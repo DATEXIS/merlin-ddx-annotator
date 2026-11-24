@@ -181,7 +181,7 @@ def build(left_path, right_path, left_model, right_model, stages, split, out, *,
             key.append({"pair_id": pair_id, "hadm_id": case_id, "source_hadm_id": case,
                         "stage": stage, "arms": {
                             letter: {"condition": condition, "trace_id": trace["trace_id"],
-                                     "model": trace["model"],
+                                     "model": trace["model"], "label_origin": "generated",
                                      "source_sha256": hashes[0 if condition == "left" else 1],
                                      "verifier_score": score(trace.get("verifier_score")),
                                      "verifier_accepted": trace.get("verifier_accepted")}
