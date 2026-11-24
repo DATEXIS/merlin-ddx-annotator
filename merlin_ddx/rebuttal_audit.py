@@ -61,7 +61,7 @@ def load_cases(data_root: Path) -> list[dict]:
             rows = list(csv.DictReader(handle))
     except FileNotFoundError as exc:
         raise HTTPException(status_code=503, detail="Blinded audit dataset unavailable") from exc
-    catalog = descriptions(data_root)
+    catalog = None
     cases: OrderedDict[str, dict] = OrderedDict()
     for row in rows:
         hadm_id = row["hadm_id"]
@@ -76,14 +76,21 @@ def load_cases(data_root: Path) -> list[dict]:
         pair = {key: row[key] for key in (
             "pair_id", "hadm_id", "stage", "target_A", "reason_A", "target_B", "reason_B",
         )}
-        if pair["stage"] == "V4":
+        if pair["stage"] not in {"V1", "V2", "V3", "V4"}:
+            raise HTTPException(status_code=500, detail="Unsupported reasoning stage")
+        if row.get("target_format") == "stage_output":
+            pair["target_format"] = "stage_output"
+            pair["clinical_context"] = row.get("clinical_context", "")
+        if pair["stage"] == "V4" and pair.get("target_format") != "stage_output":
+            if catalog is None:
+                catalog = descriptions(data_root)
             for arm in "AB":
                 description, category = describe(pair[f"target_{arm}"], catalog)
                 pair[f"description_{arm}"] = description
                 pair[f"description_category_{arm}"] = category
         case["pairs"].append(pair)
     for case in cases.values():
-        case["pairs"].sort(key=lambda pair: {"V2": 0, "V4": 1}[pair["stage"]])
+        case["pairs"].sort(key=lambda pair: {"V1": 0, "V2": 1, "V3": 2, "V4": 3}[pair["stage"]])
     return list(cases.values())
 
 
