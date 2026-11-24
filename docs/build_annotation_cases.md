@@ -22,7 +22,7 @@ instruction dataset produced by the SFT postprocessor.
 A separate comparator can be provided as normalized JSONL, one row per
 admission/stage/model. Required fields (all strings):
 `hadm_id`, `stage` (V1–V4), `model`, `trace_id`, `split`, `chief_complaint`, `admission_note`, `clinical_context`, `target`, `reason`.
-The optional fields `verifier_score` and `verifier_accepted` are kept as
+The required field `label_origin` must be exactly `"generated"` for JSONL. Reference labels must use the [separate reference review workflow](build_reference_cases.md), not this importer. The optional fields `verifier_score` and `verifier_accepted` are kept as
 private metadata. `clinical_context` contains additional evidence, not
 arm-specific model predictions; it must be nonempty for V3. Use an explicit
 empty string when a stage has no additional evidence. A comparison between
