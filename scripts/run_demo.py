@@ -54,16 +54,19 @@ def main() -> int:
     parser.add_argument("--data-root", type=Path, default=ROOT / ".demo" / "data_root",
                         help="working copy of the synthetic data root (created if absent)")
     parser.add_argument("--static-dir", type=Path, default=ROOT / "dist", help="built frontend (npm run build)")
+    parser.add_argument("--synthetic", action="store_true", help="Use a fresh custom synthetic demo directory")
     parser.add_argument("--reset", action="store_true", help="discard saved demo answers first")
     parser.add_argument("--with-ratings", action="store_true", help="preload the synthetic raters' answers")
     args = parser.parse_args()
     if not (args.static_dir / "index.html").is_file():
         parser.error(f"No built frontend in {args.static_dir}; run `npm ci && npm run build` first")
     requested = args.data_root.resolve()
-    is_demo = requested == (ROOT / ".demo" / "data_root").resolve()
+    is_demo = requested == (ROOT / ".demo" / "data_root").resolve() or args.synthetic
+    if args.synthetic and not requested.is_relative_to((ROOT / ".demo").resolve()):
+        parser.error("Custom synthetic demo directories must be inside .demo")
     if not is_demo:
         if args.reset or args.with_ratings:
-            parser.error("Reset and synthetic-rating preload are only permitted for the default demo")
+            parser.error("Reset and synthetic-rating preload are only permitted for synthetic demos")
         if not (requested / "app" / "annotators.json").is_file():
             parser.error("Explicit data root must already contain prepared study inputs")
         if args.host not in ("127.0.0.1", "localhost", "::1"):
