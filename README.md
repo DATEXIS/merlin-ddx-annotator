@@ -70,6 +70,10 @@ The reasoning audit (unchanged since v1.0.0):
 
 The [protocol](docs/protocol.md) marks, element by element, what was fixed before rating and what was documented afterwards, and lists the open discrepancies with the paper.
 
+## Create your own reasoning annotation study
+
+The new local workflow supports V1–V4 paired evaluation from raw MERLIN generation tables or explicit JSONL trace sources, with stage-specific questions, deterministic A/B allocation, trace-linked aggregate rating export, and analysis without the original study-size constraint. See [the study-building guide](docs/build_annotation_cases.md) for commands, data formats, and limitations. The new questions are proposed rubrics and are separate from the historical clinician studies.
+
 ## Quick start (synthetic cases)
 
 Requirements: Python 3.11+, Node.js 22. No PhysioNet credentials, external services, cluster or GPU.
