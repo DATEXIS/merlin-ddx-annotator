@@ -149,7 +149,8 @@ def build(path, out, stages, split, *, model=None, schema_path=None, retrospecti
                          "clinical_context": record["clinical_context"], "label_source": record["label_source"]})
             labels.append({"pair_id": pair_id, "case_id": case_id, "source_hadm_id": case,
                            "stage": stage, "label_id": record["label_id"], "label_origin": "reference",
-                           "label_source": record["label_source"], "source_sha256": settings["source_sha256"]})
+                           "label_source": record["label_source"], "source_sha256": settings["source_sha256"],
+                           "label_sha256": hashlib.sha256(record["target"].encode("utf-8")).hexdigest()})
     root = out / "annotation_inputs"
     source = root / "source" / "merlin_rebuttal_audit"
     write_csv(source / "audit_batch1_blinded.csv", rows, LABEL_COLUMNS)
