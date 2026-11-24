@@ -264,6 +264,7 @@ export default function App() {
         setPatients(nextPatients)
         if (nextPatients.length && nextPatients.every(p => p.dataset === 'study')) setSelectedView('study')
         setAnnotators(nextAnnotators)
+        setSelectedAnnotatorId(previous => nextAnnotators.some(a => a.id === previous) ? previous : nextAnnotators.length === 1 ? nextAnnotators[0].id : '')
         setVerificationCases(Array.isArray(nextVerificationCases) ? nextVerificationCases : [])
         setPeerAnnotationPayloads(localPeerAnnotationPayloads(nextAnnotators))
         setDataStatus('ready')
