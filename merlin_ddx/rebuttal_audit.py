@@ -78,7 +78,7 @@ def load_cases(data_root: Path) -> list[dict]:
         )}
         if pair["stage"] not in {"V1", "V2", "V3", "V4"}:
             raise HTTPException(status_code=500, detail="Unsupported reasoning stage")
-        if row.get("target_format") in {"stage_output", "reference_label", "label_comparison"}:
+        if row.get("target_format") in {"stage_output", "reference_label", "label_comparison", "single_reasoning"}:
             pair["target_format"] = row["target_format"]
             pair["clinical_context"] = row.get("clinical_context", "")
         if pair.get("target_format") == "reference_label":
@@ -86,13 +86,16 @@ def load_cases(data_root: Path) -> list[dict]:
                     pair[field] for field in ("reason_A", "target_B", "reason_B")):
                 raise HTTPException(status_code=500, detail="Malformed reference label case")
             pair["label_source"] = row["label_source"]
+        if pair.get("target_format") == "single_reasoning":
+            if not pair["target_A"] or not pair["reason_A"] or pair["target_B"] or pair["reason_B"]:
+                raise HTTPException(status_code=500, detail="Malformed standalone reasoning case")
         if pair.get("target_format") == "label_comparison":
             if not pair["target_A"] or not pair["target_B"] or pair["reason_A"] or pair["reason_B"]:
                 raise HTTPException(status_code=500, detail="Malformed label comparison")
         if pair.get("target_format") == "label_comparison":
             if not pair["target_A"] or not pair["target_B"] or pair["reason_A"] or pair["reason_B"]:
                 raise HTTPException(status_code=500, detail="Malformed label comparison")
-        if pair["stage"] == "V4" and pair.get("target_format") not in {"stage_output", "reference_label", "label_comparison"}:
+        if pair["stage"] == "V4" and pair.get("target_format") not in {"stage_output", "reference_label", "label_comparison", "single_reasoning"}:
             if catalog is None:
                 catalog = descriptions(data_root)
             for arm in "AB":
@@ -118,6 +121,16 @@ def validate_answers(hadm_id: str, pairs: dict[str, dict], cases: list[dict]) ->
         "preference_A_B_equivalent", "rater_comment", "pair_id", "hadm_id",
     }
     for pair_id, answer in pairs.items():
+        if expected[pair_id].get("target_format") == "single_reasoning":
+            if not set(answer).issubset({"A_Q1", "A_Q2", "rater_comment", "pair_id", "hadm_id"}):
+                raise HTTPException(status_code=400, detail="Unexpected standalone reasoning field")
+            if answer.get("pair_id", pair_id) != pair_id or answer.get("hadm_id", hadm_id) != hadm_id:
+                raise HTTPException(status_code=400, detail="Standalone identifiers do not match")
+            if any(answer.get(field) not in (None, "", *ALLOWED_ANSWERS) for field in ("A_Q1", "A_Q2")):
+                raise HTTPException(status_code=400, detail="Invalid standalone judgment")
+            if not isinstance(answer.get("rater_comment", ""), str):
+                raise HTTPException(status_code=400, detail="Invalid comment")
+            continue
         if expected[pair_id].get("target_format") == "label_comparison":
             fields = ("A_label_validity", "B_label_validity")
             if not set(answer).issubset({*fields, "target_preference_A_B_equal", "rater_comment", "pair_id", "hadm_id"}):
