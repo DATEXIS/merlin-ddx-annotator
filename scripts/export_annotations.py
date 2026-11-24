@@ -230,6 +230,10 @@ def export(study, out, *, allow_incomplete=False, include_corrections=False):
     if out.exists():
         raise ValueError("Export directory must not already exist")
     root = study / "annotation_inputs"
+    manifest = read_json(study / "private_analysis" / "manifest.json")
+    if "input_hashes" in manifest:
+        from build_study import freeze
+        freeze(study)
     if out.resolve().is_relative_to(root.resolve()):
         raise ValueError("Export must be outside the served data root")
     if (study / "private_analysis" / "ddx_key.json").is_file():
