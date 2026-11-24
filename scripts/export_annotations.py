@@ -97,6 +97,66 @@ def export_reference(study, root, out, cases, *, allow_incomplete=False, include
     return meta
 
 
+
+def export_label_comparison(study, root, out, cases, *, allow_incomplete=False):
+    key = read_json(study / "private_analysis" / "label_comparison_key.json")
+    by_pair = {p["pair_id"]: p for case in cases for p in case["pairs"]}
+    by_key = {r["pair_id"]: r for r in key}
+    if (len(by_pair) != sum(len(c["pairs"]) for c in cases)
+            or len(by_key) != len(key) or set(by_pair) != set(by_key)):
+        raise ValueError("Label comparison key does not match cases")
+    for pair_id, pair in by_pair.items():
+        row = by_key[pair_id]
+        if (pair.get("target_format") != "label_comparison"
+                or row["case_id"] != pair["hadm_id"] or row["stage"] != pair["stage"]
+                or set(row["arms"]) != {"A", "B"}
+                or {a["label_origin"] for a in row["arms"].values()} != {"generated", "reference"}):
+            raise ValueError("Invalid label comparison allocation")
+        for arm, meta in row["arms"].items():
+            if meta["label_sha256"] != hashlib.sha256(pair[f"target_{arm}"].encode("utf-8")).hexdigest():
+                raise ValueError("Reviewed label differs from allocation key")
+    raters, observed = read_observed(root, cases)
+    rows = []
+    incomplete = 0
+    for pair_id, pair in by_pair.items():
+        key_row = by_key[pair_id]
+        arms = {meta["label_origin"]: arm for arm, meta in key_row["arms"].items()}
+        joint, preferences = Counter(), Counter()
+        same = pair["target_A"] == pair["target_B"]
+        for rater in raters:
+            answer = observed.get((rater, pair_id), {})
+            def judgment(origin):
+                value = answer.get(f"{arms[origin]}_label_validity")
+                return value if value in ALLOWED_ANSWERS else "Missing"
+            generated, reference = judgment("generated"), judgment("reference")
+            joint[(generated, reference)] += 1
+            preference = answer.get("target_preference_A_B_equal")
+            if same:
+                preference = "Not applicable"
+            elif preference in ("A", "B"):
+                preference = key_row["arms"][preference]["label_origin"]
+            elif preference != "Equal":
+                preference = "Missing"
+            preferences[preference] += 1
+            incomplete += "Missing" in (generated, reference, preference)
+        # Export joint counts, not individual ratings, and no clinical text.
+        rows.append({**{k: v for k, v in key_row.items() if k != "arms"},
+                     "generated": key_row["arms"][arms["generated"]],
+                     "reference": key_row["arms"][arms["reference"]],
+                     "identical_labels": same, "n_expected_raters": len(raters),
+                     "joint_votes": [{"generated": g, "reference": r, "count": count}
+                                     for (g, r), count in sorted(joint.items())],
+                     "preference_votes": dict(preferences)})
+    if incomplete and not allow_incomplete:
+        raise ValueError(f"{incomplete} incomplete paired label judgments; use --allow-incomplete explicitly")
+    out.mkdir(parents=True, mode=0o700)
+    write_jsonl(out / "label_comparison_ratings.jsonl", rows)
+    meta = {"study_type": "label_comparison", "pairs": len(rows),
+            "raters": len(raters), "incomplete_rater_pairs": incomplete}
+    (out / "export_summary.json").write_text(json.dumps(meta, indent=2) + "\n")
+    return meta
+
+
 def export(study, out, *, allow_incomplete=False, include_corrections=False):
     study, out = Path(study), Path(out)
     if out.exists():
@@ -105,6 +165,10 @@ def export(study, out, *, allow_incomplete=False, include_corrections=False):
     if out.resolve().is_relative_to(root.resolve()):
         raise ValueError("Export must be outside the served data root")
     cases = load_cases(root)
+    if (study / "private_analysis" / "label_comparison_key.json").is_file():
+        if include_corrections:
+            raise ValueError("Correction export is only for reference-label studies")
+        return export_label_comparison(study, root, out, cases, allow_incomplete=allow_incomplete)
     if (study / "private_analysis" / "reference_key.json").is_file():
         return export_reference(study, root, out, cases, allow_incomplete=allow_incomplete,
                                 include_corrections=include_corrections)
