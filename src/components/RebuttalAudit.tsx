@@ -16,13 +16,16 @@ type PairAnswers = Partial<Record<Field, Judgment>> & {
   B_Q1_evidence_grounded?: Judgment
   B_Q2_supports_target?: Judgment
   rater_comment?: string
+  label_validity?: Judgment
+  suggested_label?: string
 }
 type AuditStore = Record<string, Record<string, PairAnswers>>
 type AuditPair = {
   pair_id: string
   hadm_id: string
   stage: 'V1' | 'V2' | 'V3' | 'V4'
-  target_format?: 'stage_output'
+  target_format?: 'stage_output' | 'reference_label'
+  label_source?: string
   clinical_context?: string
   target_A: string
   reason_A: string
@@ -63,6 +66,7 @@ function normalizeStore(store: AuditStore): AuditStore {
     }]))]))
 }
 function complete(pair: AuditPair, answers?: PairAnswers) {
+  if (pair.target_format === 'reference_label') return Boolean(answers?.label_validity)
   return FIELDS.every(field => Boolean(answers?.[field]))
     && Boolean(answers?.rationale_preference_A_B_equal)
     && (pair.target_A === pair.target_B || Boolean(answers?.target_preference_A_B_equal))
@@ -71,9 +75,42 @@ function complete(pair: AuditPair, answers?: PairAnswers) {
 function PairPanel({ pair, answers, onChange, canAnnotate }: {
   pair: AuditPair
   answers: PairAnswers
-  onChange: (field: Field | 'target_preference_A_B_equal' | 'rationale_preference_A_B_equal' | 'rater_comment', value: string) => void
+  onChange: (field: Field | 'target_preference_A_B_equal' | 'rationale_preference_A_B_equal' | 'rater_comment' | 'label_validity' | 'suggested_label', value: string) => void
   canAnnotate: boolean
 }) {
+  if (pair.target_format === 'reference_label') {
+    const question = {
+      V1: 'Does this manifestation label set correctly and completely describe the findings documented at admission?',
+      V2: 'Is the reference diagnosis supported by the provided clinical record?',
+      V3: 'Is the reference diagnosis supported by the provided clinical and laboratory record?',
+      V4: 'Are the reference ICD labels clinically supported and appropriately specific and complete for the provided record?',
+    }[pair.stage]
+    return <section aria-label={pair.stage + ' reference label'} className="rounded-lg border border-gray-200 bg-white shadow-sm p-4 space-y-4">
+      <h2 className="text-base font-semibold">{pair.stage} reference label review</h2>
+      <p className="text-sm text-gray-600">Source: {pair.label_source}. This is a candidate reference, not a verified patient-level fact.</p>
+      {pair.clinical_context && <div className="text-sm whitespace-pre-wrap break-words border-b pb-3">{pair.clinical_context}</div>}
+      <div className="rounded bg-gray-50 p-3 text-sm whitespace-pre-wrap break-words">{pair.target_A}</div>
+      <fieldset disabled={!canAnnotate}>
+        <legend className="text-sm font-medium">{question}</legend>
+        <div className="mt-2 flex gap-2">
+          {(['Yes', 'No', 'Unclear'] as Judgment[]).map(value => <label key={value} className="rounded border px-2 py-1 text-sm">
+            <input type="radio" name={pair.pair_id + '-reference'} checked={answers.label_validity === value}
+              onChange={() => onChange('label_validity', value)} className="mr-1" />{value}
+          </label>)}
+        </div>
+      </fieldset>
+      <label className="block text-sm">Suggested correction (optional; does not replace the source label)
+        <textarea value={answers.suggested_label ?? ''} disabled={!canAnnotate}
+          onChange={event => onChange('suggested_label', event.target.value)} rows={3}
+          className="mt-1 block w-full rounded border p-2" />
+      </label>
+      <label className="block text-sm">Optional comment
+        <textarea value={answers.rater_comment ?? ''} disabled={!canAnnotate}
+          onChange={event => onChange('rater_comment', event.target.value)} rows={2}
+          className="mt-1 block w-full rounded border p-2" />
+      </label>
+    </section>
+  }
   const allJudged = FIELDS.every(field => Boolean(answers[field]))
   const fullStage = pair.target_format === 'stage_output'
   const isV4 = pair.stage === 'V4' && !fullStage
@@ -238,12 +275,12 @@ export function RebuttalAudit({ annotators, annotatorId, onAnnotatorChange, onVi
     } catch (cause) { setSaveStatus(String(cause)) }
   }, [annotatorId])
 
-  const change = useCallback((hadmId: string, pair: AuditPair, field: Field | 'target_preference_A_B_equal' | 'rationale_preference_A_B_equal' | 'rater_comment', value: string) => {
+  const change = useCallback((hadmId: string, pair: AuditPair, field: Field | 'target_preference_A_B_equal' | 'rationale_preference_A_B_equal' | 'rater_comment' | 'label_validity' | 'suggested_label', value: string) => {
     revision.current += 1
     const next = { ...storeRef.current, [hadmId]: {
       ...storeRef.current[hadmId], [pair.pair_id]: {
         ...storeRef.current[hadmId]?.[pair.pair_id],
-        ...(pair.target_A === pair.target_B ? { target_preference_A_B_equal: null } : {}),
+        ...(pair.target_format !== 'reference_label' && pair.target_A === pair.target_B ? { target_preference_A_B_equal: null } : {}),
         [field]: value,
       },
     } } as AuditStore
