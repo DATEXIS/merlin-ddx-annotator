@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 from build_annotation_cases import STAGES, build
 from export_annotations import export
+from analyze_annotation_study import analyze
 from merlin_ddx.rebuttal_audit import load_cases
 from merlin_ddx.sync_api import create_app
 
@@ -63,6 +64,9 @@ def test_four_stage_roundtrip(tmp_path):
     assert all(row["source_hadm_id"] == "SYNCASE" for row in rows)
     assert all(sum(row["composite_votes"].values()) == 2 for row in rows)
     assert all(row["source_sha256"] for row in rows)
+    result = analyze(rows, replicates=10)
+    assert set(result["stage_results"]) == set(STAGES)
+    assert all(v["paired_differences"]["composite"]["ci95"] is None for v in result["stage_results"].values())
     with pytest.raises(ValueError, match="outside"):
         export(study, root / "export")
     again = tmp_path / "again"
