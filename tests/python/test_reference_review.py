@@ -76,7 +76,7 @@ def test_patient_specific_reference_jsonl(tmp_path):
         "hadm_id": "SYNCASE", "stage": "V1", "split": "test", "chief_complaint": "synthetic",
         "admission_note": "Synthetic note.", "clinical_context": "",
         "target": '{"symptom A": 1}', "label_source": "Patient-specific synthetic human annotation",
-        "label_id": "synthetic-label-1",
+        "label_id": "synthetic-label-1", "label_origin": "reference",
     }) + "\n")
     study = tmp_path / "study"
     build(path, study, ["V1"], "test")
