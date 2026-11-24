@@ -79,3 +79,24 @@ it('renders all four stages with the new stage-specific rubric and evidence', as
   expect(screen.getByRole('region', { name: 'V4 pair' })).toBeInTheDocument()
   expect(within(v1).queryByText('Synthetic laboratory context.')).not.toBeInTheDocument()
 })
+
+it('reviews a reference without demanding a generated rationale or comparison', async () => {
+  const pair = {
+    pair_id: 'reference-1', hadm_id: '123', stage: 'V1', target_format: 'reference_label',
+    target_A: 'Synthetic manifestation labels', target_B: '', reason_A: '', reason_B: '',
+    label_source: 'Synthetic disease prototype',
+  }
+  vi.stubGlobal('fetch', vi.fn((url: string) => Promise.resolve(response(
+    url === '/api/rebuttal-audit' ? [{ ...audit[0], pairs: [pair] }] : [],
+  ))))
+  render(<RebuttalAudit annotators={[{ id: 'clinician', name: 'Clinician', type: 'human' }]}
+    annotatorId="clinician" onAnnotatorChange={() => {}} onViewChange={() => {}} />)
+  const review = await screen.findByRole('region', { name: 'V1 reference label' })
+  expect(within(review).getByText('Synthetic manifestation labels')).toBeInTheDocument()
+  expect(within(review).queryByText('Response B')).not.toBeInTheDocument()
+  const user = userEvent.setup()
+  await waitFor(() => expect(within(review).getByRole('radio', { name: 'No' })).toBeEnabled())
+  await user.click(within(review).getByRole('radio', { name: 'No' }))
+  await user.type(within(review).getByLabelText(/Suggested correction/), 'Synthetic correction')
+  expect(screen.getByText('1 / 1 admissions complete')).toBeInTheDocument()
+})
