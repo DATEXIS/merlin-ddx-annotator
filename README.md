@@ -78,6 +78,10 @@ The new local workflow supports V1–V4 paired evaluation from raw MERLIN genera
 
 Use the [reference-label review workflow](docs/build_reference_cases.md) to evaluate mapped diagnoses, recorded ICD codes, disease-level manifestation prototypes, or explicit patient-level reference annotations independently of generated rationales. Clinicians can flag unsupported labels and suggest corrections without changing the source data. Reference ratings and generated-trace ratings have separate provenance and exports.
 
+### Compare generated and reference labels blindly
+
+Use the [blinded label-comparison workflow](docs/build_label_comparison_cases.md) to evaluate both sources with identical stage-specific questions and evidence, with no generated rationales or provenance visible. Exports preserve joint human judgments for model/reference error analysis after offline unblinding.
+
 ## Quick start (synthetic cases)
 
 Requirements: Python 3.11+, Node.js 22. No PhysioNet credentials, external services, cluster or GPU.
