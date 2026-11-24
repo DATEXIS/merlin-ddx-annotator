@@ -59,13 +59,24 @@ def main() -> int:
     args = parser.parse_args()
     if not (args.static_dir / "index.html").is_file():
         parser.error(f"No built frontend in {args.static_dir}; run `npm ci && npm run build` first")
-    data_root = prepare(args.data_root.resolve(), reset=args.reset, with_ratings=args.with_ratings)
+    requested = args.data_root.resolve()
+    is_demo = requested == (ROOT / ".demo" / "data_root").resolve()
+    if not is_demo:
+        if args.reset or args.with_ratings:
+            parser.error("Reset and synthetic-rating preload are only permitted for the default demo")
+        if not (requested / "app" / "annotators.json").is_file():
+            parser.error("Explicit data root must already contain prepared study inputs")
+        if args.host not in ("127.0.0.1", "localhost", "::1"):
+            parser.error("Prepared studies may only be served on loopback by this launcher")
+        data_root = requested
+    else:
+        data_root = prepare(requested, reset=args.reset, with_ratings=args.with_ratings)
 
     import uvicorn
     from merlin_ddx.sync_api import create_app
 
     app = create_app(data_root=data_root, sync_git=False, static_dir=args.static_dir.resolve())
-    print(f"Synthetic annotation demo: http://{args.host}:{args.port}/  (data: {data_root})")
+    print(f"Local annotation interface: http://{args.host}:{args.port}/")
     uvicorn.run(app, host=args.host, port=args.port, log_level="warning")
     return 0
 
