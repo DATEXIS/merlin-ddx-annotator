@@ -92,8 +92,8 @@ def build(generated_path, reference_path, model, stages, split, out, *,
     if raters < 1 or (n is not None and n < 1):
         raise ValueError("Positive sample and rater counts required")
     schema = json.loads(Path(schema_path).read_text(encoding="utf-8")) if schema_path else None
-    generated = index(read_traces(generated_path, model, stages), split, ())
-    references = reference_index(read_labels(reference_path, reference_model or model, stages, schema, False),
+    generated = index(read_traces(generated_path, model, stages, label_only=True), split, (), label_only=True)
+    references = reference_index(read_labels(reference_path, reference_model or model, stages, schema, False, include_v4_labs=True),
                                  split, stages)
     matched = set(generated) & set(references)
     eligible = sorted({case for case, _ in matched if all((case, s) in matched for s in stages)})
@@ -122,9 +122,6 @@ def build(generated_path, reference_path, model, stages, split, out, *,
                     raise ValueError("Compared labels have different admission evidence")
             context = normalized_context(g["clinical_context"])
             ref_context = normalized_context(r["clinical_context"])
-            # Raw reference adapter previously omitted V4 labs in admission-only mode.
-            # Require identical evidence for explicit JSONL sources; for a raw reference
-            # table V4 labs must be supplied by the raw adapter as well.
             if context != ref_context:
                 raise ValueError("Compared labels have different stage-specific evidence")
             if stage == "V3" and not context:
