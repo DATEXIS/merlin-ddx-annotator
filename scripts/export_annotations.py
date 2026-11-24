@@ -195,6 +195,36 @@ def export_single_reasoning(study, root, out, cases, *, allow_incomplete=False):
     return result
 
 
+
+def export_ddx(study, root, out, *, allow_incomplete=False):
+    from analyze_interrater_agreement import ddx_selections
+    raters, fixed, selections = ddx_selections(root)
+    key = read_json(study / "private_analysis" / "ddx_key.json")
+    if {row["case_id"] for row in key} != set(fixed):
+        raise ValueError("DDx case mapping mismatch")
+    rows = []
+    incomplete = 0
+    for row in key:
+        cid = row["case_id"]
+        selected = [selections[r, cid] for r in raters if (r, cid) in selections]
+        incomplete += len(raters) - len(selected)
+        counts = Counter(label for group in selected for label in group)
+        fixed_labels = {label.strip().casefold() for label in fixed[cid].values()}
+        rows.append({"case_id": cid, "source_hadm_id": row["source_hadm_id"],
+                     "chief_complaint": row["chief_complaint"], "n_expected_raters": len(raters),
+                     "n_completed_raters": len(selected),
+                     "fixed_candidate_votes": {label: counts[label] for label in sorted(fixed_labels)},
+                     "other_selected_label_count": sum(n for label, n in counts.items() if label not in fixed_labels)})
+    if incomplete and not allow_incomplete:
+        raise ValueError(f"{incomplete} incomplete DDx rater cases; use --allow-incomplete explicitly")
+    out.mkdir(parents=True, mode=0o700)
+    write_jsonl(out / "ddx_ratings.jsonl", rows)
+    result = {"study_type": "ddx", "cases": len(rows), "raters": len(raters),
+              "incomplete_rater_cases": incomplete}
+    (out / "export_summary.json").write_text(json.dumps(result, indent=2) + "\n")
+    return result
+
+
 def export(study, out, *, allow_incomplete=False, include_corrections=False):
     study, out = Path(study), Path(out)
     if out.exists():
@@ -202,6 +232,10 @@ def export(study, out, *, allow_incomplete=False, include_corrections=False):
     root = study / "annotation_inputs"
     if out.resolve().is_relative_to(root.resolve()):
         raise ValueError("Export must be outside the served data root")
+    if (study / "private_analysis" / "ddx_key.json").is_file():
+        if include_corrections:
+            raise ValueError("Correction export is only for reference-label studies")
+        return export_ddx(study, root, out, allow_incomplete=allow_incomplete)
     cases = load_cases(root)
     if (study / "private_analysis" / "single_reasoning_key.json").is_file():
         if include_corrections:
