@@ -78,10 +78,15 @@ def load_cases(data_root: Path) -> list[dict]:
         )}
         if pair["stage"] not in {"V1", "V2", "V3", "V4"}:
             raise HTTPException(status_code=500, detail="Unsupported reasoning stage")
-        if row.get("target_format") == "stage_output":
-            pair["target_format"] = "stage_output"
+        if row.get("target_format") in {"stage_output", "reference_label"}:
+            pair["target_format"] = row["target_format"]
             pair["clinical_context"] = row.get("clinical_context", "")
-        if pair["stage"] == "V4" and pair.get("target_format") != "stage_output":
+        if pair.get("target_format") == "reference_label":
+            if not row.get("label_source") or not pair["target_A"] or any(
+                    pair[field] for field in ("reason_A", "target_B", "reason_B")):
+                raise HTTPException(status_code=500, detail="Malformed reference label case")
+            pair["label_source"] = row["label_source"]
+        if pair["stage"] == "V4" and pair.get("target_format") not in {"stage_output", "reference_label"}:
             if catalog is None:
                 catalog = descriptions(data_root)
             for arm in "AB":
@@ -107,6 +112,18 @@ def validate_answers(hadm_id: str, pairs: dict[str, dict], cases: list[dict]) ->
         "preference_A_B_equivalent", "rater_comment", "pair_id", "hadm_id",
     }
     for pair_id, answer in pairs.items():
+        if expected[pair_id].get("target_format") == "reference_label":
+            if not set(answer).issubset({"label_validity", "suggested_label", "rater_comment",
+                                         "pair_id", "hadm_id"}):
+                raise HTTPException(status_code=400, detail="Unexpected reference answer field")
+            if answer.get("pair_id", pair_id) != pair_id or answer.get("hadm_id", hadm_id) != hadm_id:
+                raise HTTPException(status_code=400, detail="Reference identifiers do not match")
+            if answer.get("label_validity") not in (None, "", *ALLOWED_ANSWERS):
+                raise HTTPException(status_code=400, detail="Invalid reference judgment")
+            if any(not isinstance(answer.get(field, ""), str)
+                   for field in ("suggested_label", "rater_comment")):
+                raise HTTPException(status_code=400, detail="Invalid reference review text")
+            continue
         if not set(answer).issubset(allowed):
             raise HTTPException(status_code=400, detail="Unexpected answer field")
         if answer.get("pair_id", pair_id) != pair_id or answer.get("hadm_id", hadm_id) != hadm_id:
