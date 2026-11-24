@@ -83,7 +83,7 @@ def read_traces(path, model, stages):
                     "admission_note": text(row["admission_note"]),
                     "clinical_context": ("Laboratory results (construction input):\n" + labs) if labs else "",
                     "target": target, "reason": rationale,
-                    "trace_id": f"{model}:{row['hadm_id']}:{stage}",
+                    "trace_id": f"{model}:{row['hadm_id']}:{stage}", "label_origin": "generated",
                     "verifier_score": score(row[f"{prefix}_score"]),
                 }
     elif path.suffix.lower() == ".jsonl":
@@ -103,6 +103,8 @@ def index(rows, split, complaints):
     fields = ("hadm_id", "stage", "model", "trace_id", "split", "chief_complaint",
               "admission_note", "clinical_context", "target", "reason")
     for row in rows:
+        if row.get("label_origin") != "generated":
+            raise ValueError("Generated trace input requires label_origin=generated; use the reference builder for labels")
         if any(not isinstance(row.get(k), str) for k in fields):
             raise ValueError("Trace fields must be explicit strings")
         if any(not row[k].strip() for k in fields if k != "clinical_context"):
