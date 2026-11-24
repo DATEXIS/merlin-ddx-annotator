@@ -74,6 +74,10 @@ The [protocol](docs/protocol.md) marks, element by element, what was fixed befor
 
 The new local workflow supports V1–V4 paired evaluation from raw MERLIN generation tables or explicit JSONL trace sources, with stage-specific questions, deterministic A/B allocation, trace-linked aggregate rating export, and analysis without the original study-size constraint. See [the study-building guide](docs/build_annotation_cases.md) for commands, data formats, and limitations. The new questions are proposed rubrics and are separate from the historical clinician studies.
 
+### Review reference (ground-truth) labels
+
+Use the [reference-label review workflow](docs/build_reference_cases.md) to evaluate mapped diagnoses, recorded ICD codes, disease-level manifestation prototypes, or explicit patient-level reference annotations independently of generated rationales. Clinicians can flag unsupported labels and suggest corrections without changing the source data. Reference ratings and generated-trace ratings have separate provenance and exports.
+
 ## Quick start (synthetic cases)
 
 Requirements: Python 3.11+, Node.js 22. No PhysioNet credentials, external services, cluster or GPU.
