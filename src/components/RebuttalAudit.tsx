@@ -24,7 +24,7 @@ type AuditPair = {
   pair_id: string
   hadm_id: string
   stage: 'V1' | 'V2' | 'V3' | 'V4'
-  target_format?: 'stage_output' | 'reference_label' | 'label_comparison'
+  target_format?: 'stage_output' | 'reference_label' | 'label_comparison' | 'single_reasoning'
   label_source?: string
   clinical_context?: string
   target_A: string
@@ -66,6 +66,7 @@ function normalizeStore(store: AuditStore): AuditStore {
     }]))]))
 }
 function complete(pair: AuditPair, answers?: PairAnswers) {
+  if (pair.target_format === 'single_reasoning') return Boolean(answers?.A_Q1 && answers?.A_Q2)
   if (pair.target_format === 'reference_label') return Boolean(answers?.label_validity)
   if (pair.target_format === 'label_comparison') return Boolean(answers?.A_label_validity && answers?.B_label_validity && (pair.target_A === pair.target_B || answers.target_preference_A_B_equal))
   return FIELDS.every(field => Boolean(answers?.[field]))
@@ -158,7 +159,8 @@ function PairPanel({ pair, answers, onChange, canAnnotate }: {
     </section>
   }
   const allJudged = FIELDS.every(field => Boolean(answers[field]))
-  const fullStage = pair.target_format === 'stage_output'
+  const single = pair.target_format === 'single_reasoning'
+  const fullStage = pair.target_format === 'stage_output' || single
   const isV4 = pair.stage === 'V4' && !fullStage
   const stageQuestion = {
     V1: 'Does the extraction correctly and completely classify the relevant manifestations, including explicit absences and unmentioned findings?',
@@ -173,7 +175,7 @@ function PairPanel({ pair, answers, onChange, canAnnotate }: {
     </div>
     {pair.clinical_context && <div className="border-b border-gray-200 px-4 py-3 text-sm whitespace-pre-wrap break-words">{pair.clinical_context}</div>}
     <div className="p-4 grid gap-4 xl:grid-cols-2">
-      {(['A', 'B'] as const).map(arm => <div key={arm} className="rounded-lg border border-gray-200 overflow-hidden">
+      {(single ? (['A'] as const) : (['A', 'B'] as const)).map(arm => <div key={arm} className="rounded-lg border border-gray-200 overflow-hidden">
         <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
           <span className="text-xs font-semibold text-blue-700">Response {arm}</span>
           <h3 className="mt-1 font-semibold text-gray-900 break-words">
@@ -209,7 +211,7 @@ function PairPanel({ pair, answers, onChange, canAnnotate }: {
       </div>)}
     </div>
     <div className="border-t border-gray-200 px-4 py-4">
-      {pair.target_A !== pair.target_B && <fieldset disabled={!canAnnotate || !allJudged}>
+      {!single && pair.target_A !== pair.target_B && <fieldset disabled={!canAnnotate || !allJudged}>
         <legend className="text-sm font-semibold text-gray-900">{fullStage ? 'Which stage output is more clinically appropriate given the available evidence?' : isV4
           ? 'Which ICD diagnosis is more clinically appropriate for this patient, including whether the level of specificity is justified by the available evidence?'
           : 'Which diagnosis is more clinically appropriate for this patient at this point in the case?'}</legend>
@@ -222,7 +224,7 @@ function PairPanel({ pair, answers, onChange, canAnnotate }: {
           </label>)}
         </div>
       </fieldset>}
-      <fieldset disabled={!canAnnotate || !allJudged} className={pair.target_A !== pair.target_B ? 'mt-4' : ''}>
+      {!single && <fieldset disabled={!canAnnotate || !allJudged} className={pair.target_A !== pair.target_B ? 'mt-4' : ''}>
         <legend className="text-sm font-semibold text-gray-900">Which rationale is clinically better?</legend>
         <p className="mt-1 text-xs text-gray-600">Consider grounding in the patient record, clinical relevance, whether the reasoning supports its target, and clarity of the justification.</p>
         <div className="mt-2 flex flex-wrap gap-2">
@@ -232,7 +234,7 @@ function PairPanel({ pair, answers, onChange, canAnnotate }: {
               onChange={() => onChange('rationale_preference_A_B_equal', value)} className="mr-2 accent-blue-600" />{value}
           </label>)}
         </div>
-      </fieldset>
+      </fieldset>}
       <label className="mt-4 block text-sm font-medium text-gray-700">Optional comment
         <textarea value={answers.rater_comment ?? ''} disabled={!canAnnotate}
           onChange={event => onChange('rater_comment', event.target.value)} rows={2}
@@ -326,7 +328,7 @@ export function RebuttalAudit({ annotators, annotatorId, onAnnotatorChange, onVi
     const next = { ...storeRef.current, [hadmId]: {
       ...storeRef.current[hadmId], [pair.pair_id]: {
         ...storeRef.current[hadmId]?.[pair.pair_id],
-        ...(pair.target_format !== 'reference_label' && pair.target_A === pair.target_B ? { target_preference_A_B_equal: null } : {}),
+        ...(pair.target_format !== 'reference_label' && pair.target_format !== 'single_reasoning' && pair.target_A === pair.target_B ? { target_preference_A_B_equal: null } : {}),
         [field]: value,
       },
     } } as AuditStore
