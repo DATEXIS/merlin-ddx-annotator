@@ -51,7 +51,7 @@ All DDx results, including the pilot: [results/ddx_annotation/](results/ddx_anno
 
 ## The clinician evaluation
 
-The reasoning audit (unchanged since v1.0.0):
+The original reasoning audit (historical rubric retained; exact study-era implementation archived at v1.1.0):
 
 ![The clinician-audit interface on a synthetic case: admission note on the left, the blinded V2 pair with the rubric questions on the right.](docs/assets/screenshots/01_clinical_context.png)
 
@@ -171,7 +171,7 @@ See [docs/data_access.md](docs/data_access.md).
 
 | Path | Content |
 |---|---|
-| `src/` | The study's React application, unchanged: `App.tsx` (DDx views and view switching), `components/DiagnosesPanel.tsx` (DDx annotation), `components/RebuttalAudit.tsx` (audit screen). `main.tsx` adds a fallback to the audit-only shell `AuditApp.tsx` for data roots without DDx cases |
+| `src/` | The React application: `App.tsx` (DDx views and view switching), `components/DiagnosesPanel.tsx` (DDx annotation), `components/RebuttalAudit.tsx` (historical audit and new V1–V4 workflows). `main.tsx` selects the audit-only shell `AuditApp.tsx` for data roots without DDx cases |
 | `merlin_ddx/` | Study backend (`sync_api.py`, `annotation_store.py`, `rebuttal_audit.py`) and the original audit analysis (`rebuttal_analysis.py` and companions) |
 | `scripts/` | DDx analysis (`analyse_annotations.py`, `analyse_scaleup_annotations.py`, `sample_blind_annotation.py`, sanitized study code; `run_ddx_analysis.py`, `ddx_agreement.py`), audit analysis entry points, demo and reproduction tools |
 | `docs/` | `ddx_annotation/`, `reasoning_audit/`, `verification/`; audit protocol, rubric, walkthrough; reproducibility, data access, figures |
