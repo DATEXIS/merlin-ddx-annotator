@@ -49,7 +49,7 @@ def test_data_files_live_only_in_synthetic_examples_and_results():
 def test_examples_and_results_contain_no_mimic_style_identifiers():
     # MIMIC-IV subject_id / hadm_id are 8-digit numbers beginning with 1 or 2.
     pattern = re.compile(r"(?<![\d.])[12]\d{7}(?![\d.])")
-    allowed = {"20260917"}            # the bootstrap seed of the original analysis
+    allowed = {"20260917", "20260711"}   # bootstrap seed of the audit analysis; sampling seed of the 350-case study
     for directory in ("examples", "results", "docs"):
         for path in (ROOT / directory).rglob("*"):
             if path.is_file() and path.suffix in {".csv", ".json", ".md", ".txt", ".mmd"}:

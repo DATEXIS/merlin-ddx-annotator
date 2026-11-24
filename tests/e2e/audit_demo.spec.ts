@@ -1,10 +1,11 @@
 import { expect, test } from '@playwright/test'
-import { answerPair, selectAnnotator, syntheticAnswer, waitSaved } from './helpers'
+import { answerPair, openAudit, selectAnnotator, syntheticAnswer, waitSaved } from './helpers'
 
 const RATER = 'synthetic_rater_2'
 
 test('a synthetic rater completes an admission; answers are saved by the server and exported', async ({ page, request }) => {
   await page.goto('/')
+  await openAudit(page)
   await expect(page.getByRole('region', { name: 'Admission note' })).toContainText('SYNTHETIC CASE')
   await expect(page.getByText('Select an annotator to record answers.')).toBeVisible()
   await selectAnnotator(page, 'Synthetic rater 2')
@@ -20,6 +21,7 @@ test('a synthetic rater completes an admission; answers are saved by the server 
   // Reload with browser storage cleared: answers come back from the server.
   await page.evaluate(() => localStorage.clear())
   await page.reload()
+  await openAudit(page)
   await selectAnnotator(page, 'Synthetic rater 2')
   await expect(page.getByText('1 / 5 admissions complete')).toBeVisible()
   await expect(page.getByRole('region', { name: 'V2 pair' }).locator('fieldset').nth(3)

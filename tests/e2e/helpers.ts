@@ -9,6 +9,16 @@ export function syntheticAnswer(rater: string, pairId: string): Answer {
   return spec.ratings[rater][pairId]
 }
 
+/** The application opens on the DDx pilot view; the audit is one of the dataset views. */
+export async function openView(page: Page, label: string) {
+  await page.getByLabel('Dataset split').getByRole('button', { name: label, exact: true }).click()
+}
+
+export async function openAudit(page: Page) {
+  await openView(page, 'reasoning audit')
+  await expect(page.getByRole('region', { name: 'V2 pair' })).toBeVisible()
+}
+
 export async function selectAnnotator(page: Page, name: string) {
   await page.getByRole('combobox', { name: 'Annotator' }).selectOption({ label: name })
 }

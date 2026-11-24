@@ -1,0 +1,789 @@
+{
+  "patients": {
+    "900101-chest_pain": {
+      "patientId": "900101-chest_pain",
+      "models": {
+        "llama": {
+          "modelName": "Llama-3.3-70B-Instruct",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] From the admission note: the note documents exertional pressure with sweating, a rising troponin and new lateral ST depression."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] Taking the laboratory results into account: the note documents exertional pressure with sweating, a rising troponin and new lateral ST depression."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] ICD-10 I214 codes this diagnosis: the note documents exertional pressure with sweating, a rising troponin and new lateral ST depression.",
+                "icdCode": "I214"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] From the admission note: the note documents exertional discomfort relieved by rest, although the troponin rise argues against a stable pattern."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] Taking the laboratory results into account: the note documents exertional discomfort relieved by rest, although the troponin rise argues against a stable pattern."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] ICD-10 I209 codes this diagnosis: the note documents exertional discomfort relieved by rest, although the troponin rise argues against a stable pattern.",
+                "icdCode": "I209"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] From the admission note: the note documents chest discomfort without hypoxia or leg swelling makes embolism less likely."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] Taking the laboratory results into account: the note documents chest discomfort without hypoxia or leg swelling makes embolism less likely."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "qwen": {
+          "modelName": "Qwen3-32B",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] From the admission note: the note documents exertional pressure with sweating, a rising troponin and new lateral ST depression."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] Taking the laboratory results into account: the note documents exertional pressure with sweating, a rising troponin and new lateral ST depression."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] ICD-10 I214 codes this diagnosis: the note documents exertional pressure with sweating, a rising troponin and new lateral ST depression.",
+                "icdCode": "I214"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] From the admission note: the note documents exertional discomfort relieved by rest, although the troponin rise argues against a stable pattern."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] Taking the laboratory results into account: the note documents exertional discomfort relieved by rest, although the troponin rise argues against a stable pattern."
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] From the admission note: the note documents chest discomfort without hypoxia or leg swelling makes embolism less likely."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] Taking the laboratory results into account: the note documents chest discomfort without hypoxia or leg swelling makes embolism less likely."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "medgemma": {
+          "modelName": "medgemma-27b-it",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] From the admission note: the note documents exertional pressure with sweating, a rising troponin and new lateral ST depression."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] Taking the laboratory results into account: the note documents exertional pressure with sweating, a rising troponin and new lateral ST depression."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] ICD-10 I214 codes this diagnosis: the note documents exertional pressure with sweating, a rising troponin and new lateral ST depression.",
+                "icdCode": "I214"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] From the admission note: the note documents exertional discomfort relieved by rest, although the troponin rise argues against a stable pattern."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] Taking the laboratory results into account: the note documents exertional discomfort relieved by rest, although the troponin rise argues against a stable pattern."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] ICD-10 I209 codes this diagnosis: the note documents exertional discomfort relieved by rest, although the troponin rise argues against a stable pattern.",
+                "icdCode": "I209"
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d6": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d9": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        }
+      }
+    },
+    "900102-cough": {
+      "patientId": "900102-cough",
+      "models": {
+        "llama": {
+          "modelName": "Llama-3.3-70B-Instruct",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] From the admission note: the note documents a cough with wheeze but no consolidation."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] Taking the laboratory results into account: the note documents a cough with wheeze but no consolidation."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] ICD-10 J209 codes this diagnosis: the note documents a cough with wheeze but no consolidation.",
+                "icdCode": "J209"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] From the admission note: the note documents abrupt fever with myalgia, a classroom exposure and a positive influenza A swab."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] Taking the laboratory results into account: the note documents abrupt fever with myalgia, a classroom exposure and a positive influenza A swab."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] ICD-10 J101 codes this diagnosis: the note documents abrupt fever with myalgia, a classroom exposure and a positive influenza A swab.",
+                "icdCode": "J101"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] From the admission note: the note documents fever and cough, although the chest X-ray shows no consolidation."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] Taking the laboratory results into account: the note documents fever and cough, although the chest X-ray shows no consolidation."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d6": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "qwen": {
+          "modelName": "Qwen3-32B",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] From the admission note: the note documents a cough with wheeze but no consolidation."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] Taking the laboratory results into account: the note documents a cough with wheeze but no consolidation."
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] From the admission note: the note documents abrupt fever with myalgia, a classroom exposure and a positive influenza A swab."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] Taking the laboratory results into account: the note documents abrupt fever with myalgia, a classroom exposure and a positive influenza A swab."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] ICD-10 J101 codes this diagnosis: the note documents abrupt fever with myalgia, a classroom exposure and a positive influenza A swab.",
+                "icdCode": "J101"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] From the admission note: the note documents fever and cough, although the chest X-ray shows no consolidation."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] Taking the laboratory results into account: the note documents fever and cough, although the chest X-ray shows no consolidation."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "medgemma": {
+          "modelName": "medgemma-27b-it",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] From the admission note: the note documents a cough with wheeze but no consolidation."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] Taking the laboratory results into account: the note documents a cough with wheeze but no consolidation."
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] From the admission note: the note documents abrupt fever with myalgia, a classroom exposure and a positive influenza A swab."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] Taking the laboratory results into account: the note documents abrupt fever with myalgia, a classroom exposure and a positive influenza A swab."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] ICD-10 J101 codes this diagnosis: the note documents abrupt fever with myalgia, a classroom exposure and a positive influenza A swab.",
+                "icdCode": "J101"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] From the admission note: the note documents fever and cough, although the chest X-ray shows no consolidation."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] Taking the laboratory results into account: the note documents fever and cough, although the chest X-ray shows no consolidation."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] ICD-10 J189 codes this diagnosis: the note documents fever and cough, although the chest X-ray shows no consolidation.",
+                "icdCode": "J189"
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d6": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        }
+      }
+    },
+    "900103-abdominal_pain": {
+      "patientId": "900103-abdominal_pain",
+      "models": {
+        "llama": {
+          "modelName": "Llama-3.3-70B-Instruct",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] From the admission note: the note documents right upper quadrant pain after a fatty meal, fever, a positive Murphy sign and a thickened gallbladder with stones."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] Taking the laboratory results into account: the note documents right upper quadrant pain after a fatty meal, fever, a positive Murphy sign and a thickened gallbladder with stones."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] ICD-10 K810 codes this diagnosis: the note documents right upper quadrant pain after a fatty meal, fever, a positive Murphy sign and a thickened gallbladder with stones.",
+                "icdCode": "K810"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] From the admission note: the note documents a dilated bile duct with raised bilirubin and a stone on MRCP."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] Taking the laboratory results into account: the note documents a dilated bile duct with raised bilirubin and a stone on MRCP."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] ICD-10 K8050 codes this diagnosis: the note documents a dilated bile duct with raised bilirubin and a stone on MRCP.",
+                "icdCode": "K8050"
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] From the admission note: the note documents upper abdominal pain, but the lipase is normal."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] Taking the laboratory results into account: the note documents upper abdominal pain, but the lipase is normal."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "qwen": {
+          "modelName": "Qwen3-32B",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] From the admission note: the note documents right upper quadrant pain after a fatty meal, fever, a positive Murphy sign and a thickened gallbladder with stones."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] Taking the laboratory results into account: the note documents right upper quadrant pain after a fatty meal, fever, a positive Murphy sign and a thickened gallbladder with stones."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] ICD-10 K8000 codes this diagnosis: the note documents right upper quadrant pain after a fatty meal, fever, a positive Murphy sign and a thickened gallbladder with stones.",
+                "icdCode": "K8000"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] From the admission note: the note documents a dilated bile duct with raised bilirubin and a stone on MRCP."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] Taking the laboratory results into account: the note documents a dilated bile duct with raised bilirubin and a stone on MRCP."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] ICD-10 K8050 codes this diagnosis: the note documents a dilated bile duct with raised bilirubin and a stone on MRCP.",
+                "icdCode": "K8050"
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] From the admission note: the note documents upper abdominal pain, but the lipase is normal."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] Taking the laboratory results into account: the note documents upper abdominal pain, but the lipase is normal."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "medgemma": {
+          "modelName": "medgemma-27b-it",
+          "diagnoses": {
+            "d2": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] From the admission note: the note documents right upper quadrant pain after a fatty meal, fever, a positive Murphy sign and a thickened gallbladder with stones."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] Taking the laboratory results into account: the note documents right upper quadrant pain after a fatty meal, fever, a positive Murphy sign and a thickened gallbladder with stones."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] ICD-10 K810 codes this diagnosis: the note documents right upper quadrant pain after a fatty meal, fever, a positive Murphy sign and a thickened gallbladder with stones.",
+                "icdCode": "K810"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] From the admission note: the note documents a dilated bile duct with raised bilirubin and a stone on MRCP."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] Taking the laboratory results into account: the note documents a dilated bile duct with raised bilirubin and a stone on MRCP."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] From the admission note: the note documents upper abdominal pain, but the lipase is normal."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] Taking the laboratory results into account: the note documents upper abdominal pain, but the lipase is normal."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] ICD-10 K859 codes this diagnosis: the note documents upper abdominal pain, but the lipase is normal.",
+                "icdCode": "K859"
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d8": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        }
+      }
+    },
+    "900104-headache": {
+      "patientId": "900104-headache",
+      "models": {
+        "llama": {
+          "modelName": "Llama-3.3-70B-Instruct",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] From the admission note: the note documents a known migraine history, but the onset is sudden and the pain unlike his usual attacks."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] Taking the laboratory results into account: the note documents a known migraine history, but the onset is sudden and the pain unlike his usual attacks."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] ICD-10 G43909 codes this diagnosis: the note documents a known migraine history, but the onset is sudden and the pain unlike his usual attacks.",
+                "icdCode": "G43909"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] From the admission note: the note documents a thunderclap headache on exertion with neck stiffness and blood in the basal cisterns on CT."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] Taking the laboratory results into account: the note documents a thunderclap headache on exertion with neck stiffness and blood in the basal cisterns on CT."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] ICD-10 I607 codes this diagnosis: the note documents a thunderclap headache on exertion with neck stiffness and blood in the basal cisterns on CT.",
+                "icdCode": "I607"
+              }
+            },
+            "d7": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] From the admission note: the note documents neck stiffness, but there is no fever and the CT shows blood."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] Taking the laboratory results into account: the note documents neck stiffness, but there is no fever and the CT shows blood."
+              }
+            },
+            "d11": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "qwen": {
+          "modelName": "Qwen3-32B",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] From the admission note: the note documents a known migraine history, but the onset is sudden and the pain unlike his usual attacks."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] Taking the laboratory results into account: the note documents a known migraine history, but the onset is sudden and the pain unlike his usual attacks."
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] From the admission note: the note documents a thunderclap headache on exertion with neck stiffness and blood in the basal cisterns on CT."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] Taking the laboratory results into account: the note documents a thunderclap headache on exertion with neck stiffness and blood in the basal cisterns on CT."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] ICD-10 I607 codes this diagnosis: the note documents a thunderclap headache on exertion with neck stiffness and blood in the basal cisterns on CT.",
+                "icdCode": "I607"
+              }
+            },
+            "d7": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] From the admission note: the note documents neck stiffness, but there is no fever and the CT shows blood."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] Taking the laboratory results into account: the note documents neck stiffness, but there is no fever and the CT shows blood."
+              }
+            },
+            "d11": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "medgemma": {
+          "modelName": "medgemma-27b-it",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] From the admission note: the note documents a known migraine history, but the onset is sudden and the pain unlike his usual attacks."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] Taking the laboratory results into account: the note documents a known migraine history, but the onset is sudden and the pain unlike his usual attacks."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] ICD-10 G43909 codes this diagnosis: the note documents a known migraine history, but the onset is sudden and the pain unlike his usual attacks.",
+                "icdCode": "G43909"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] From the admission note: the note documents a thunderclap headache on exertion with neck stiffness and blood in the basal cisterns on CT."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] Taking the laboratory results into account: the note documents a thunderclap headache on exertion with neck stiffness and blood in the basal cisterns on CT."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] ICD-10 I609 codes this diagnosis: the note documents a thunderclap headache on exertion with neck stiffness and blood in the basal cisterns on CT.",
+                "icdCode": "I609"
+              }
+            },
+            "d6": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d7": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] From the admission note: the note documents neck stiffness, but there is no fever and the CT shows blood."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] Taking the laboratory results into account: the note documents neck stiffness, but there is no fever and the CT shows blood."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

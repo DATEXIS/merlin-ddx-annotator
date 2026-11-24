@@ -1,0 +1,12 @@
+Disease,Synonyms,icd10_regex,fever,acute_onset,exertional,productive_sputum,focal_tenderness,neuro_deficit,weight_loss,hypoxia
+Acute decompensated heart failure,,^I50,0,0,1,0,0,0,0,1
+COPD exacerbation,,^J44,0,1,1,1,0,0,0,1
+Pulmonary embolism,,^I26,0,1,0,0,0,0,0,1
+Pneumonia,,^J1[2-8],1,0,0,1,0,0,0,1
+Asthma exacerbation,,^J45,0,1,1,0,0,0,0,0
+Pleural effusion,,^J9[01],0,0,1,0,0,0,0,1
+Anemia,,^D6[0-4],0,0,1,0,0,0,0,0
+Pneumothorax,,^J93,0,1,0,0,0,0,0,1
+Interstitial lung disease,,^J84,0,0,1,0,0,0,0,1
+Acute coronary syndrome,,^I2[124],0,1,1,0,0,0,0,0
+Anxiety,,^F41,0,1,0,0,0,0,0,0

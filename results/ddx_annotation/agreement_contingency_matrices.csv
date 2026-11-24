@@ -1,0 +1,4 @@
+cohort,pair,unit,both_selected,first_only,second_only,neither,candidates,n_cases
+study_350,Clinician 1 vs Clinician 2,candidate diagnosis,230,23,20,12345,12618,236
+study_350,Clinician 1 vs Clinician 3,candidate diagnosis,99,44,24,6944,7111,122
+study_350,Clinician 2 vs Clinician 3,candidate diagnosis,36,7,5,2322,2370,41

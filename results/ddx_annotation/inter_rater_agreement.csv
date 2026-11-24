@@ -1,0 +1,5 @@
+cohort,pair,statistic,n_cases_kappa,cohen_kappa,p_o,p_e,n_cases_both_completed,exact_set_agreement,identical_sets,mean_jaccard,second_within_first,first_strictly_within_second,fleiss_kappa
+study_350,Clinician 1 vs Clinician 2,pairwise,236,0.912774,0.996592,0.960931,236,0.889831,210,0.911723,216,4,
+study_350,Clinician 1 vs Clinician 3,pairwise,122,0.739517,0.990437,0.963289,121,0.677686,82,0.747934,97,2,
+study_350,Clinician 2 vs Clinician 3,pairwise,41,0.854567,0.994937,0.965185,41,0.829268,34,0.853659,36,0,
+study_350,"Clinicians 1, 2 and 3",fleiss,41,,,,,,,,,,0.810516

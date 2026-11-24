@@ -38,7 +38,9 @@ def test_known_matrix():
 
 
 def test_public_results_carry_no_item_level_data():
-    for path in (ROOT / "results").iterdir():
+    for path in (ROOT / "results").rglob("*"):          # includes results/ddx_annotation/
+        if not path.is_file():
+            continue
         text = path.read_text(encoding="utf-8")
         if path.suffix == ".csv":
             header = next(csv.reader(io.StringIO(text)))

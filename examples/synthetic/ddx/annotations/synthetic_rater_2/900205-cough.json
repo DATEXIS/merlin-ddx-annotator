@@ -1,0 +1,8 @@
+{
+  "annotatorId": "synthetic_rater_2",
+  "patientId": "900205-cough",
+  "updatedAt": "2026-01-01T00:00:00Z",
+  "annotations": {
+    "d1": true
+  }
+}

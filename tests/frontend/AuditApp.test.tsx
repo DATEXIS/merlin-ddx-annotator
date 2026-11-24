@@ -44,11 +44,11 @@ it('remembers the selected annotator under the study key', async () => {
   expect(screen.queryByText('Select an annotator to record answers.')).not.toBeInTheDocument()
 })
 
-it('explains that the other study views are not included', async () => {
+it('explains that the DDx views need a DDx cohort', async () => {
   serve()
   const user = userEvent.setup()
   render(<AuditApp />)
   await screen.findByRole('region', { name: 'V2 pair' })
   await user.click(screen.getByRole('button', { name: 'train' }))
-  expect(screen.getByText(/belonged to a separate annotation study and are not part of this release/)).toBeInTheDocument()
+  expect(screen.getByText(/need the DDx cohort files, which this data root does not contain/)).toBeInTheDocument()
 })

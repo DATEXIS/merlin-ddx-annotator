@@ -1,0 +1,5 @@
+cohort,clinician,cohort_size,completed_records,abdominal_pain,back_pain,chest_pain,cough,diarrhea,dyspnea,headache
+pilot,Clinician 1,70,69,9,10,10,10,10,10,10
+study_350,Clinician 1,350,350,50,50,50,50,50,50,50
+study_350,Clinician 2,350,236,49,49,49,50,39,0,0
+study_350,Clinician 3,350,121,1,0,0,1,49,50,20

@@ -1,0 +1,12 @@
+Disease,Synonyms,icd10_regex,fever,acute_onset,exertional,productive_sputum,focal_tenderness,neuro_deficit,weight_loss,hypoxia
+Acute appendicitis,,^K35,1,1,0,0,1,0,0,0
+Acute cholecystitis,,^(K81|K80[01]),1,1,0,0,1,0,0,0
+Choledocholithiasis,,^K80[3-5],0,1,0,0,1,0,0,0
+Acute pancreatitis,,^K85,0,1,0,0,1,0,0,0
+Small bowel obstruction,,^K56,0,1,0,0,0,0,0,0
+Diverticulitis,,^K57,1,0,0,0,1,0,0,0
+Peptic ulcer disease,,^K2[5-7],0,0,0,0,1,0,0,0
+Nephrolithiasis,,^N2[01],0,1,0,0,0,0,0,0
+Mesenteric ischemia,,^K55,0,1,0,0,0,0,0,0
+Ectopic pregnancy,,^O00,0,1,0,0,1,0,0,0
+Gastroenteritis,,^A0[89],1,0,0,0,0,0,0,0

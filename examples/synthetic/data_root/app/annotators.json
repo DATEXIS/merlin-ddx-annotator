@@ -10,5 +10,29 @@
     "name": "Synthetic rater 2",
     "type": "human",
     "active": true
+  },
+  {
+    "id": "synthetic_rater_3",
+    "name": "Synthetic rater 3",
+    "type": "human",
+    "active": true
+  },
+  {
+    "id": "llama",
+    "name": "Llama",
+    "type": "llm",
+    "active": true
+  },
+  {
+    "id": "qwen",
+    "name": "Qwen",
+    "type": "llm",
+    "active": true
+  },
+  {
+    "id": "medgemma",
+    "name": "MedGemma",
+    "type": "llm",
+    "active": true
   }
 ]

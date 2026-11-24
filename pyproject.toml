@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "merlin-ddx-annotator"
-version = "1.0.0"
-description = "Clinical annotation interface, evaluation protocol, rubric, and reproducibility tools for the MERLIN-DDx clinician evaluation study."
+version = "1.1.0"
+description = "Clinical annotation interface, protocols, analysis code and reproducibility tools for the MERLIN-DDx clinician studies (DDx annotation and reasoning audit)."
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"

@@ -1,0 +1,12 @@
+Disease,Synonyms,icd10_regex,fever,acute_onset,exertional,productive_sputum,focal_tenderness,neuro_deficit,weight_loss,hypoxia
+Acute coronary syndrome,,^I2[124],0,1,1,0,0,0,0,0
+Stable angina,,^I20,0,0,1,0,0,0,0,0
+Pulmonary embolism,,^I26,0,1,0,0,0,0,0,1
+Aortic dissection,,^I710,0,1,0,0,1,1,0,0
+Pericarditis,,^I3[01],1,1,0,0,0,0,0,0
+Pneumothorax,,^J93,0,1,0,0,0,0,0,1
+Pneumonia,,^J1[2-8],1,0,0,1,0,0,0,1
+Gastroesophageal reflux,,^K21,0,0,0,0,0,0,0,0
+Costochondritis,,^M940,0,0,0,0,1,0,0,0
+Panic disorder,,^F410,0,1,0,0,0,0,0,0
+Esophageal spasm,,^K224,0,1,0,0,0,0,0,0

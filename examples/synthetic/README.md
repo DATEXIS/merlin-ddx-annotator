@@ -1,5 +1,7 @@
 # Synthetic demonstration cases
 
+This folder holds the reasoning-audit demonstration (described on this page) and the DDx-annotation demonstration ([ddx/](ddx/README.md)). Both share `data_root/`, which the demo server reads: the audit's pair and note files, and the DDx cohorts `app/patients*.json` and `app/model_reasoning*.json`. They also share one annotator list.
+
 **Everything here is synthetic.** The five admissions, notes, rationales, allocations and ratings were written by hand for this repository. None is derived from, paraphrased from or modelled on a MIMIC-IV record or on a rationale evaluated in the study, and no rating comes from a clinician. Synthetic notes start with `SYNTHETIC CASE - not a real patient.`; synthetic comments start with `SYNTHETIC:`.
 
 ## Files

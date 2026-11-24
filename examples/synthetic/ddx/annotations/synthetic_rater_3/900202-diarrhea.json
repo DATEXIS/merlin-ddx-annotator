@@ -1,0 +1,8 @@
+{
+  "annotatorId": "synthetic_rater_3",
+  "patientId": "900202-diarrhea",
+  "updatedAt": "2026-01-01T00:00:00Z",
+  "annotations": {
+    "d4": true
+  }
+}

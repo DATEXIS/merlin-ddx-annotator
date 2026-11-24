@@ -1,0 +1,37 @@
+cohort,clinician,subset,pair,kappa
+pilot,Clinician 1,all,clinician vs Llama (V3 top-1),0.8330186511623252
+pilot,Clinician 1,all,clinician vs Qwen3 (V3 top-1),0.8664149209298602
+pilot,Clinician 1,all,clinician vs medgemma (V3 top-1),0.747730282930737
+pilot,Clinician 1,all,clinician vs cosine-GT,0.7996223813947904
+pilot,Clinician 1,all,clinician vs ICD-GT,0.8664149209298602
+pilot,Clinician 1,all,"models mutual (Fleiss, V3 top-1)",0.7712203974044702
+pilot,Clinician 1,train,clinician vs Llama (V3 top-1),0.8302696078431367
+pilot,Clinician 1,train,clinician vs Qwen3 (V3 top-1),0.8302696078431367
+pilot,Clinician 1,train,clinician vs medgemma (V3 top-1),0.7192449005447883
+pilot,Clinician 1,train,clinician vs cosine-GT,0.8642156862745087
+pilot,Clinician 1,train,clinician vs ICD-GT,0.8981617647058808
+pilot,Clinician 1,train,"models mutual (Fleiss, V3 top-1)",0.7686439734214351
+pilot,Clinician 1,test,clinician vs Llama (V3 top-1),0.8356793743890517
+pilot,Clinician 1,test,clinician vs Qwen3 (V3 top-1),0.9014076246334323
+pilot,Clinician 1,test,clinician vs medgemma (V3 top-1),0.7757355582237827
+pilot,Clinician 1,test,clinician vs cosine-GT,0.7370869990224839
+pilot,Clinician 1,test,clinician vs ICD-GT,0.8356793743890517
+pilot,Clinician 1,test,"models mutual (Fleiss, V3 top-1)",0.7737398209839118
+study_350,Clinician 1,all,clinician vs Llama (V3 top-1),0.6523701332018377
+study_350,Clinician 1,all,clinician vs Qwen3 (V3 top-1),0.6496001741038445
+study_350,Clinician 1,all,clinician vs medgemma (V3 top-1),0.5526658546162784
+study_350,Clinician 1,all,clinician vs cosine-GT,0.638520337711872
+study_350,Clinician 1,all,clinician vs ICD-GT,0.7271590288476573
+study_350,Clinician 1,all,"models mutual (Fleiss, V3 top-1)",0.6998295224442793
+study_350,Clinician 2,all,clinician vs Llama (V3 top-1),0.6936901890091369
+study_350,Clinician 2,all,clinician vs Qwen3 (V3 top-1),0.7188663378576996
+study_350,Clinician 2,all,clinician vs medgemma (V3 top-1),0.5867915370056546
+study_350,Clinician 2,all,clinician vs cosine-GT,0.6349458416958191
+study_350,Clinician 2,all,clinician vs ICD-GT,0.7314544122819824
+study_350,Clinician 2,all,"models mutual (Fleiss, V3 top-1)",0.7001340879188671
+study_350,Clinician 3,all,clinician vs Llama (V3 top-1),0.5078790875613192
+study_350,Clinician 3,all,clinician vs Qwen3 (V3 top-1),0.5245611523897495
+study_350,Clinician 3,all,clinician vs medgemma (V3 top-1),0.4390814770251178
+study_350,Clinician 3,all,clinician vs cosine-GT,0.5662663144608238
+study_350,Clinician 3,all,clinician vs ICD-GT,0.7080638655024769
+study_350,Clinician 3,all,"models mutual (Fleiss, V3 top-1)",0.6842188086779987

@@ -1,0 +1,12 @@
+Disease,Synonyms,icd10_regex,fever,acute_onset,exertional,productive_sputum,focal_tenderness,neuro_deficit,weight_loss,hypoxia
+Clostridioides difficile infection,,^A047,1,1,0,0,0,0,0,0
+Viral gastroenteritis,,^A08,1,1,0,0,0,0,0,0
+Bacterial gastroenteritis,,^A0[2-5],1,1,0,0,0,0,0,0
+Ulcerative colitis,,^K51,0,0,0,0,0,0,1,0
+Crohn disease,,^K50,0,0,0,0,1,0,1,0
+Ischemic colitis,,^K559,0,1,0,0,1,0,0,0
+Irritable bowel syndrome,,^K58,0,0,0,0,0,0,0,0
+Celiac disease,,^K900,0,0,0,0,0,0,1,0
+Microscopic colitis,,^K528,0,0,0,0,0,0,0,0
+Medication-induced diarrhea,,^K521,0,1,0,0,0,0,0,0
+Hyperthyroidism,,^E05,0,0,0,0,0,0,1,0

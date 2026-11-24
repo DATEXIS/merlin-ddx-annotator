@@ -1,0 +1,9 @@
+{
+  "annotatorId": "synthetic_rater_1",
+  "patientId": "900201-back_pain",
+  "updatedAt": "2026-01-01T00:00:00Z",
+  "annotations": {
+    "d2": true,
+    "d4": true
+  }
+}

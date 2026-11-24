@@ -1,0 +1,1446 @@
+[
+  {
+    "id": "900101-chest_pain",
+    "note_id": "900101-DS-1",
+    "subject_id": "S900101",
+    "hadm_id": "900101",
+    "name": "900101 (chest_pain)",
+    "chief_complaint": "chest_pain",
+    "split": "train",
+    "labs": "Troponin rising on repeat. Creatinine and potassium within range.",
+    "dischargeDiagnosis": "Primary: non-ST elevation myocardial infarction. Secondary: hypertension, hyperlipidemia.",
+    "groundTruthIcdCodes": [
+      {
+        "code": "I214",
+        "longDescription": "Non-ST elevation (NSTEMI) myocardial infarction"
+      },
+      {
+        "code": "I10",
+        "longDescription": "Essential (primary) hypertension"
+      },
+      {
+        "code": "E785",
+        "longDescription": "Hyperlipidemia, unspecified"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Service",
+        "content": "MEDICINE"
+      },
+      {
+        "title": "Allergies",
+        "content": "No known drug allergies"
+      },
+      {
+        "title": "Attending",
+        "content": ""
+      },
+      {
+        "title": "Chief Complaint",
+        "content": "chest pain"
+      },
+      {
+        "title": "Major Surgical or Invasive Procedure",
+        "content": ""
+      },
+      {
+        "title": "History of Present Illness",
+        "content": "SYNTHETIC CASE - not a real patient. A 64-year-old man felt pressure-like central chest discomfort while carrying shopping upstairs. It eased after twenty minutes of rest but returned twice overnight, each time with sweating."
+      },
+      {
+        "title": "Past Medical History",
+        "content": "Hypertension. High cholesterol. Former smoker."
+      },
+      {
+        "title": "Social History",
+        "content": "Synthetic case; social history not recorded."
+      },
+      {
+        "title": "Family History",
+        "content": ""
+      },
+      {
+        "title": "Physical Exam",
+        "content": "Comfortable at rest. Heart rate 88, blood pressure 152/90. Heart sounds normal, no murmur. Lungs clear. Chest wall not tender."
+      },
+      {
+        "title": "Pertinent Results",
+        "content": "First troponin mildly raised, second troponin higher. ECG: new ST depression in the lateral leads."
+      },
+      {
+        "title": "Brief Hospital Course",
+        "content": "Treated with aspirin, a second antiplatelet agent and heparin. Angiography showed a tight lesion in one coronary artery, which was stented. No further pain."
+      },
+      {
+        "title": "Medications on Admission",
+        "content": "See the synthetic history above."
+      },
+      {
+        "title": "Discharge Medications",
+        "content": "Continued as described in the hospital course."
+      },
+      {
+        "title": "Facility",
+        "content": ""
+      },
+      {
+        "title": "Discharge Disposition",
+        "content": "Home"
+      },
+      {
+        "title": "Discharge Diagnosis",
+        "content": "Primary: non-ST elevation myocardial infarction. Secondary: hypertension, hyperlipidemia."
+      },
+      {
+        "title": "Discharge Condition",
+        "content": "Synthetic case: stable at discharge."
+      },
+      {
+        "title": "Discharge Instructions",
+        "content": "Synthetic case: return if symptoms recur."
+      },
+      {
+        "title": "Followup Instructions",
+        "content": ""
+      }
+    ],
+    "diagnoses": [
+      {
+        "id": "d1",
+        "label": "Acute coronary syndrome",
+        "rank": 1,
+        "score": 0.82,
+        "icd_rank": 1
+      },
+      {
+        "id": "d2",
+        "label": "Stable angina",
+        "rank": 2,
+        "score": 0.785
+      },
+      {
+        "id": "d3",
+        "label": "Pulmonary embolism",
+        "rank": 3,
+        "score": 0.75
+      },
+      {
+        "id": "d4",
+        "label": "Pericarditis",
+        "rank": 4,
+        "score": 0.715
+      },
+      {
+        "id": "d5",
+        "label": "Aortic dissection",
+        "rank": 5,
+        "score": 0.68
+      },
+      {
+        "id": "d6",
+        "label": "Gastroesophageal reflux",
+        "rank": 6,
+        "score": 0.645
+      },
+      {
+        "id": "d7",
+        "label": "Costochondritis",
+        "rank": 7,
+        "score": 0.61
+      },
+      {
+        "id": "d8",
+        "label": "Pneumonia",
+        "rank": 8,
+        "score": 0.575
+      },
+      {
+        "id": "d9",
+        "label": "Panic disorder",
+        "rank": 9,
+        "score": 0.54
+      },
+      {
+        "id": "d10",
+        "label": "Pneumothorax",
+        "rank": 10,
+        "score": 0.505
+      },
+      {
+        "id": "d11",
+        "label": "Esophageal spasm",
+        "rank": 11,
+        "score": 0.47
+      }
+    ],
+    "existingAnnotations": [
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "8 / 2 / 2 / 2"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "7 / 3 / 4 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "5 / 4 / 3 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "2 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "4 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "3 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "8 / 3 / 2 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "7 / 2 / 3 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "5 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "2 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "4 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "3 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / 2 / 1 / 2"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "_ / 1 / 2 / 1"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "5 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "2 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "9 / 3 / 3 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "4 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "3 / _ / _ / _"
+      }
+    ]
+  },
+  {
+    "id": "900102-cough",
+    "note_id": "900102-DS-1",
+    "subject_id": "S900102",
+    "hadm_id": "900102",
+    "name": "900102 (cough)",
+    "chief_complaint": "cough",
+    "split": "train",
+    "labs": "White cell count normal. Glucose raised on admission.",
+    "dischargeDiagnosis": "Influenza A with bronchitic symptoms. Type 2 diabetes.",
+    "groundTruthIcdCodes": [
+      {
+        "code": "J101",
+        "longDescription": "Influenza due to other identified influenza virus with other respiratory manifestations"
+      },
+      {
+        "code": "E119",
+        "longDescription": "Type 2 diabetes mellitus without complications"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Service",
+        "content": "MEDICINE"
+      },
+      {
+        "title": "Allergies",
+        "content": "No known drug allergies"
+      },
+      {
+        "title": "Attending",
+        "content": ""
+      },
+      {
+        "title": "Chief Complaint",
+        "content": "cough"
+      },
+      {
+        "title": "Major Surgical or Invasive Procedure",
+        "content": ""
+      },
+      {
+        "title": "History of Present Illness",
+        "content": "SYNTHETIC CASE - not a real patient. A 51-year-old teacher developed a dry cough, fever to 39.2 and aching muscles two days after several pupils in her class fell ill. She feels exhausted and short of breath on stairs."
+      },
+      {
+        "title": "Past Medical History",
+        "content": "Type 2 diabetes on tablets."
+      },
+      {
+        "title": "Social History",
+        "content": "Synthetic case; social history not recorded."
+      },
+      {
+        "title": "Family History",
+        "content": ""
+      },
+      {
+        "title": "Physical Exam",
+        "content": "Flushed, temperature 38.9. Oxygen saturation 95% on room air. Scattered wheeze, no focal crackles."
+      },
+      {
+        "title": "Pertinent Results",
+        "content": "Rapid antigen swab positive for influenza A. Chest X-ray without consolidation."
+      },
+      {
+        "title": "Brief Hospital Course",
+        "content": "Started on an antiviral and given fluids. Blood sugars were higher than usual and settled with a temporary insulin scale. Fever resolved on day three."
+      },
+      {
+        "title": "Medications on Admission",
+        "content": "See the synthetic history above."
+      },
+      {
+        "title": "Discharge Medications",
+        "content": "Continued as described in the hospital course."
+      },
+      {
+        "title": "Facility",
+        "content": ""
+      },
+      {
+        "title": "Discharge Disposition",
+        "content": "Home"
+      },
+      {
+        "title": "Discharge Diagnosis",
+        "content": "Influenza A with bronchitic symptoms. Type 2 diabetes."
+      },
+      {
+        "title": "Discharge Condition",
+        "content": "Synthetic case: stable at discharge."
+      },
+      {
+        "title": "Discharge Instructions",
+        "content": "Synthetic case: return if symptoms recur."
+      },
+      {
+        "title": "Followup Instructions",
+        "content": ""
+      }
+    ],
+    "diagnoses": [
+      {
+        "id": "d1",
+        "label": "Acute bronchitis",
+        "rank": 1,
+        "score": 0.82
+      },
+      {
+        "id": "d2",
+        "label": "Influenza",
+        "rank": 2,
+        "score": 0.785,
+        "icd_rank": 1
+      },
+      {
+        "id": "d3",
+        "label": "Community-acquired pneumonia",
+        "rank": 3,
+        "score": 0.75
+      },
+      {
+        "id": "d4",
+        "label": "Asthma",
+        "rank": 4,
+        "score": 0.715
+      },
+      {
+        "id": "d5",
+        "label": "COPD exacerbation",
+        "rank": 5,
+        "score": 0.68
+      },
+      {
+        "id": "d6",
+        "label": "Pertussis",
+        "rank": 6,
+        "score": 0.645
+      },
+      {
+        "id": "d7",
+        "label": "Gastroesophageal reflux",
+        "rank": 7,
+        "score": 0.61
+      },
+      {
+        "id": "d8",
+        "label": "Heart failure",
+        "rank": 8,
+        "score": 0.575
+      },
+      {
+        "id": "d9",
+        "label": "Bronchiectasis",
+        "rank": 9,
+        "score": 0.54
+      },
+      {
+        "id": "d10",
+        "label": "Pulmonary tuberculosis",
+        "rank": 10,
+        "score": 0.505
+      },
+      {
+        "id": "d11",
+        "label": "Lung cancer",
+        "rank": 11,
+        "score": 0.47
+      }
+    ],
+    "existingAnnotations": [
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "3 / 2 / 2 / 2"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "2 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "1 / 3 / 3 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "4 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "5 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "6 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "3 / 1 / 2 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "2 / 2 / 1 / 1"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "1 / 3 / 3 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "4 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "5 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / 2 / 1 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "6 / 3 / 2 / 2"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "3 / 1 / 3 / 1"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "4 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "2 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "7 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "5 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      }
+    ]
+  },
+  {
+    "id": "900103-abdominal_pain",
+    "note_id": "900103-DS-1",
+    "subject_id": "S900103",
+    "hadm_id": "900103",
+    "name": "900103 (abdominal_pain)",
+    "chief_complaint": "abdominal_pain",
+    "split": "test",
+    "labs": "White cell count raised. Bilirubin and alkaline phosphatase mildly raised. Lipase normal.",
+    "dischargeDiagnosis": "Acute calculous cholecystitis. Choledocholithiasis.",
+    "groundTruthIcdCodes": [
+      {
+        "code": "K8000",
+        "longDescription": "Calculus of gallbladder with acute cholecystitis without obstruction"
+      },
+      {
+        "code": "K8050",
+        "longDescription": "Calculus of bile duct without cholangitis or cholecystitis without obstruction"
+      },
+      {
+        "code": "K810",
+        "longDescription": "Acute cholecystitis"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Service",
+        "content": "SURGERY"
+      },
+      {
+        "title": "Allergies",
+        "content": "No known drug allergies"
+      },
+      {
+        "title": "Attending",
+        "content": ""
+      },
+      {
+        "title": "Chief Complaint",
+        "content": "abdominal pain"
+      },
+      {
+        "title": "Major Surgical or Invasive Procedure",
+        "content": ""
+      },
+      {
+        "title": "History of Present Illness",
+        "content": "SYNTHETIC CASE - not a real patient. A 47-year-old woman has had constant pain under the right ribs for a day, worse after a fatty meal, with vomiting and shivers."
+      },
+      {
+        "title": "Past Medical History",
+        "content": "Obesity. Previous episodes of milder upper abdominal pain after meals."
+      },
+      {
+        "title": "Social History",
+        "content": "Synthetic case; social history not recorded."
+      },
+      {
+        "title": "Family History",
+        "content": ""
+      },
+      {
+        "title": "Physical Exam",
+        "content": "Temperature 38.4. Tender in the right upper quadrant with a positive Murphy sign. No guarding elsewhere."
+      },
+      {
+        "title": "Pertinent Results",
+        "content": "Ultrasound: thickened gallbladder wall with stones and pericholecystic fluid. Common bile duct mildly dilated; a stone was later seen on MRCP."
+      },
+      {
+        "title": "Brief Hospital Course",
+        "content": "Given antibiotics. The duct stone was removed endoscopically, and the gallbladder was taken out laparoscopically two days later."
+      },
+      {
+        "title": "Medications on Admission",
+        "content": "See the synthetic history above."
+      },
+      {
+        "title": "Discharge Medications",
+        "content": "Continued as described in the hospital course."
+      },
+      {
+        "title": "Facility",
+        "content": ""
+      },
+      {
+        "title": "Discharge Disposition",
+        "content": "Home"
+      },
+      {
+        "title": "Discharge Diagnosis",
+        "content": "Acute calculous cholecystitis. Choledocholithiasis."
+      },
+      {
+        "title": "Discharge Condition",
+        "content": "Synthetic case: stable at discharge."
+      },
+      {
+        "title": "Discharge Instructions",
+        "content": "Synthetic case: return if symptoms recur."
+      },
+      {
+        "title": "Followup Instructions",
+        "content": ""
+      }
+    ],
+    "diagnoses": [
+      {
+        "id": "d1",
+        "label": "Acute appendicitis",
+        "rank": 1,
+        "score": 0.82
+      },
+      {
+        "id": "d2",
+        "label": "Acute cholecystitis",
+        "rank": 2,
+        "score": 0.785,
+        "icd_rank": 1
+      },
+      {
+        "id": "d3",
+        "label": "Choledocholithiasis",
+        "rank": 3,
+        "score": 0.75,
+        "icd_rank": 2
+      },
+      {
+        "id": "d4",
+        "label": "Acute pancreatitis",
+        "rank": 4,
+        "score": 0.715
+      },
+      {
+        "id": "d5",
+        "label": "Peptic ulcer disease",
+        "rank": 5,
+        "score": 0.68
+      },
+      {
+        "id": "d6",
+        "label": "Diverticulitis",
+        "rank": 6,
+        "score": 0.645
+      },
+      {
+        "id": "d7",
+        "label": "Small bowel obstruction",
+        "rank": 7,
+        "score": 0.61
+      },
+      {
+        "id": "d8",
+        "label": "Gastroenteritis",
+        "rank": 8,
+        "score": 0.575
+      },
+      {
+        "id": "d9",
+        "label": "Nephrolithiasis",
+        "rank": 9,
+        "score": 0.54
+      },
+      {
+        "id": "d10",
+        "label": "Mesenteric ischemia",
+        "rank": 10,
+        "score": 0.505
+      },
+      {
+        "id": "d11",
+        "label": "Ectopic pregnancy",
+        "rank": 11,
+        "score": 0.47
+      }
+    ],
+    "existingAnnotations": [
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "2 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "4 / 2 / 2 / 2"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "3 / 3 / 3 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "10 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "5 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "2 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "4 / 3 / 2 / 2"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "3 / 2 / 3 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "10 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "5 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "2 / 2 / 1 / 2"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "4 / 4 / 3 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "3 / 1 / 2 / 1"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "9 / 3 / 4 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "_ / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "5 / _ / _ / _"
+      }
+    ]
+  },
+  {
+    "id": "900104-headache",
+    "note_id": "900104-DS-1",
+    "subject_id": "S900104",
+    "hadm_id": "900104",
+    "name": "900104 (headache)",
+    "chief_complaint": "headache",
+    "split": "test",
+    "labs": "Sodium low on day five, corrected with fluid management.",
+    "dischargeDiagnosis": "Subarachnoid hemorrhage from a ruptured aneurysm. History of migraine.",
+    "groundTruthIcdCodes": [
+      {
+        "code": "I607",
+        "longDescription": "Nontraumatic subarachnoid hemorrhage from unspecified intracranial artery"
+      },
+      {
+        "code": "G43909",
+        "longDescription": "Migraine, unspecified, not intractable, without status migrainosus"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Service",
+        "content": "NEUROLOGY"
+      },
+      {
+        "title": "Allergies",
+        "content": "No known drug allergies"
+      },
+      {
+        "title": "Attending",
+        "content": ""
+      },
+      {
+        "title": "Chief Complaint",
+        "content": "headache"
+      },
+      {
+        "title": "Major Surgical or Invasive Procedure",
+        "content": ""
+      },
+      {
+        "title": "History of Present Illness",
+        "content": "SYNTHETIC CASE - not a real patient. A 39-year-old man with a history of migraine had a sudden, explosive headache while lifting weights, the worst of his life, followed by neck stiffness and one episode of vomiting."
+      },
+      {
+        "title": "Past Medical History",
+        "content": "Migraine without aura, a few attacks a year."
+      },
+      {
+        "title": "Social History",
+        "content": "Synthetic case; social history not recorded."
+      },
+      {
+        "title": "Family History",
+        "content": ""
+      },
+      {
+        "title": "Physical Exam",
+        "content": "Drowsy but oriented. Neck stiff. Pupils equal. No limb weakness."
+      },
+      {
+        "title": "Pertinent Results",
+        "content": "CT head: blood in the basal cisterns. CT angiography: small aneurysm on an anterior circulation artery."
+      },
+      {
+        "title": "Brief Hospital Course",
+        "content": "Transferred to the neurosurgical unit; the aneurysm was coiled. Nimodipine was given for three weeks. He recovered without deficit."
+      },
+      {
+        "title": "Medications on Admission",
+        "content": "See the synthetic history above."
+      },
+      {
+        "title": "Discharge Medications",
+        "content": "Continued as described in the hospital course."
+      },
+      {
+        "title": "Facility",
+        "content": ""
+      },
+      {
+        "title": "Discharge Disposition",
+        "content": "Home"
+      },
+      {
+        "title": "Discharge Diagnosis",
+        "content": "Subarachnoid hemorrhage from a ruptured aneurysm. History of migraine."
+      },
+      {
+        "title": "Discharge Condition",
+        "content": "Synthetic case: stable at discharge."
+      },
+      {
+        "title": "Discharge Instructions",
+        "content": "Synthetic case: return if symptoms recur."
+      },
+      {
+        "title": "Followup Instructions",
+        "content": ""
+      }
+    ],
+    "diagnoses": [
+      {
+        "id": "d1",
+        "label": "Migraine",
+        "rank": 1,
+        "score": 0.82,
+        "icd_rank": 2
+      },
+      {
+        "id": "d2",
+        "label": "Tension-type headache",
+        "rank": 2,
+        "score": 0.785
+      },
+      {
+        "id": "d3",
+        "label": "Hypertensive emergency",
+        "rank": 3,
+        "score": 0.75
+      },
+      {
+        "id": "d4",
+        "label": "Sinusitis",
+        "rank": 4,
+        "score": 0.715
+      },
+      {
+        "id": "d5",
+        "label": "Subarachnoid hemorrhage",
+        "rank": 5,
+        "score": 0.68,
+        "icd_rank": 1
+      },
+      {
+        "id": "d6",
+        "label": "Cluster headache",
+        "rank": 6,
+        "score": 0.645
+      },
+      {
+        "id": "d7",
+        "label": "Bacterial meningitis",
+        "rank": 7,
+        "score": 0.61
+      },
+      {
+        "id": "d8",
+        "label": "Brain tumor",
+        "rank": 8,
+        "score": 0.575
+      },
+      {
+        "id": "d9",
+        "label": "Idiopathic intracranial hypertension",
+        "rank": 9,
+        "score": 0.54
+      },
+      {
+        "id": "d10",
+        "label": "Giant cell arteritis",
+        "rank": 10,
+        "score": 0.505
+      },
+      {
+        "id": "d11",
+        "label": "Cerebral venous thrombosis",
+        "rank": 11,
+        "score": 0.47
+      }
+    ],
+    "existingAnnotations": [
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "9 / 2 / 2 / 2"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "4 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "1 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "3 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "2 / 3 / 3 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "5 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "6 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "9 / 3 / 2 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "3 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "1 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "2 / 2 / 3 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "4 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "5 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "8 / 1 / 2 / 1"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "_ / 3 / 3 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "10 / 2 / 1 / 2"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "4 / 4 / 5 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "1 / 5 / 4 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "2 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "5 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "3 / _ / _ / _"
+      }
+    ]
+  }
+]

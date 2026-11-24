@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Run the clinician-audit interface on the synthetic demonstration cases.
+"""Run the annotation interface on the synthetic demonstration cases.
 
     npm ci && npm run build
     python scripts/run_demo.py                 # http://127.0.0.1:8765
@@ -9,9 +9,13 @@ The synthetic data root is copied to ``.demo/data_root`` (git-ignored) so that
 saving answers never modifies the committed examples; ``--reset`` starts over.
 No PhysioNet credentials, external services, cluster access or GPU are needed.
 
-The unchanged study backend (``merlin_ddx.sync_api``) serves the built frontend
-and stores answers as one JSON record per annotator and admission under
-``.demo/data_root/rebuttal_audit_annotations/<annotator>/``.
+The unchanged study backend (``merlin_ddx.sync_api``) serves the built frontend.
+It opens on the DDx annotation views (pilot train / test, the 350-case study) and
+offers the reasoning audit as a further view. It stores one JSON record per
+annotator and case: DDx selections under ``.demo/data_root/annotations/<annotator>/``
+(added diagnoses under ``custom_diagnoses/``), audit answers under
+``.demo/data_root/rebuttal_audit_annotations/<annotator>/``. ``--with-ratings``
+preloads the synthetic raters' records for both.
 """
 from __future__ import annotations
 
@@ -32,6 +36,9 @@ def prepare(data_root: Path, *, reset: bool, with_ratings: bool) -> Path:
     if not data_root.exists():
         shutil.copytree(SYNTHETIC / "data_root", data_root)
     if with_ratings:
+        for source, target_name in ((SYNTHETIC / "ddx" / "annotations", "annotations"),
+                                    (SYNTHETIC / "ddx" / "custom_diagnoses", "custom_diagnoses")):
+            shutil.copytree(source, data_root / target_name, dirs_exist_ok=True)
         for rater_dir in sorted((SYNTHETIC / "ratings").iterdir()):
             target = data_root / "rebuttal_audit_annotations" / rater_dir.name
             target.mkdir(parents=True, exist_ok=True)
@@ -58,7 +65,7 @@ def main() -> int:
     from merlin_ddx.sync_api import create_app
 
     app = create_app(data_root=data_root, sync_git=False, static_dir=args.static_dir.resolve())
-    print(f"Synthetic clinician-audit demo: http://{args.host}:{args.port}/  (data: {data_root})")
+    print(f"Synthetic annotation demo: http://{args.host}:{args.port}/  (data: {data_root})")
     uvicorn.run(app, host=args.host, port=args.port, log_level="warning")
     return 0
 

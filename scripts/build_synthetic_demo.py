@@ -3,8 +3,9 @@
 
 Writes, in exactly the formats the study used:
 
-* ``examples/synthetic/data_root/`` - what the annotation server reads
-  (annotator list, blinded pair file, admission notes, ICD-10-CM catalog subset);
+* ``examples/synthetic/data_root/`` - what the annotation server reads for the
+  reasoning audit (annotator list, shared with the DDx views; blinded pair file,
+  admission notes, ICD-10-CM catalog subset);
 * ``examples/synthetic/allocation_key.csv`` - which response is loop / zero-shot,
   kept outside the server's data root as in the study (blinding);
 * ``examples/synthetic/ratings/<rater>/<case>.json`` - synthetic rating exports in
@@ -58,6 +59,11 @@ def build() -> dict[Path, bytes]:
     files: dict[Path, bytes] = {}
     data_root = EXAMPLES / "data_root"
     annotators = [{"id": r["id"], "name": r["name"], "type": "human", "active": True} for r in spec["raters"]]
+    # The annotator list is shared with the DDx-annotation views: their extra synthetic
+    # rater and the three model columns come from examples/synthetic/ddx/demo_cases.json.
+    ddx_spec = EXAMPLES / "ddx" / "demo_cases.json"
+    if ddx_spec.is_file():
+        annotators += json.loads(ddx_spec.read_text(encoding="utf-8"))["annotators"]
     files[data_root / "app" / "annotators.json"] = (json.dumps(annotators, indent=2) + "\n").encode("utf-8")
     blinded, notes, key = [], [], []
     for case in spec["cases"]:

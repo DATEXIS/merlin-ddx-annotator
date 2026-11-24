@@ -1,0 +1,5 @@
+cohort,clinician,completed_records,positive_selections,candidate_list_selections,added_diagnosis_selections,mean_selections,multi_label_records,multi_label_rate
+pilot,Clinician 1,69,69,66,3,1,0,0
+study_350,Clinician 1,350,387,338,49,1.10571,34,0.0971429
+study_350,Clinician 2,236,250,224,26,1.05932,13,0.0550847
+study_350,Clinician 3,121,123,92,31,1.01653,2,0.0165289

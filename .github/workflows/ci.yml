@@ -29,16 +29,25 @@ jobs:
           uv sync --locked --extra analysis --extra dev
           npm ci
 
-      - name: Python tests (backend, rubric, original analysis, reproduction)
+      - name: Python tests (backend, rubric, original analyses, reproduction, DDx)
         run: uv run pytest
 
       - name: Synthetic examples are up to date
         run: |
           uv run python scripts/build_synthetic_demo.py --check
+          uv run python scripts/build_synthetic_ddx_demo.py --check
           uv run python scripts/demo_summary.py --check
 
       - name: Published agreement statistics reproduce from the contingency matrices
-        run: uv run python scripts/kappa_from_contingency.py
+        run: |
+          uv run python scripts/kappa_from_contingency.py
+          uv run python scripts/ddx_kappa_from_contingency.py
+
+      - name: Original DDx analysis runs on the synthetic cases
+        run: |
+          uv run python scripts/make_synthetic_ddx_fixture.py --out .demo/ddx_fixture
+          uv run python scripts/run_ddx_analysis.py study --fixture .demo/ddx_fixture --out .demo/ddx_study --quiet
+          uv run python scripts/run_ddx_analysis.py pilot --fixture .demo/ddx_fixture --out .demo/ddx_pilot --quiet
 
       - name: Frontend unit tests
         run: npx vitest run

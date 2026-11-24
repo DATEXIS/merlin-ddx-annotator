@@ -1,0 +1,991 @@
+{
+  "patients": {
+    "900201-back_pain": {
+      "patientId": "900201-back_pain",
+      "models": {
+        "llama": {
+          "modelName": "Llama-3.3-70B-Instruct",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] From the admission note: the note documents back pain, but fever, night pain and bacteremia point to infection."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] Taking the laboratory results into account: the note documents back pain, but fever, night pain and bacteremia point to infection."
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] From the admission note: the note documents night pain with fever, focal vertebral tenderness, MRI changes in adjacent vertebrae and Staphylococcus aureus bacteremia."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] Taking the laboratory results into account: the note documents night pain with fever, focal vertebral tenderness, MRI changes in adjacent vertebrae and Staphylococcus aureus bacteremia."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] ICD-10 M4626 codes this diagnosis: the note documents night pain with fever, focal vertebral tenderness, MRI changes in adjacent vertebrae and Staphylococcus aureus bacteremia.",
+                "icdCode": "M4626"
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] From the admission note: the note documents enhancing epidural tissue on MRI, although there is no neurological deficit."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] Taking the laboratory results into account: the note documents enhancing epidural tissue on MRI, although there is no neurological deficit."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] ICD-10 G061 codes this diagnosis: the note documents enhancing epidural tissue on MRI, although there is no neurological deficit.",
+                "icdCode": "G061"
+              }
+            },
+            "d6": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d7": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "qwen": {
+          "modelName": "Qwen3-32B",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] From the admission note: the note documents back pain, but fever, night pain and bacteremia point to infection."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] Taking the laboratory results into account: the note documents back pain, but fever, night pain and bacteremia point to infection."
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] From the admission note: the note documents night pain with fever, focal vertebral tenderness, MRI changes in adjacent vertebrae and Staphylococcus aureus bacteremia."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] Taking the laboratory results into account: the note documents night pain with fever, focal vertebral tenderness, MRI changes in adjacent vertebrae and Staphylococcus aureus bacteremia."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] ICD-10 M4626 codes this diagnosis: the note documents night pain with fever, focal vertebral tenderness, MRI changes in adjacent vertebrae and Staphylococcus aureus bacteremia.",
+                "icdCode": "M4626"
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] From the admission note: the note documents enhancing epidural tissue on MRI, although there is no neurological deficit."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] Taking the laboratory results into account: the note documents enhancing epidural tissue on MRI, although there is no neurological deficit."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d7": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "medgemma": {
+          "modelName": "medgemma-27b-it",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] From the admission note: the note documents back pain, but fever, night pain and bacteremia point to infection."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] Taking the laboratory results into account: the note documents back pain, but fever, night pain and bacteremia point to infection."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] ICD-10 M5126 codes this diagnosis: the note documents back pain, but fever, night pain and bacteremia point to infection.",
+                "icdCode": "M5126"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] From the admission note: the note documents night pain with fever, focal vertebral tenderness, MRI changes in adjacent vertebrae and Staphylococcus aureus bacteremia."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] Taking the laboratory results into account: the note documents night pain with fever, focal vertebral tenderness, MRI changes in adjacent vertebrae and Staphylococcus aureus bacteremia."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] ICD-10 M4626 codes this diagnosis: the note documents night pain with fever, focal vertebral tenderness, MRI changes in adjacent vertebrae and Staphylococcus aureus bacteremia.",
+                "icdCode": "M4626"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d4": {
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] Taking the laboratory results into account: the note documents enhancing epidural tissue on MRI, although there is no neurological deficit."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d8": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        }
+      }
+    },
+    "900202-diarrhea": {
+      "patientId": "900202-diarrhea",
+      "models": {
+        "llama": {
+          "modelName": "Llama-3.3-70B-Instruct",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] From the admission note: the note documents acute watery diarrhea, but the toxin test is negative."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] Taking the laboratory results into account: the note documents acute watery diarrhea, but the toxin test is negative."
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] From the admission note: the note documents watery diarrhea starting during checkpoint-inhibitor treatment with negative stool infection tests."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] Taking the laboratory results into account: the note documents watery diarrhea starting during checkpoint-inhibitor treatment with negative stool infection tests."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] ICD-10 K521 codes this diagnosis: the note documents watery diarrhea starting during checkpoint-inhibitor treatment with negative stool infection tests.",
+                "icdCode": "K521"
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] From the admission note: the note documents bloody diarrhea with colonic inflammation, although the timing follows immunotherapy."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] Taking the laboratory results into account: the note documents bloody diarrhea with colonic inflammation, although the timing follows immunotherapy."
+              }
+            },
+            "d6": {
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "qwen": {
+          "modelName": "Qwen3-32B",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] From the admission note: the note documents acute watery diarrhea, but the toxin test is negative."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] Taking the laboratory results into account: the note documents acute watery diarrhea, but the toxin test is negative."
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] From the admission note: the note documents watery diarrhea starting during checkpoint-inhibitor treatment with negative stool infection tests."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] Taking the laboratory results into account: the note documents watery diarrhea starting during checkpoint-inhibitor treatment with negative stool infection tests."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] ICD-10 K521 codes this diagnosis: the note documents watery diarrhea starting during checkpoint-inhibitor treatment with negative stool infection tests.",
+                "icdCode": "K521"
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] From the admission note: the note documents bloody diarrhea with colonic inflammation, although the timing follows immunotherapy."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] Taking the laboratory results into account: the note documents bloody diarrhea with colonic inflammation, although the timing follows immunotherapy."
+              }
+            },
+            "d6": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d7": {
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "medgemma": {
+          "modelName": "medgemma-27b-it",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] From the admission note: the note documents acute watery diarrhea, but the toxin test is negative."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] Taking the laboratory results into account: the note documents acute watery diarrhea, but the toxin test is negative."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] ICD-10 A047 codes this diagnosis: the note documents acute watery diarrhea, but the toxin test is negative.",
+                "icdCode": "A047"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] ICD-10 A047 codes this diagnosis: it remains in the differential with fewer supporting findings.",
+                "icdCode": "A047"
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] From the admission note: the note documents watery diarrhea starting during checkpoint-inhibitor treatment with negative stool infection tests."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] Taking the laboratory results into account: the note documents watery diarrhea starting during checkpoint-inhibitor treatment with negative stool infection tests."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] ICD-10 K521 codes this diagnosis: the note documents watery diarrhea starting during checkpoint-inhibitor treatment with negative stool infection tests.",
+                "icdCode": "K521"
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] From the admission note: the note documents bloody diarrhea with colonic inflammation, although the timing follows immunotherapy."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] Taking the laboratory results into account: the note documents bloody diarrhea with colonic inflammation, although the timing follows immunotherapy."
+              }
+            },
+            "d8": {
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        }
+      }
+    },
+    "900203-dyspnea": {
+      "patientId": "900203-dyspnea",
+      "models": {
+        "llama": {
+          "modelName": "Llama-3.3-70B-Instruct",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] From the admission note: the note documents orthopnoea, ankle oedema, raised venous pressure, bibasal crackles and a raised BNP after stopping diuretics."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] Taking the laboratory results into account: the note documents orthopnoea, ankle oedema, raised venous pressure, bibasal crackles and a raised BNP after stopping diuretics."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] ICD-10 I5023 codes this diagnosis: the note documents orthopnoea, ankle oedema, raised venous pressure, bibasal crackles and a raised BNP after stopping diuretics.",
+                "icdCode": "I5023"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] From the admission note: the note documents crackles and breathlessness, but no fever and no consolidation."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] Taking the laboratory results into account: the note documents crackles and breathlessness, but no fever and no consolidation."
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] From the admission note: the note documents small bilateral effusions, best explained by the heart failure."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] Taking the laboratory results into account: the note documents small bilateral effusions, best explained by the heart failure."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d6": {
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "qwen": {
+          "modelName": "Qwen3-32B",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] From the admission note: the note documents orthopnoea, ankle oedema, raised venous pressure, bibasal crackles and a raised BNP after stopping diuretics."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] Taking the laboratory results into account: the note documents orthopnoea, ankle oedema, raised venous pressure, bibasal crackles and a raised BNP after stopping diuretics."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] ICD-10 I5023 codes this diagnosis: the note documents orthopnoea, ankle oedema, raised venous pressure, bibasal crackles and a raised BNP after stopping diuretics.",
+                "icdCode": "I5023"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] From the admission note: the note documents crackles and breathlessness, but no fever and no consolidation."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] Taking the laboratory results into account: the note documents crackles and breathlessness, but no fever and no consolidation."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] From the admission note: the note documents small bilateral effusions, best explained by the heart failure."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] Taking the laboratory results into account: the note documents small bilateral effusions, best explained by the heart failure."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] ICD-10 J910 codes this diagnosis: the note documents small bilateral effusions, best explained by the heart failure.",
+                "icdCode": "J910"
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d6": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "medgemma": {
+          "modelName": "medgemma-27b-it",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] From the admission note: the note documents orthopnoea, ankle oedema, raised venous pressure, bibasal crackles and a raised BNP after stopping diuretics."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] Taking the laboratory results into account: the note documents orthopnoea, ankle oedema, raised venous pressure, bibasal crackles and a raised BNP after stopping diuretics."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] ICD-10 I509 codes this diagnosis: the note documents orthopnoea, ankle oedema, raised venous pressure, bibasal crackles and a raised BNP after stopping diuretics.",
+                "icdCode": "I509"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] From the admission note: the note documents crackles and breathlessness, but no fever and no consolidation."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] Taking the laboratory results into account: the note documents crackles and breathlessness, but no fever and no consolidation."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] ICD-10 J189 codes this diagnosis: the note documents crackles and breathlessness, but no fever and no consolidation.",
+                "icdCode": "J189"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] From the admission note: the note documents small bilateral effusions, best explained by the heart failure."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] Taking the laboratory results into account: the note documents small bilateral effusions, best explained by the heart failure."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        }
+      }
+    },
+    "900204-chest_pain": {
+      "patientId": "900204-chest_pain",
+      "models": {
+        "llama": {
+          "modelName": "Llama-3.3-70B-Instruct",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] From the admission note: the note documents chest pain, but the troponin is normal and the ECG shows only sinus tachycardia."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] Taking the laboratory results into account: the note documents chest pain, but the troponin is normal and the ECG shows only sinus tachycardia."
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] From the admission note: the note documents pleuritic pain and breathlessness after immobilisation, tachycardia, low oxygen saturation and a swollen calf."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] Taking the laboratory results into account: the note documents pleuritic pain and breathlessness after immobilisation, tachycardia, low oxygen saturation and a swollen calf."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] ICD-10 I2699 codes this diagnosis: the note documents pleuritic pain and breathlessness after immobilisation, tachycardia, low oxygen saturation and a swollen calf.",
+                "icdCode": "I2699"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] From the admission note: the note documents pleuritic pain and breathlessness, but the chest is clear on examination."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] Taking the laboratory results into account: the note documents pleuritic pain and breathlessness, but the chest is clear on examination."
+              }
+            }
+          }
+        },
+        "qwen": {
+          "modelName": "Qwen3-32B",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] From the admission note: the note documents chest pain, but the troponin is normal and the ECG shows only sinus tachycardia."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] Taking the laboratory results into account: the note documents chest pain, but the troponin is normal and the ECG shows only sinus tachycardia."
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] From the admission note: the note documents pleuritic pain and breathlessness after immobilisation, tachycardia, low oxygen saturation and a swollen calf."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] Taking the laboratory results into account: the note documents pleuritic pain and breathlessness after immobilisation, tachycardia, low oxygen saturation and a swollen calf."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] ICD-10 I2699 codes this diagnosis: the note documents pleuritic pain and breathlessness after immobilisation, tachycardia, low oxygen saturation and a swollen calf.",
+                "icdCode": "I2699"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] From the admission note: the note documents pleuritic pain and breathlessness, but the chest is clear on examination."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] Taking the laboratory results into account: the note documents pleuritic pain and breathlessness, but the chest is clear on examination."
+              }
+            }
+          }
+        },
+        "medgemma": {
+          "modelName": "medgemma-27b-it",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] From the admission note: the note documents chest pain, but the troponin is normal and the ECG shows only sinus tachycardia."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] Taking the laboratory results into account: the note documents chest pain, but the troponin is normal and the ECG shows only sinus tachycardia."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] ICD-10 I214 codes this diagnosis: the note documents chest pain, but the troponin is normal and the ECG shows only sinus tachycardia.",
+                "icdCode": "I214"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] From the admission note: the note documents pleuritic pain and breathlessness after immobilisation, tachycardia, low oxygen saturation and a swollen calf."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] Taking the laboratory results into account: the note documents pleuritic pain and breathlessness after immobilisation, tachycardia, low oxygen saturation and a swollen calf."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] ICD-10 I2699 codes this diagnosis: the note documents pleuritic pain and breathlessness after immobilisation, tachycardia, low oxygen saturation and a swollen calf.",
+                "icdCode": "I2699"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d5": {
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] Taking the laboratory results into account: the note documents pleuritic pain and breathlessness, but the chest is clear on examination."
+              }
+            },
+            "d8": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d10": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        }
+      }
+    },
+    "900205-cough": {
+      "patientId": "900205-cough",
+      "models": {
+        "llama": {
+          "modelName": "Llama-3.3-70B-Instruct",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] From the admission note: the note documents more cough, purulent sputum and wheeze in a man with COPD."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] Taking the laboratory results into account: the note documents more cough, purulent sputum and wheeze in a man with COPD."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic Llama rationale, rank 2] ICD-10 J441 codes this diagnosis: the note documents more cough, purulent sputum and wheeze in a man with COPD.",
+                "icdCode": "J441"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] From the admission note: the note documents fever, pleuritic pain, bronchial breathing and left lower lobe consolidation with pneumococcus in the sputum."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] Taking the laboratory results into account: the note documents fever, pleuritic pain, bronchial breathing and left lower lobe consolidation with pneumococcus in the sputum."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Llama rationale, rank 1] ICD-10 J189 codes this diagnosis: the note documents fever, pleuritic pain, bronchial breathing and left lower lobe consolidation with pneumococcus in the sputum.",
+                "icdCode": "J189"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] From the admission note: the note documents productive cough, although the consolidation indicates pneumonia."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Llama rationale, rank 3] Taking the laboratory results into account: the note documents productive cough, although the consolidation indicates pneumonia."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Llama rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d8": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Llama rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "qwen": {
+          "modelName": "Qwen3-32B",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] From the admission note: the note documents more cough, purulent sputum and wheeze in a man with COPD."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] Taking the laboratory results into account: the note documents more cough, purulent sputum and wheeze in a man with COPD."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] ICD-10 J449 codes this diagnosis: the note documents more cough, purulent sputum and wheeze in a man with COPD.",
+                "icdCode": "J449"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic Qwen rationale, rank 2] From the admission note: the note documents fever, pleuritic pain, bronchial breathing and left lower lobe consolidation with pneumococcus in the sputum."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] Taking the laboratory results into account: the note documents fever, pleuritic pain, bronchial breathing and left lower lobe consolidation with pneumococcus in the sputum."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic Qwen rationale, rank 1] ICD-10 J189 codes this diagnosis: the note documents fever, pleuritic pain, bronchial breathing and left lower lobe consolidation with pneumococcus in the sputum.",
+                "icdCode": "J189"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] From the admission note: the note documents productive cough, although the consolidation indicates pneumonia."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic Qwen rationale, rank 3] Taking the laboratory results into account: the note documents productive cough, although the consolidation indicates pneumonia."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic Qwen rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d8": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic Qwen rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        },
+        "medgemma": {
+          "modelName": "medgemma-27b-it",
+          "diagnoses": {
+            "d1": {
+              "v2": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] From the admission note: the note documents more cough, purulent sputum and wheeze in a man with COPD."
+              },
+              "v3": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] Taking the laboratory results into account: the note documents more cough, purulent sputum and wheeze in a man with COPD."
+              },
+              "v4": {
+                "rank": 1,
+                "reason": "[synthetic MedGemma rationale, rank 1] ICD-10 J441 codes this diagnosis: the note documents more cough, purulent sputum and wheeze in a man with COPD.",
+                "icdCode": "J441"
+              }
+            },
+            "d2": {
+              "v2": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] From the admission note: the note documents fever, pleuritic pain, bronchial breathing and left lower lobe consolidation with pneumococcus in the sputum."
+              },
+              "v3": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] Taking the laboratory results into account: the note documents fever, pleuritic pain, bronchial breathing and left lower lobe consolidation with pneumococcus in the sputum."
+              },
+              "v4": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] ICD-10 J189 codes this diagnosis: the note documents fever, pleuritic pain, bronchial breathing and left lower lobe consolidation with pneumococcus in the sputum.",
+                "icdCode": "J189"
+              }
+            },
+            "d3": {
+              "v2": {
+                "rank": 2,
+                "reason": "[synthetic MedGemma rationale, rank 2] From the admission note: the note documents productive cough, although the consolidation indicates pneumonia."
+              },
+              "v3": {
+                "rank": 3,
+                "reason": "[synthetic MedGemma rationale, rank 3] Taking the laboratory results into account: the note documents productive cough, although the consolidation indicates pneumonia."
+              }
+            },
+            "d4": {
+              "v2": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 5,
+                "reason": "[synthetic MedGemma rationale, rank 5] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            },
+            "d5": {
+              "v2": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] From the admission note: it remains in the differential with fewer supporting findings."
+              },
+              "v3": {
+                "rank": 4,
+                "reason": "[synthetic MedGemma rationale, rank 4] Taking the laboratory results into account: it remains in the differential with fewer supporting findings."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

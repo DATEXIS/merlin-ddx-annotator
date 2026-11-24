@@ -1,0 +1,7 @@
+cohort,clinician,subset,n_cases,n_confirmed,agree_icd_reference,n_icd_reference,agree_icd_ci_low,agree_icd_ci_high,agree_cosine_reference,n_cosine_reference,agree_cosine_ci_low,agree_cosine_ci_high,icd_vs_cosine_reference,n_both_references,references_disagree,clinician_backs_icd,clinician_backs_cosine,clinician_backs_neither,recall_ceiling,icd_reference_reachable,cosine_calibration_auc
+pilot,Clinician 1,all,61,61,0.868852,61,0.786885,0.95082,0.803279,61,0.688525,0.901639,0.754098,61,15,8,4,3,1,1,0.96063
+pilot,Clinician 1,train,30,30,0.9,30,0.8,1,0.866667,30,0.733333,0.966667,0.833333,30,5,3,2,0,1,1,0.970527
+pilot,Clinician 1,test,31,31,0.83871,31,0.709677,0.967742,0.741935,31,0.580645,0.871774,0.677419,31,10,5,2,3,1,1,0.951711
+study_350,Clinician 1,all,350,350,0.771429,350,0.725714,0.814286,0.68,350,0.631429,0.725786,0.637143,350,127,71,39,17,0.885714,1,0.965268
+study_350,Clinician 2,all,236,236,0.758475,236,0.707627,0.809322,0.661017,236,0.601695,0.720339,0.610169,236,92,50,27,15,0.90678,1,0.965566
+study_350,Clinician 3,all,122,121,0.719008,121,0.636364,0.801653,0.578512,121,0.487603,0.669421,0.737705,122,32,18,1,13,0.754098,1,0.976737

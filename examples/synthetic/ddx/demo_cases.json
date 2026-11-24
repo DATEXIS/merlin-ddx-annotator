@@ -1,0 +1,364 @@
+{
+  "_comment": "Synthetic DDx-annotation demonstration. Every case, note, candidate list, prediction, rationale and rating is invented for this repository; none comes from MIMIC-IV or from the study. Build with: python scripts/build_synthetic_ddx_demo.py",
+  "features": ["fever", "acute_onset", "exertional", "productive_sputum", "focal_tenderness", "neuro_deficit", "weight_loss", "hypoxia"],
+  "models": {
+    "llama": "Llama-3.3-70B-Instruct",
+    "qwen": "Qwen3-32B",
+    "medgemma": "medgemma-27b-it"
+  },
+  "annotators": [
+    {"id": "synthetic_rater_3", "name": "Synthetic rater 3", "type": "human", "active": true},
+    {"id": "llama", "name": "Llama", "type": "llm", "active": true},
+    {"id": "qwen", "name": "Qwen", "type": "llm", "active": true},
+    {"id": "medgemma", "name": "MedGemma", "type": "llm", "active": true}
+  ],
+  "schemes": {
+    "chest_pain": [
+      ["Acute coronary syndrome", "^I2[124]", [0, 1, 1, 0, 0, 0, 0, 0]],
+      ["Stable angina", "^I20", [0, 0, 1, 0, 0, 0, 0, 0]],
+      ["Pulmonary embolism", "^I26", [0, 1, 0, 0, 0, 0, 0, 1]],
+      ["Aortic dissection", "^I710", [0, 1, 0, 0, 1, 1, 0, 0]],
+      ["Pericarditis", "^I3[01]", [1, 1, 0, 0, 0, 0, 0, 0]],
+      ["Pneumothorax", "^J93", [0, 1, 0, 0, 0, 0, 0, 1]],
+      ["Pneumonia", "^J1[2-8]", [1, 0, 0, 1, 0, 0, 0, 1]],
+      ["Gastroesophageal reflux", "^K21", [0, 0, 0, 0, 0, 0, 0, 0]],
+      ["Costochondritis", "^M940", [0, 0, 0, 0, 1, 0, 0, 0]],
+      ["Panic disorder", "^F410", [0, 1, 0, 0, 0, 0, 0, 0]],
+      ["Esophageal spasm", "^K224", [0, 1, 0, 0, 0, 0, 0, 0]]
+    ],
+    "cough": [
+      ["Community-acquired pneumonia", "^J1[2-8]", [1, 1, 0, 1, 0, 0, 0, 1]],
+      ["Acute bronchitis", "^J20", [0, 1, 0, 1, 0, 0, 0, 0]],
+      ["COPD exacerbation", "^J44", [0, 1, 1, 1, 0, 0, 0, 1]],
+      ["Asthma", "^J45", [0, 1, 1, 0, 0, 0, 0, 0]],
+      ["Heart failure", "^I50", [0, 0, 1, 0, 0, 0, 0, 1]],
+      ["Pulmonary tuberculosis", "^A15", [1, 0, 0, 1, 0, 0, 1, 0]],
+      ["Lung cancer", "^C34", [0, 0, 0, 0, 0, 0, 1, 0]],
+      ["Gastroesophageal reflux", "^K21", [0, 0, 0, 0, 0, 0, 0, 0]],
+      ["Pertussis", "^A37", [0, 1, 0, 0, 0, 0, 0, 0]],
+      ["Bronchiectasis", "^J47", [0, 0, 0, 1, 0, 0, 0, 0]],
+      ["Influenza", "^J1[01]", [1, 1, 0, 0, 0, 0, 0, 0]]
+    ],
+    "abdominal_pain": [
+      ["Acute appendicitis", "^K35", [1, 1, 0, 0, 1, 0, 0, 0]],
+      ["Acute cholecystitis", "^(K81|K80[01])", [1, 1, 0, 0, 1, 0, 0, 0]],
+      ["Choledocholithiasis", "^K80[3-5]", [0, 1, 0, 0, 1, 0, 0, 0]],
+      ["Acute pancreatitis", "^K85", [0, 1, 0, 0, 1, 0, 0, 0]],
+      ["Small bowel obstruction", "^K56", [0, 1, 0, 0, 0, 0, 0, 0]],
+      ["Diverticulitis", "^K57", [1, 0, 0, 0, 1, 0, 0, 0]],
+      ["Peptic ulcer disease", "^K2[5-7]", [0, 0, 0, 0, 1, 0, 0, 0]],
+      ["Nephrolithiasis", "^N2[01]", [0, 1, 0, 0, 0, 0, 0, 0]],
+      ["Mesenteric ischemia", "^K55", [0, 1, 0, 0, 0, 0, 0, 0]],
+      ["Ectopic pregnancy", "^O00", [0, 1, 0, 0, 1, 0, 0, 0]],
+      ["Gastroenteritis", "^A0[89]", [1, 0, 0, 0, 0, 0, 0, 0]]
+    ],
+    "headache": [
+      ["Migraine", "^G43", [0, 0, 0, 0, 0, 0, 0, 0]],
+      ["Tension-type headache", "^G442", [0, 0, 0, 0, 0, 0, 0, 0]],
+      ["Subarachnoid hemorrhage", "^I60", [0, 1, 1, 0, 0, 1, 0, 0]],
+      ["Bacterial meningitis", "^G0[01]", [1, 1, 0, 0, 0, 1, 0, 0]],
+      ["Idiopathic intracranial hypertension", "^G932", [0, 0, 0, 0, 0, 1, 0, 0]],
+      ["Brain tumor", "^(C71|D33)", [0, 0, 0, 0, 0, 1, 1, 0]],
+      ["Giant cell arteritis", "^M315", [1, 0, 0, 0, 1, 0, 1, 0]],
+      ["Cluster headache", "^G440", [0, 1, 0, 0, 0, 0, 0, 0]],
+      ["Hypertensive emergency", "^I16", [0, 1, 0, 0, 0, 1, 0, 0]],
+      ["Cerebral venous thrombosis", "^(I676|G08)", [0, 0, 0, 0, 0, 1, 0, 0]],
+      ["Sinusitis", "^J01", [1, 0, 0, 0, 1, 0, 0, 0]]
+    ],
+    "back_pain": [
+      ["Lumbar disc herniation", "^M51", [0, 1, 0, 0, 0, 1, 0, 0]],
+      ["Vertebral osteomyelitis", "^M46[2-5]", [1, 0, 0, 0, 1, 0, 0, 0]],
+      ["Spinal epidural abscess", "^G06", [1, 0, 0, 0, 1, 1, 0, 0]],
+      ["Vertebral compression fracture", "^(M485|M80)", [0, 1, 0, 0, 1, 0, 0, 0]],
+      ["Metastatic spinal disease", "^C795", [0, 0, 0, 0, 1, 0, 1, 0]],
+      ["Abdominal aortic aneurysm", "^I71[34]", [0, 1, 0, 0, 0, 0, 0, 0]],
+      ["Pyelonephritis", "^N10", [1, 1, 0, 0, 1, 0, 0, 0]],
+      ["Nephrolithiasis", "^N2[01]", [0, 1, 0, 0, 0, 0, 0, 0]],
+      ["Lumbar spinal stenosis", "^M480", [0, 0, 0, 0, 0, 1, 0, 0]],
+      ["Mechanical low back pain", "^M545", [0, 0, 0, 0, 0, 0, 0, 0]],
+      ["Cauda equina syndrome", "^G834", [0, 1, 0, 0, 0, 1, 0, 0]]
+    ],
+    "diarrhea": [
+      ["Clostridioides difficile infection", "^A047", [1, 1, 0, 0, 0, 0, 0, 0]],
+      ["Viral gastroenteritis", "^A08", [1, 1, 0, 0, 0, 0, 0, 0]],
+      ["Bacterial gastroenteritis", "^A0[2-5]", [1, 1, 0, 0, 0, 0, 0, 0]],
+      ["Ulcerative colitis", "^K51", [0, 0, 0, 0, 0, 0, 1, 0]],
+      ["Crohn disease", "^K50", [0, 0, 0, 0, 1, 0, 1, 0]],
+      ["Ischemic colitis", "^K559", [0, 1, 0, 0, 1, 0, 0, 0]],
+      ["Irritable bowel syndrome", "^K58", [0, 0, 0, 0, 0, 0, 0, 0]],
+      ["Celiac disease", "^K900", [0, 0, 0, 0, 0, 0, 1, 0]],
+      ["Microscopic colitis", "^K528", [0, 0, 0, 0, 0, 0, 0, 0]],
+      ["Medication-induced diarrhea", "^K521", [0, 1, 0, 0, 0, 0, 0, 0]],
+      ["Hyperthyroidism", "^E05", [0, 0, 0, 0, 0, 0, 1, 0]]
+    ],
+    "dyspnea": [
+      ["Acute decompensated heart failure", "^I50", [0, 0, 1, 0, 0, 0, 0, 1]],
+      ["COPD exacerbation", "^J44", [0, 1, 1, 1, 0, 0, 0, 1]],
+      ["Pulmonary embolism", "^I26", [0, 1, 0, 0, 0, 0, 0, 1]],
+      ["Pneumonia", "^J1[2-8]", [1, 0, 0, 1, 0, 0, 0, 1]],
+      ["Asthma exacerbation", "^J45", [0, 1, 1, 0, 0, 0, 0, 0]],
+      ["Pleural effusion", "^J9[01]", [0, 0, 1, 0, 0, 0, 0, 1]],
+      ["Anemia", "^D6[0-4]", [0, 0, 1, 0, 0, 0, 0, 0]],
+      ["Pneumothorax", "^J93", [0, 1, 0, 0, 0, 0, 0, 1]],
+      ["Interstitial lung disease", "^J84", [0, 0, 1, 0, 0, 0, 0, 1]],
+      ["Acute coronary syndrome", "^I2[124]", [0, 1, 1, 0, 0, 0, 0, 0]],
+      ["Anxiety", "^F41", [0, 1, 0, 0, 0, 0, 0, 0]]
+    ]
+  },
+  "cases": [
+    {
+      "id": "900101-chest_pain", "dataset": "pilot", "split": "train",
+      "demonstrates": "Pilot, train split. The cosine reference, the ICD reference and the rater agree.",
+      "candidates": ["Acute coronary syndrome", "Stable angina", "Pulmonary embolism", "Pericarditis", "Aortic dissection", "Gastroesophageal reflux", "Costochondritis", "Pneumonia", "Panic disorder", "Pneumothorax", "Esophageal spasm"],
+      "icd": [["I214", "Non-ST elevation (NSTEMI) myocardial infarction"], ["I10", "Essential (primary) hypertension"], ["E785", "Hyperlipidemia, unspecified"]],
+      "note": {
+        "hpi": "SYNTHETIC CASE - not a real patient. A 64-year-old man felt pressure-like central chest discomfort while carrying shopping upstairs. It eased after twenty minutes of rest but returned twice overnight, each time with sweating.",
+        "pmh": "Hypertension. High cholesterol. Former smoker.",
+        "exam": "Comfortable at rest. Heart rate 88, blood pressure 152/90. Heart sounds normal, no murmur. Lungs clear. Chest wall not tender.",
+        "results": "First troponin mildly raised, second troponin higher. ECG: new ST depression in the lateral leads.",
+        "course": "Treated with aspirin, a second antiplatelet agent and heparin. Angiography showed a tight lesion in one coronary artery, which was stented. No further pain.",
+        "dd": "Primary: non-ST elevation myocardial infarction. Secondary: hypertension, hyperlipidemia.",
+        "labs": "Troponin rising on repeat. Creatinine and potassium within range."
+      },
+      "findings": {
+        "Acute coronary syndrome": "exertional pressure with sweating, a rising troponin and new lateral ST depression",
+        "Stable angina": "exertional discomfort relieved by rest, although the troponin rise argues against a stable pattern",
+        "Pulmonary embolism": "chest discomfort without hypoxia or leg swelling makes embolism less likely"
+      },
+      "predictions": {
+        "llama": {"v1": [0, 1, 1, 0, 0, 0, 0, 0], "v2": ["Acute coronary syndrome", "Stable angina", "Pulmonary embolism", "Pericarditis", "Aortic dissection"], "v3": ["Acute coronary syndrome", "Stable angina", "Pericarditis", "Pulmonary embolism", "Aortic dissection"], "v4": ["I214", "I209", "I10"]},
+        "qwen": {"v1": [0, 1, 1, 0, 0, 0, 0, 0], "v2": ["Acute coronary syndrome", "Pulmonary embolism", "Stable angina", "Aortic dissection", "Pericarditis"], "v3": ["Acute coronary syndrome", "Stable angina", "Pulmonary embolism", "Aortic dissection", "Pericarditis"], "v4": ["I214", "I10"]},
+        "medgemma": {"v1": [0, 1, 0, 0, 0, 0, 0, 0], "v2": ["Stable angina", "Acute coronary syndrome", "Gastroesophageal reflux", "Pericarditis", "Panic disorder"], "v3": ["Acute coronary syndrome", "Stable angina", "Gastroesophageal reflux", "Pericarditis", "Panic disorder"], "v4": ["I209", "I214"]}
+      },
+      "ratings": {"synthetic_rater_1": ["Acute coronary syndrome"]}
+    },
+    {
+      "id": "900102-cough", "dataset": "pilot", "split": "train",
+      "demonstrates": "Pilot, train split. The cosine reference (first candidate) differs from the ICD reference; the rater sides with the ICD reference.",
+      "candidates": ["Acute bronchitis", "Influenza", "Community-acquired pneumonia", "Asthma", "COPD exacerbation", "Pertussis", "Gastroesophageal reflux", "Heart failure", "Bronchiectasis", "Pulmonary tuberculosis", "Lung cancer"],
+      "icd": [["J101", "Influenza due to other identified influenza virus with other respiratory manifestations"], ["E119", "Type 2 diabetes mellitus without complications"]],
+      "note": {
+        "hpi": "SYNTHETIC CASE - not a real patient. A 51-year-old teacher developed a dry cough, fever to 39.2 and aching muscles two days after several pupils in her class fell ill. She feels exhausted and short of breath on stairs.",
+        "pmh": "Type 2 diabetes on tablets.",
+        "exam": "Flushed, temperature 38.9. Oxygen saturation 95% on room air. Scattered wheeze, no focal crackles.",
+        "results": "Rapid antigen swab positive for influenza A. Chest X-ray without consolidation.",
+        "course": "Started on an antiviral and given fluids. Blood sugars were higher than usual and settled with a temporary insulin scale. Fever resolved on day three.",
+        "dd": "Influenza A with bronchitic symptoms. Type 2 diabetes.",
+        "labs": "White cell count normal. Glucose raised on admission."
+      },
+      "findings": {
+        "Influenza": "abrupt fever with myalgia, a classroom exposure and a positive influenza A swab",
+        "Acute bronchitis": "a cough with wheeze but no consolidation",
+        "Community-acquired pneumonia": "fever and cough, although the chest X-ray shows no consolidation"
+      },
+      "predictions": {
+        "llama": {"v1": [1, 1, 0, 0, 0, 0, 0, 0], "v2": ["Influenza", "Acute bronchitis", "Community-acquired pneumonia", "Asthma", "Pertussis"], "v3": ["Influenza", "Acute bronchitis", "Community-acquired pneumonia", "Asthma", "Pertussis"], "v4": ["J101", "J209"]},
+        "qwen": {"v1": [1, 1, 0, 0, 0, 0, 0, 0], "v2": ["Acute bronchitis", "Influenza", "Community-acquired pneumonia", "Asthma", "COPD exacerbation"], "v3": ["Influenza", "Acute bronchitis", "Community-acquired pneumonia", "Asthma", "COPD exacerbation"], "v4": ["J101", "E119"]},
+        "medgemma": {"v1": [0, 1, 0, 1, 0, 0, 0, 0], "v2": ["Community-acquired pneumonia", "Acute bronchitis", "Influenza", "Asthma", "Pertussis"], "v3": ["Acute bronchitis", "Influenza", "Community-acquired pneumonia", "Asthma", "Pertussis"], "v4": ["J189", "J101"]}
+      },
+      "ratings": {"synthetic_rater_1": ["Influenza"]}
+    },
+    {
+      "id": "900103-abdominal_pain", "dataset": "pilot", "split": "test",
+      "demonstrates": "Pilot, test split. The rater marks two diagnoses (multi-label): the main one and a complication documented in the note.",
+      "candidates": ["Acute appendicitis", "Acute cholecystitis", "Choledocholithiasis", "Acute pancreatitis", "Peptic ulcer disease", "Diverticulitis", "Small bowel obstruction", "Gastroenteritis", "Nephrolithiasis", "Mesenteric ischemia", "Ectopic pregnancy"],
+      "icd": [["K8000", "Calculus of gallbladder with acute cholecystitis without obstruction"], ["K8050", "Calculus of bile duct without cholangitis or cholecystitis without obstruction"], ["K810", "Acute cholecystitis"]],
+      "note": {
+        "hpi": "SYNTHETIC CASE - not a real patient. A 47-year-old woman has had constant pain under the right ribs for a day, worse after a fatty meal, with vomiting and shivers.",
+        "pmh": "Obesity. Previous episodes of milder upper abdominal pain after meals.",
+        "exam": "Temperature 38.4. Tender in the right upper quadrant with a positive Murphy sign. No guarding elsewhere.",
+        "results": "Ultrasound: thickened gallbladder wall with stones and pericholecystic fluid. Common bile duct mildly dilated; a stone was later seen on MRCP.",
+        "course": "Given antibiotics. The duct stone was removed endoscopically, and the gallbladder was taken out laparoscopically two days later.",
+        "dd": "Acute calculous cholecystitis. Choledocholithiasis.",
+        "labs": "White cell count raised. Bilirubin and alkaline phosphatase mildly raised. Lipase normal."
+      },
+      "findings": {
+        "Acute cholecystitis": "right upper quadrant pain after a fatty meal, fever, a positive Murphy sign and a thickened gallbladder with stones",
+        "Choledocholithiasis": "a dilated bile duct with raised bilirubin and a stone on MRCP",
+        "Acute pancreatitis": "upper abdominal pain, but the lipase is normal"
+      },
+      "predictions": {
+        "llama": {"v1": [1, 1, 0, 0, 1, 0, 0, 0], "v2": ["Acute cholecystitis", "Choledocholithiasis", "Acute pancreatitis", "Peptic ulcer disease", "Acute appendicitis"], "v3": ["Acute cholecystitis", "Choledocholithiasis", "Acute pancreatitis", "Peptic ulcer disease", "Acute appendicitis"], "v4": ["K810", "K8050"]},
+        "qwen": {"v1": [1, 1, 0, 0, 1, 0, 0, 0], "v2": ["Acute cholecystitis", "Acute pancreatitis", "Choledocholithiasis", "Peptic ulcer disease", "Acute appendicitis"], "v3": ["Acute cholecystitis", "Choledocholithiasis", "Acute pancreatitis", "Peptic ulcer disease", "Acute appendicitis"], "v4": ["K8000", "K8050"]},
+        "medgemma": {"v1": [0, 1, 0, 0, 1, 0, 0, 0], "v2": ["Acute pancreatitis", "Acute cholecystitis", "Peptic ulcer disease", "Choledocholithiasis", "Gastroenteritis"], "v3": ["Acute cholecystitis", "Acute pancreatitis", "Choledocholithiasis", "Peptic ulcer disease", "Gastroenteritis"], "v4": ["K859", "K810"]}
+      },
+      "ratings": {"synthetic_rater_1": ["Acute cholecystitis", "Choledocholithiasis"]}
+    },
+    {
+      "id": "900104-headache", "dataset": "pilot", "split": "test",
+      "demonstrates": "Pilot, test split. A dangerous diagnosis ranked low by the cosine score but chosen by the rater and the ICD reference.",
+      "candidates": ["Migraine", "Tension-type headache", "Hypertensive emergency", "Sinusitis", "Subarachnoid hemorrhage", "Cluster headache", "Bacterial meningitis", "Brain tumor", "Idiopathic intracranial hypertension", "Giant cell arteritis", "Cerebral venous thrombosis"],
+      "icd": [["I607", "Nontraumatic subarachnoid hemorrhage from unspecified intracranial artery"], ["G43909", "Migraine, unspecified, not intractable, without status migrainosus"]],
+      "note": {
+        "hpi": "SYNTHETIC CASE - not a real patient. A 39-year-old man with a history of migraine had a sudden, explosive headache while lifting weights, the worst of his life, followed by neck stiffness and one episode of vomiting.",
+        "pmh": "Migraine without aura, a few attacks a year.",
+        "exam": "Drowsy but oriented. Neck stiff. Pupils equal. No limb weakness.",
+        "results": "CT head: blood in the basal cisterns. CT angiography: small aneurysm on an anterior circulation artery.",
+        "course": "Transferred to the neurosurgical unit; the aneurysm was coiled. Nimodipine was given for three weeks. He recovered without deficit.",
+        "dd": "Subarachnoid hemorrhage from a ruptured aneurysm. History of migraine.",
+        "labs": "Sodium low on day five, corrected with fluid management."
+      },
+      "findings": {
+        "Subarachnoid hemorrhage": "a thunderclap headache on exertion with neck stiffness and blood in the basal cisterns on CT",
+        "Migraine": "a known migraine history, but the onset is sudden and the pain unlike his usual attacks",
+        "Bacterial meningitis": "neck stiffness, but there is no fever and the CT shows blood"
+      },
+      "predictions": {
+        "llama": {"v1": [0, 1, 1, 0, 0, 0, 0, 0], "v2": ["Subarachnoid hemorrhage", "Migraine", "Bacterial meningitis", "Hypertensive emergency", "Cerebral venous thrombosis"], "v3": ["Subarachnoid hemorrhage", "Migraine", "Bacterial meningitis", "Hypertensive emergency", "Cerebral venous thrombosis"], "v4": ["I607", "G43909"]},
+        "qwen": {"v1": [0, 1, 1, 0, 0, 1, 0, 0], "v2": ["Subarachnoid hemorrhage", "Bacterial meningitis", "Migraine", "Cerebral venous thrombosis", "Hypertensive emergency"], "v3": ["Subarachnoid hemorrhage", "Migraine", "Bacterial meningitis", "Cerebral venous thrombosis", "Hypertensive emergency"], "v4": ["I607"]},
+        "medgemma": {"v1": [0, 0, 0, 0, 0, 0, 0, 0], "v2": ["Migraine", "Subarachnoid hemorrhage", "Tension-type headache", "Cluster headache", "Bacterial meningitis"], "v3": ["Subarachnoid hemorrhage", "Migraine", "Tension-type headache", "Bacterial meningitis", "Cluster headache"], "v4": ["G43909", "I609"]}
+      },
+      "ratings": {"synthetic_rater_1": ["Subarachnoid hemorrhage"]}
+    },
+    {
+      "id": "900201-back_pain", "dataset": "test350", "split": "test",
+      "demonstrates": "350-case study. Three raters; rater 1 marks a second, related diagnosis, raters 2 and 3 mark only the main one. Shows the WikiDoc-style diagnosis help card.",
+      "candidates": ["Lumbar disc herniation", "Vertebral osteomyelitis", "Mechanical low back pain", "Spinal epidural abscess", "Vertebral compression fracture", "Pyelonephritis", "Metastatic spinal disease", "Lumbar spinal stenosis", "Nephrolithiasis", "Cauda equina syndrome", "Abdominal aortic aneurysm"],
+      "icd": [["M4626", "Osteomyelitis of vertebra, lumbar region"], ["R7881", "Bacteremia"], ["E119", "Type 2 diabetes mellitus without complications"]],
+      "note": {
+        "hpi": "SYNTHETIC CASE - not a real patient. A 68-year-old man has had worsening low back pain for three weeks, now waking him at night, with sweats. Two months ago he was treated for an infected foot ulcer.",
+        "pmh": "Type 2 diabetes. Peripheral vascular disease.",
+        "exam": "Temperature 38.1. Marked tenderness over the third lumbar vertebra. Leg power and sensation normal; no saddle numbness.",
+        "results": "MRI spine: signal change in two adjacent lumbar vertebral bodies and the disc between them; a small rim of enhancing tissue in front of the spinal canal without cord compression. Blood cultures grew Staphylococcus aureus.",
+        "course": "Treated with six weeks of intravenous antibiotics through a long line. Pain improved and inflammatory markers fell. Spinal surgeons advised no operation.",
+        "dd": "Lumbar vertebral osteomyelitis and discitis with Staphylococcus aureus bacteremia. Small epidural phlegmon.",
+        "labs": "CRP and ESR markedly raised. White cell count raised."
+      },
+      "findings": {
+        "Vertebral osteomyelitis": "night pain with fever, focal vertebral tenderness, MRI changes in adjacent vertebrae and Staphylococcus aureus bacteremia",
+        "Spinal epidural abscess": "enhancing epidural tissue on MRI, although there is no neurological deficit",
+        "Lumbar disc herniation": "back pain, but fever, night pain and bacteremia point to infection"
+      },
+      "predictions": {
+        "llama": {"v1": [1, 0, 0, 0, 1, 0, 0, 0], "v2": ["Vertebral osteomyelitis", "Spinal epidural abscess", "Lumbar disc herniation", "Metastatic spinal disease", "Pyelonephritis"], "v3": ["Vertebral osteomyelitis", "Spinal epidural abscess", "Metastatic spinal disease", "Lumbar disc herniation", "Pyelonephritis"], "v4": ["M4626", "G061"]},
+        "qwen": {"v1": [1, 0, 0, 0, 1, 1, 0, 0], "v2": ["Spinal epidural abscess", "Vertebral osteomyelitis", "Lumbar disc herniation", "Metastatic spinal disease", "Vertebral compression fracture"], "v3": ["Vertebral osteomyelitis", "Spinal epidural abscess", "Metastatic spinal disease", "Lumbar disc herniation", "Vertebral compression fracture"], "v4": ["M4626", "R7881"]},
+        "medgemma": {"v1": [0, 0, 0, 0, 1, 0, 0, 0], "v2": ["Lumbar disc herniation", "Mechanical low back pain", "Vertebral osteomyelitis", "Vertebral compression fracture", "Lumbar spinal stenosis"], "v3": ["Vertebral osteomyelitis", "Lumbar disc herniation", "Spinal epidural abscess", "Mechanical low back pain", "Vertebral compression fracture"], "v4": ["M5126", "M4626"]}
+      },
+      "ratings": {
+        "synthetic_rater_1": ["Vertebral osteomyelitis", "Spinal epidural abscess"],
+        "synthetic_rater_2": ["Vertebral osteomyelitis"],
+        "synthetic_rater_3": ["Vertebral osteomyelitis"]
+      }
+    },
+    {
+      "id": "900202-diarrhea", "dataset": "test350", "split": "test",
+      "demonstrates": "350-case study. The correct diagnosis is not in the candidate list: rater 1 adds it as an 'Other Disease', rater 2 marks the same added diagnosis, rater 3 marks the closest listed candidate.",
+      "candidates": ["Clostridioides difficile infection", "Viral gastroenteritis", "Bacterial gastroenteritis", "Medication-induced diarrhea", "Ulcerative colitis", "Microscopic colitis", "Crohn disease", "Ischemic colitis", "Irritable bowel syndrome", "Celiac disease", "Hyperthyroidism"],
+      "icd": [["K521", "Toxic gastroenteritis and colitis"], ["T451X5A", "Adverse effect of antineoplastic and immunosuppressive drugs, initial encounter"], ["C439", "Malignant melanoma of skin, unspecified"]],
+      "note": {
+        "hpi": "SYNTHETIC CASE - not a real patient. A 58-year-old woman receiving immunotherapy for melanoma has had eight watery stools a day for five days, with cramping and some blood.",
+        "pmh": "Metastatic melanoma, on a checkpoint inhibitor for four months.",
+        "exam": "Heart rate 104. Abdomen soft, diffusely tender, no peritonism.",
+        "results": "Stool tests for Clostridioides difficile and bacterial pathogens negative. Flexible sigmoidoscopy: inflamed colonic mucosa; biopsies showed an immune-mediated colitis pattern.",
+        "course": "Immunotherapy paused. High-dose steroids started with rapid improvement, then a slow taper. Oncology to review restarting treatment.",
+        "dd": "Immune checkpoint inhibitor colitis. Metastatic melanoma.",
+        "labs": "CRP raised. Potassium low, replaced."
+      },
+      "findings": {
+        "Medication-induced diarrhea": "watery diarrhea starting during checkpoint-inhibitor treatment with negative stool infection tests",
+        "Clostridioides difficile infection": "acute watery diarrhea, but the toxin test is negative",
+        "Ulcerative colitis": "bloody diarrhea with colonic inflammation, although the timing follows immunotherapy"
+      },
+      "custom": [
+        {"label": "Immune checkpoint inhibitor colitis", "createdBy": "synthetic_rater_1"}
+      ],
+      "predictions": {
+        "llama": {"v1": [0, 1, 0, 0, 0, 0, 0, 0], "v2": ["Clostridioides difficile infection", "Medication-induced diarrhea", "Bacterial gastroenteritis", "Ulcerative colitis", "Viral gastroenteritis"], "v3": ["Medication-induced diarrhea", "Ulcerative colitis", "Clostridioides difficile infection", "Microscopic colitis", "Bacterial gastroenteritis"], "v4": ["K521", "T451X5A"]},
+        "qwen": {"v1": [1, 1, 0, 0, 0, 0, 0, 0], "v2": ["Medication-induced diarrhea", "Clostridioides difficile infection", "Ulcerative colitis", "Bacterial gastroenteritis", "Microscopic colitis"], "v3": ["Medication-induced diarrhea", "Ulcerative colitis", "Microscopic colitis", "Clostridioides difficile infection", "Crohn disease"], "v4": ["K521"]},
+        "medgemma": {"v1": [1, 1, 0, 0, 0, 0, 0, 0], "v2": ["Clostridioides difficile infection", "Viral gastroenteritis", "Bacterial gastroenteritis", "Ulcerative colitis", "Medication-induced diarrhea"], "v3": ["Clostridioides difficile infection", "Ulcerative colitis", "Medication-induced diarrhea", "Viral gastroenteritis", "Ischemic colitis"], "v4": ["A047", "K521"]}
+      },
+      "ratings": {
+        "synthetic_rater_1": ["Immune checkpoint inhibitor colitis"],
+        "synthetic_rater_2": ["Immune checkpoint inhibitor colitis"],
+        "synthetic_rater_3": ["Medication-induced diarrhea"]
+      }
+    },
+    {
+      "id": "900203-dyspnea", "dataset": "test350", "split": "test",
+      "demonstrates": "350-case study. Raters 1 and 3 agree; rater 2 has not annotated this case (incomplete overlap).",
+      "candidates": ["Acute decompensated heart failure", "Pneumonia", "COPD exacerbation", "Pleural effusion", "Pulmonary embolism", "Acute coronary syndrome", "Asthma exacerbation", "Anemia", "Interstitial lung disease", "Pneumothorax", "Anxiety"],
+      "icd": [["I5023", "Acute on chronic systolic (congestive) heart failure"], ["I4891", "Unspecified atrial fibrillation"], ["N183", "Chronic kidney disease, stage 3"]],
+      "note": {
+        "hpi": "SYNTHETIC CASE - not a real patient. A 77-year-old woman has been increasingly breathless over a week, now cannot lie flat, and her ankles have swollen. She ran out of her water tablets ten days ago.",
+        "pmh": "Heart failure with reduced ejection fraction. Atrial fibrillation. Chronic kidney disease.",
+        "exam": "Oxygen saturation 89% on room air. Irregular pulse 112. Raised jugular venous pressure, crackles at both bases, pitting oedema to the knees.",
+        "results": "Chest X-ray: enlarged heart, upper lobe venous diversion, small bilateral effusions. Echo: ejection fraction 25%, unchanged.",
+        "course": "Intravenous diuretics with four litres of fluid removed over five days. Rate control adjusted. Discharged on her usual tablets with a written plan for daily weights.",
+        "dd": "Acute on chronic systolic heart failure after stopping diuretics. Atrial fibrillation. Chronic kidney disease stage 3.",
+        "labs": "BNP markedly raised. Creatinine slightly above her baseline."
+      },
+      "findings": {
+        "Acute decompensated heart failure": "orthopnoea, ankle oedema, raised venous pressure, bibasal crackles and a raised BNP after stopping diuretics",
+        "Pleural effusion": "small bilateral effusions, best explained by the heart failure",
+        "Pneumonia": "crackles and breathlessness, but no fever and no consolidation"
+      },
+      "predictions": {
+        "llama": {"v1": [0, 0, 1, 0, 0, 0, 0, 1], "v2": ["Acute decompensated heart failure", "Pneumonia", "Pleural effusion", "Pulmonary embolism", "COPD exacerbation"], "v3": ["Acute decompensated heart failure", "Pleural effusion", "Pneumonia", "Pulmonary embolism", "Acute coronary syndrome"], "v4": ["I5023", "I4891"]},
+        "qwen": {"v1": [0, 0, 1, 0, 0, 0, 0, 1], "v2": ["Acute decompensated heart failure", "Pleural effusion", "Pneumonia", "Acute coronary syndrome", "Pulmonary embolism"], "v3": ["Acute decompensated heart failure", "Pleural effusion", "Acute coronary syndrome", "Pneumonia", "Pulmonary embolism"], "v4": ["I5023", "J910"]},
+        "medgemma": {"v1": [0, 0, 1, 1, 0, 0, 0, 1], "v2": ["Pneumonia", "Acute decompensated heart failure", "COPD exacerbation", "Pleural effusion", "Pulmonary embolism"], "v3": ["Acute decompensated heart failure", "Pneumonia", "Pleural effusion", "COPD exacerbation", "Pulmonary embolism"], "v4": ["I509", "J189"]}
+      },
+      "ratings": {
+        "synthetic_rater_1": ["Acute decompensated heart failure"],
+        "synthetic_rater_3": ["Acute decompensated heart failure"]
+      }
+    },
+    {
+      "id": "900204-chest_pain", "dataset": "test350", "split": "test",
+      "demonstrates": "350-case study. The cosine reference (acute coronary syndrome) and the ICD reference (pulmonary embolism) disagree; both raters side with the ICD reference.",
+      "candidates": ["Acute coronary syndrome", "Pulmonary embolism", "Pericarditis", "Pneumonia", "Pneumothorax", "Aortic dissection", "Stable angina", "Costochondritis", "Gastroesophageal reflux", "Panic disorder", "Esophageal spasm"],
+      "icd": [["I2699", "Other pulmonary embolism without acute cor pulmonale"], ["I82401", "Acute embolism and thrombosis of unspecified deep veins of right lower extremity"]],
+      "note": {
+        "hpi": "SYNTHETIC CASE - not a real patient. A 33-year-old woman, three weeks after a long-haul flight and a sprained ankle in a cast, has sharp right-sided chest pain on breathing in and is breathless walking to the bathroom.",
+        "pmh": "Takes the combined contraceptive pill.",
+        "exam": "Heart rate 118, oxygen saturation 92% on room air. Right calf swollen and tender. Chest clear.",
+        "results": "CT pulmonary angiogram: clots in segmental arteries of the right lower lobe. Leg ultrasound: deep vein thrombosis. ECG: sinus tachycardia only. Troponin normal.",
+        "course": "Started on anticoagulation, switched to a tablet before discharge. The contraceptive pill was stopped and alternatives discussed.",
+        "dd": "Pulmonary embolism with right leg deep vein thrombosis.",
+        "labs": "D-dimer raised. Troponin normal twice."
+      },
+      "findings": {
+        "Pulmonary embolism": "pleuritic pain and breathlessness after immobilisation, tachycardia, low oxygen saturation and a swollen calf",
+        "Acute coronary syndrome": "chest pain, but the troponin is normal and the ECG shows only sinus tachycardia",
+        "Pneumothorax": "pleuritic pain and breathlessness, but the chest is clear on examination"
+      },
+      "predictions": {
+        "llama": {"v1": [0, 1, 0, 0, 0, 0, 0, 1], "v2": ["Pulmonary embolism", "Pneumothorax", "Pneumonia", "Pericarditis", "Acute coronary syndrome"], "v3": ["Pulmonary embolism", "Pneumothorax", "Pericarditis", "Pneumonia", "Acute coronary syndrome"], "v4": ["I2699", "I82401"]},
+        "qwen": {"v1": [0, 1, 0, 0, 0, 0, 0, 1], "v2": ["Pulmonary embolism", "Pericarditis", "Pneumothorax", "Acute coronary syndrome", "Pneumonia"], "v3": ["Pulmonary embolism", "Pneumothorax", "Pericarditis", "Pneumonia", "Acute coronary syndrome"], "v4": ["I2699"]},
+        "medgemma": {"v1": [0, 1, 1, 0, 0, 0, 0, 0], "v2": ["Acute coronary syndrome", "Pulmonary embolism", "Pericarditis", "Costochondritis", "Panic disorder"], "v3": ["Pulmonary embolism", "Acute coronary syndrome", "Pericarditis", "Pneumothorax", "Costochondritis"], "v4": ["I2699", "I214"]}
+      },
+      "ratings": {
+        "synthetic_rater_1": ["Pulmonary embolism"],
+        "synthetic_rater_2": ["Pulmonary embolism"]
+      }
+    },
+    {
+      "id": "900205-cough", "dataset": "test350", "split": "test",
+      "demonstrates": "350-case study. Raters 1 and 2 disagree (pneumonia vs COPD exacerbation).",
+      "candidates": ["COPD exacerbation", "Community-acquired pneumonia", "Acute bronchitis", "Heart failure", "Asthma", "Bronchiectasis", "Lung cancer", "Influenza", "Pulmonary tuberculosis", "Pertussis", "Gastroesophageal reflux"],
+      "icd": [["J189", "Pneumonia, unspecified organism"], ["J449", "Chronic obstructive pulmonary disease, unspecified"]],
+      "note": {
+        "hpi": "SYNTHETIC CASE - not a real patient. A 71-year-old man with COPD has had more cough and green sputum for four days, a fever since yesterday and new pain on the left side when he coughs.",
+        "pmh": "COPD, uses inhalers; two flare-ups last year. Ex-smoker of forty pack-years.",
+        "exam": "Temperature 38.6, oxygen saturation 90% on room air. Wheeze throughout and bronchial breathing at the left base.",
+        "results": "Chest X-ray: consolidation in the left lower lobe. Sputum culture: Streptococcus pneumoniae.",
+        "course": "Treated with antibiotics, nebulisers and a short course of steroids. Oxygen weaned by day four.",
+        "dd": "Left lower lobe pneumonia. COPD with exacerbation.",
+        "labs": "White cell count and CRP raised."
+      },
+      "findings": {
+        "Community-acquired pneumonia": "fever, pleuritic pain, bronchial breathing and left lower lobe consolidation with pneumococcus in the sputum",
+        "COPD exacerbation": "more cough, purulent sputum and wheeze in a man with COPD",
+        "Acute bronchitis": "productive cough, although the consolidation indicates pneumonia"
+      },
+      "predictions": {
+        "llama": {"v1": [1, 1, 0, 1, 0, 0, 0, 1], "v2": ["Community-acquired pneumonia", "COPD exacerbation", "Acute bronchitis", "Heart failure", "Influenza"], "v3": ["Community-acquired pneumonia", "COPD exacerbation", "Acute bronchitis", "Heart failure", "Influenza"], "v4": ["J189", "J441"]},
+        "qwen": {"v1": [1, 1, 1, 1, 0, 0, 0, 1], "v2": ["COPD exacerbation", "Community-acquired pneumonia", "Acute bronchitis", "Influenza", "Heart failure"], "v3": ["Community-acquired pneumonia", "COPD exacerbation", "Acute bronchitis", "Influenza", "Heart failure"], "v4": ["J189", "J449"]},
+        "medgemma": {"v1": [0, 1, 1, 1, 0, 0, 0, 1], "v2": ["COPD exacerbation", "Acute bronchitis", "Community-acquired pneumonia", "Asthma", "Heart failure"], "v3": ["COPD exacerbation", "Community-acquired pneumonia", "Acute bronchitis", "Asthma", "Heart failure"], "v4": ["J441", "J189"]}
+      },
+      "ratings": {
+        "synthetic_rater_1": ["Community-acquired pneumonia"],
+        "synthetic_rater_2": ["COPD exacerbation"]
+      }
+    }
+  ]
+}

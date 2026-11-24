@@ -1,0 +1,1808 @@
+[
+  {
+    "id": "900201-back_pain",
+    "note_id": "900201-DS-1",
+    "subject_id": "S900201",
+    "hadm_id": "900201",
+    "name": "900201 (back_pain)",
+    "chief_complaint": "back_pain",
+    "split": "test",
+    "labs": "CRP and ESR markedly raised. White cell count raised.",
+    "dischargeDiagnosis": "Lumbar vertebral osteomyelitis and discitis with Staphylococcus aureus bacteremia. Small epidural phlegmon.",
+    "groundTruthIcdCodes": [
+      {
+        "code": "M4626",
+        "longDescription": "Osteomyelitis of vertebra, lumbar region"
+      },
+      {
+        "code": "R7881",
+        "longDescription": "Bacteremia"
+      },
+      {
+        "code": "E119",
+        "longDescription": "Type 2 diabetes mellitus without complications"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Service",
+        "content": "MEDICINE"
+      },
+      {
+        "title": "Allergies",
+        "content": "No known drug allergies"
+      },
+      {
+        "title": "Attending",
+        "content": ""
+      },
+      {
+        "title": "Chief Complaint",
+        "content": "back pain"
+      },
+      {
+        "title": "Major Surgical or Invasive Procedure",
+        "content": ""
+      },
+      {
+        "title": "History of Present Illness",
+        "content": "SYNTHETIC CASE - not a real patient. A 68-year-old man has had worsening low back pain for three weeks, now waking him at night, with sweats. Two months ago he was treated for an infected foot ulcer."
+      },
+      {
+        "title": "Past Medical History",
+        "content": "Type 2 diabetes. Peripheral vascular disease."
+      },
+      {
+        "title": "Social History",
+        "content": "Synthetic case; social history not recorded."
+      },
+      {
+        "title": "Family History",
+        "content": ""
+      },
+      {
+        "title": "Physical Exam",
+        "content": "Temperature 38.1. Marked tenderness over the third lumbar vertebra. Leg power and sensation normal; no saddle numbness."
+      },
+      {
+        "title": "Pertinent Results",
+        "content": "MRI spine: signal change in two adjacent lumbar vertebral bodies and the disc between them; a small rim of enhancing tissue in front of the spinal canal without cord compression. Blood cultures grew Staphylococcus aureus."
+      },
+      {
+        "title": "Brief Hospital Course",
+        "content": "Treated with six weeks of intravenous antibiotics through a long line. Pain improved and inflammatory markers fell. Spinal surgeons advised no operation."
+      },
+      {
+        "title": "Medications on Admission",
+        "content": "See the synthetic history above."
+      },
+      {
+        "title": "Discharge Medications",
+        "content": "Continued as described in the hospital course."
+      },
+      {
+        "title": "Facility",
+        "content": ""
+      },
+      {
+        "title": "Discharge Disposition",
+        "content": "Home"
+      },
+      {
+        "title": "Discharge Diagnosis",
+        "content": "Lumbar vertebral osteomyelitis and discitis with Staphylococcus aureus bacteremia. Small epidural phlegmon."
+      },
+      {
+        "title": "Discharge Condition",
+        "content": "Synthetic case: stable at discharge."
+      },
+      {
+        "title": "Discharge Instructions",
+        "content": "Synthetic case: return if symptoms recur."
+      },
+      {
+        "title": "Followup Instructions",
+        "content": ""
+      }
+    ],
+    "diagnoses": [
+      {
+        "id": "d1",
+        "label": "Lumbar disc herniation",
+        "rank": 1,
+        "score": 0.82
+      },
+      {
+        "id": "d2",
+        "label": "Vertebral osteomyelitis",
+        "rank": 2,
+        "score": 0.785,
+        "icd_rank": 1
+      },
+      {
+        "id": "d3",
+        "label": "Mechanical low back pain",
+        "rank": 3,
+        "score": 0.75
+      },
+      {
+        "id": "d4",
+        "label": "Spinal epidural abscess",
+        "rank": 4,
+        "score": 0.715
+      },
+      {
+        "id": "d5",
+        "label": "Vertebral compression fracture",
+        "rank": 5,
+        "score": 0.68
+      },
+      {
+        "id": "d6",
+        "label": "Pyelonephritis",
+        "rank": 6,
+        "score": 0.645
+      },
+      {
+        "id": "d7",
+        "label": "Metastatic spinal disease",
+        "rank": 7,
+        "score": 0.61
+      },
+      {
+        "id": "d8",
+        "label": "Lumbar spinal stenosis",
+        "rank": 8,
+        "score": 0.575
+      },
+      {
+        "id": "d9",
+        "label": "Nephrolithiasis",
+        "rank": 9,
+        "score": 0.54
+      },
+      {
+        "id": "d10",
+        "label": "Cauda equina syndrome",
+        "rank": 10,
+        "score": 0.505
+      },
+      {
+        "id": "d11",
+        "label": "Abdominal aortic aneurysm",
+        "rank": 11,
+        "score": 0.47
+      }
+    ],
+    "existingAnnotations": [
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "8 / 3 / 4 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "3 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "2 / 2 / 2 / 2"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "5 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "1 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "4 / 4 / 3 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "5 / 3 / 4 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "3 / 2 / 1 / 1"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "1 / 1 / 2 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "8 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "2 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "7 / 4 / 3 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "4 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "8 / 1 / 2 / 1"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "5 / 3 / 1 / 2"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "10 / 2 / 4 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "3 / _ / 3 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "4 / 4 / 5 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "2 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "1 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "9 / 5 / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      }
+    ],
+    "dataset": "test350"
+  },
+  {
+    "id": "900202-diarrhea",
+    "note_id": "900202-DS-1",
+    "subject_id": "S900202",
+    "hadm_id": "900202",
+    "name": "900202 (diarrhea)",
+    "chief_complaint": "diarrhea",
+    "split": "test",
+    "labs": "CRP raised. Potassium low, replaced.",
+    "dischargeDiagnosis": "Immune checkpoint inhibitor colitis. Metastatic melanoma.",
+    "groundTruthIcdCodes": [
+      {
+        "code": "K521",
+        "longDescription": "Toxic gastroenteritis and colitis"
+      },
+      {
+        "code": "T451X5A",
+        "longDescription": "Adverse effect of antineoplastic and immunosuppressive drugs, initial encounter"
+      },
+      {
+        "code": "C439",
+        "longDescription": "Malignant melanoma of skin, unspecified"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Service",
+        "content": "MEDICINE"
+      },
+      {
+        "title": "Allergies",
+        "content": "No known drug allergies"
+      },
+      {
+        "title": "Attending",
+        "content": ""
+      },
+      {
+        "title": "Chief Complaint",
+        "content": "diarrhea"
+      },
+      {
+        "title": "Major Surgical or Invasive Procedure",
+        "content": ""
+      },
+      {
+        "title": "History of Present Illness",
+        "content": "SYNTHETIC CASE - not a real patient. A 58-year-old woman receiving immunotherapy for melanoma has had eight watery stools a day for five days, with cramping and some blood."
+      },
+      {
+        "title": "Past Medical History",
+        "content": "Metastatic melanoma, on a checkpoint inhibitor for four months."
+      },
+      {
+        "title": "Social History",
+        "content": "Synthetic case; social history not recorded."
+      },
+      {
+        "title": "Family History",
+        "content": ""
+      },
+      {
+        "title": "Physical Exam",
+        "content": "Heart rate 104. Abdomen soft, diffusely tender, no peritonism."
+      },
+      {
+        "title": "Pertinent Results",
+        "content": "Stool tests for Clostridioides difficile and bacterial pathogens negative. Flexible sigmoidoscopy: inflamed colonic mucosa; biopsies showed an immune-mediated colitis pattern."
+      },
+      {
+        "title": "Brief Hospital Course",
+        "content": "Immunotherapy paused. High-dose steroids started with rapid improvement, then a slow taper. Oncology to review restarting treatment."
+      },
+      {
+        "title": "Medications on Admission",
+        "content": "See the synthetic history above."
+      },
+      {
+        "title": "Discharge Medications",
+        "content": "Continued as described in the hospital course."
+      },
+      {
+        "title": "Facility",
+        "content": ""
+      },
+      {
+        "title": "Discharge Disposition",
+        "content": "Home"
+      },
+      {
+        "title": "Discharge Diagnosis",
+        "content": "Immune checkpoint inhibitor colitis. Metastatic melanoma."
+      },
+      {
+        "title": "Discharge Condition",
+        "content": "Synthetic case: stable at discharge."
+      },
+      {
+        "title": "Discharge Instructions",
+        "content": "Synthetic case: return if symptoms recur."
+      },
+      {
+        "title": "Followup Instructions",
+        "content": ""
+      }
+    ],
+    "diagnoses": [
+      {
+        "id": "d1",
+        "label": "Clostridioides difficile infection",
+        "rank": 1,
+        "score": 0.82
+      },
+      {
+        "id": "d2",
+        "label": "Viral gastroenteritis",
+        "rank": 2,
+        "score": 0.785
+      },
+      {
+        "id": "d3",
+        "label": "Bacterial gastroenteritis",
+        "rank": 3,
+        "score": 0.75
+      },
+      {
+        "id": "d4",
+        "label": "Medication-induced diarrhea",
+        "rank": 4,
+        "score": 0.715,
+        "icd_rank": 1
+      },
+      {
+        "id": "d5",
+        "label": "Ulcerative colitis",
+        "rank": 5,
+        "score": 0.68
+      },
+      {
+        "id": "d6",
+        "label": "Microscopic colitis",
+        "rank": 6,
+        "score": 0.645
+      },
+      {
+        "id": "d7",
+        "label": "Crohn disease",
+        "rank": 7,
+        "score": 0.61
+      },
+      {
+        "id": "d8",
+        "label": "Ischemic colitis",
+        "rank": 8,
+        "score": 0.575
+      },
+      {
+        "id": "d9",
+        "label": "Irritable bowel syndrome",
+        "rank": 9,
+        "score": 0.54
+      },
+      {
+        "id": "d10",
+        "label": "Celiac disease",
+        "rank": 10,
+        "score": 0.505
+      },
+      {
+        "id": "d11",
+        "label": "Hyperthyroidism",
+        "rank": 11,
+        "score": 0.47
+      }
+    ],
+    "existingAnnotations": [
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "2 / 1 / 3 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "5 / 5 / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "1 / 3 / 5 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "4 / 2 / 1 / 1"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "_ / 4 / 2 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "10 / _ / 4 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "3 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "2 / 2 / 4 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "3 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "1 / 4 / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "5 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "_ / 3 / 2 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "10 / 5 / 3 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "7 / _ / 5 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "4 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "2 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "3 / 2 / 4 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "1 / 3 / _ / 1"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "5 / 5 / 3 / 2"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "_ / 4 / 2 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "4 / _ / 5 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      }
+    ],
+    "dataset": "test350"
+  },
+  {
+    "id": "900203-dyspnea",
+    "note_id": "900203-DS-1",
+    "subject_id": "S900203",
+    "hadm_id": "900203",
+    "name": "900203 (dyspnea)",
+    "chief_complaint": "dyspnea",
+    "split": "test",
+    "labs": "BNP markedly raised. Creatinine slightly above her baseline.",
+    "dischargeDiagnosis": "Acute on chronic systolic heart failure after stopping diuretics. Atrial fibrillation. Chronic kidney disease stage 3.",
+    "groundTruthIcdCodes": [
+      {
+        "code": "I5023",
+        "longDescription": "Acute on chronic systolic (congestive) heart failure"
+      },
+      {
+        "code": "I4891",
+        "longDescription": "Unspecified atrial fibrillation"
+      },
+      {
+        "code": "N183",
+        "longDescription": "Chronic kidney disease, stage 3"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Service",
+        "content": "MEDICINE"
+      },
+      {
+        "title": "Allergies",
+        "content": "No known drug allergies"
+      },
+      {
+        "title": "Attending",
+        "content": ""
+      },
+      {
+        "title": "Chief Complaint",
+        "content": "dyspnea"
+      },
+      {
+        "title": "Major Surgical or Invasive Procedure",
+        "content": ""
+      },
+      {
+        "title": "History of Present Illness",
+        "content": "SYNTHETIC CASE - not a real patient. A 77-year-old woman has been increasingly breathless over a week, now cannot lie flat, and her ankles have swollen. She ran out of her water tablets ten days ago."
+      },
+      {
+        "title": "Past Medical History",
+        "content": "Heart failure with reduced ejection fraction. Atrial fibrillation. Chronic kidney disease."
+      },
+      {
+        "title": "Social History",
+        "content": "Synthetic case; social history not recorded."
+      },
+      {
+        "title": "Family History",
+        "content": ""
+      },
+      {
+        "title": "Physical Exam",
+        "content": "Oxygen saturation 89% on room air. Irregular pulse 112. Raised jugular venous pressure, crackles at both bases, pitting oedema to the knees."
+      },
+      {
+        "title": "Pertinent Results",
+        "content": "Chest X-ray: enlarged heart, upper lobe venous diversion, small bilateral effusions. Echo: ejection fraction 25%, unchanged."
+      },
+      {
+        "title": "Brief Hospital Course",
+        "content": "Intravenous diuretics with four litres of fluid removed over five days. Rate control adjusted. Discharged on her usual tablets with a written plan for daily weights."
+      },
+      {
+        "title": "Medications on Admission",
+        "content": "See the synthetic history above."
+      },
+      {
+        "title": "Discharge Medications",
+        "content": "Continued as described in the hospital course."
+      },
+      {
+        "title": "Facility",
+        "content": ""
+      },
+      {
+        "title": "Discharge Disposition",
+        "content": "Home"
+      },
+      {
+        "title": "Discharge Diagnosis",
+        "content": "Acute on chronic systolic heart failure after stopping diuretics. Atrial fibrillation. Chronic kidney disease stage 3."
+      },
+      {
+        "title": "Discharge Condition",
+        "content": "Synthetic case: stable at discharge."
+      },
+      {
+        "title": "Discharge Instructions",
+        "content": "Synthetic case: return if symptoms recur."
+      },
+      {
+        "title": "Followup Instructions",
+        "content": ""
+      }
+    ],
+    "diagnoses": [
+      {
+        "id": "d1",
+        "label": "Acute decompensated heart failure",
+        "rank": 1,
+        "score": 0.82,
+        "icd_rank": 1
+      },
+      {
+        "id": "d2",
+        "label": "Pneumonia",
+        "rank": 2,
+        "score": 0.785
+      },
+      {
+        "id": "d3",
+        "label": "COPD exacerbation",
+        "rank": 3,
+        "score": 0.75
+      },
+      {
+        "id": "d4",
+        "label": "Pleural effusion",
+        "rank": 4,
+        "score": 0.715
+      },
+      {
+        "id": "d5",
+        "label": "Pulmonary embolism",
+        "rank": 5,
+        "score": 0.68
+      },
+      {
+        "id": "d6",
+        "label": "Acute coronary syndrome",
+        "rank": 6,
+        "score": 0.645
+      },
+      {
+        "id": "d7",
+        "label": "Asthma exacerbation",
+        "rank": 7,
+        "score": 0.61
+      },
+      {
+        "id": "d8",
+        "label": "Anemia",
+        "rank": 8,
+        "score": 0.575
+      },
+      {
+        "id": "d9",
+        "label": "Interstitial lung disease",
+        "rank": 9,
+        "score": 0.54
+      },
+      {
+        "id": "d10",
+        "label": "Pneumothorax",
+        "rank": 10,
+        "score": 0.505
+      },
+      {
+        "id": "d11",
+        "label": "Anxiety",
+        "rank": 11,
+        "score": 0.47
+      }
+    ],
+    "existingAnnotations": [
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "8 / 2 / 3 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "2 / 5 / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "4 / 3 / 2 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "10 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "5 / _ / 5 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "3 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "8 / 3 / 4 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "2 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "4 / 2 / 2 / 2"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "10 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "5 / 4 / 3 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "3 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "2 / 2 / 1 / 1"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "5 / 1 / 2 / 2"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "1 / 3 / 4 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "4 / 4 / 3 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "10 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "3 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      }
+    ],
+    "dataset": "test350"
+  },
+  {
+    "id": "900204-chest_pain",
+    "note_id": "900204-DS-1",
+    "subject_id": "S900204",
+    "hadm_id": "900204",
+    "name": "900204 (chest_pain)",
+    "chief_complaint": "chest_pain",
+    "split": "test",
+    "labs": "D-dimer raised. Troponin normal twice.",
+    "dischargeDiagnosis": "Pulmonary embolism with right leg deep vein thrombosis.",
+    "groundTruthIcdCodes": [
+      {
+        "code": "I2699",
+        "longDescription": "Other pulmonary embolism without acute cor pulmonale"
+      },
+      {
+        "code": "I82401",
+        "longDescription": "Acute embolism and thrombosis of unspecified deep veins of right lower extremity"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Service",
+        "content": "MEDICINE"
+      },
+      {
+        "title": "Allergies",
+        "content": "No known drug allergies"
+      },
+      {
+        "title": "Attending",
+        "content": ""
+      },
+      {
+        "title": "Chief Complaint",
+        "content": "chest pain"
+      },
+      {
+        "title": "Major Surgical or Invasive Procedure",
+        "content": ""
+      },
+      {
+        "title": "History of Present Illness",
+        "content": "SYNTHETIC CASE - not a real patient. A 33-year-old woman, three weeks after a long-haul flight and a sprained ankle in a cast, has sharp right-sided chest pain on breathing in and is breathless walking to the bathroom."
+      },
+      {
+        "title": "Past Medical History",
+        "content": "Takes the combined contraceptive pill."
+      },
+      {
+        "title": "Social History",
+        "content": "Synthetic case; social history not recorded."
+      },
+      {
+        "title": "Family History",
+        "content": ""
+      },
+      {
+        "title": "Physical Exam",
+        "content": "Heart rate 118, oxygen saturation 92% on room air. Right calf swollen and tender. Chest clear."
+      },
+      {
+        "title": "Pertinent Results",
+        "content": "CT pulmonary angiogram: clots in segmental arteries of the right lower lobe. Leg ultrasound: deep vein thrombosis. ECG: sinus tachycardia only. Troponin normal."
+      },
+      {
+        "title": "Brief Hospital Course",
+        "content": "Started on anticoagulation, switched to a tablet before discharge. The contraceptive pill was stopped and alternatives discussed."
+      },
+      {
+        "title": "Medications on Admission",
+        "content": "See the synthetic history above."
+      },
+      {
+        "title": "Discharge Medications",
+        "content": "Continued as described in the hospital course."
+      },
+      {
+        "title": "Facility",
+        "content": ""
+      },
+      {
+        "title": "Discharge Disposition",
+        "content": "Home"
+      },
+      {
+        "title": "Discharge Diagnosis",
+        "content": "Pulmonary embolism with right leg deep vein thrombosis."
+      },
+      {
+        "title": "Discharge Condition",
+        "content": "Synthetic case: stable at discharge."
+      },
+      {
+        "title": "Discharge Instructions",
+        "content": "Synthetic case: return if symptoms recur."
+      },
+      {
+        "title": "Followup Instructions",
+        "content": ""
+      }
+    ],
+    "diagnoses": [
+      {
+        "id": "d1",
+        "label": "Acute coronary syndrome",
+        "rank": 1,
+        "score": 0.82
+      },
+      {
+        "id": "d2",
+        "label": "Pulmonary embolism",
+        "rank": 2,
+        "score": 0.785,
+        "icd_rank": 1
+      },
+      {
+        "id": "d3",
+        "label": "Pericarditis",
+        "rank": 3,
+        "score": 0.75
+      },
+      {
+        "id": "d4",
+        "label": "Pneumonia",
+        "rank": 4,
+        "score": 0.715
+      },
+      {
+        "id": "d5",
+        "label": "Pneumothorax",
+        "rank": 5,
+        "score": 0.68
+      },
+      {
+        "id": "d6",
+        "label": "Aortic dissection",
+        "rank": 6,
+        "score": 0.645
+      },
+      {
+        "id": "d7",
+        "label": "Stable angina",
+        "rank": 7,
+        "score": 0.61
+      },
+      {
+        "id": "d8",
+        "label": "Costochondritis",
+        "rank": 8,
+        "score": 0.575
+      },
+      {
+        "id": "d9",
+        "label": "Gastroesophageal reflux",
+        "rank": 9,
+        "score": 0.54
+      },
+      {
+        "id": "d10",
+        "label": "Panic disorder",
+        "rank": 10,
+        "score": 0.505
+      },
+      {
+        "id": "d11",
+        "label": "Esophageal spasm",
+        "rank": 11,
+        "score": 0.47
+      }
+    ],
+    "existingAnnotations": [
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "3 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "2 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "7 / 4 / 3 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "8 / 3 / 4 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "1 / 2 / 2 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "4 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "5 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "3 / 4 / 5 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "2 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "7 / 2 / 3 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "8 / 5 / 4 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "1 / 3 / 2 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "4 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "5 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / 1 / 2 / 2"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "7 / 2 / 1 / 1"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "5 / 3 / 3 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "6 / _ / 4 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "2 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d7",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "9 / 4 / 5 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "4 / 5 / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "3 / _ / _ / _"
+      }
+    ],
+    "dataset": "test350"
+  },
+  {
+    "id": "900205-cough",
+    "note_id": "900205-DS-1",
+    "subject_id": "S900205",
+    "hadm_id": "900205",
+    "name": "900205 (cough)",
+    "chief_complaint": "cough",
+    "split": "test",
+    "labs": "White cell count and CRP raised.",
+    "dischargeDiagnosis": "Left lower lobe pneumonia. COPD with exacerbation.",
+    "groundTruthIcdCodes": [
+      {
+        "code": "J189",
+        "longDescription": "Pneumonia, unspecified organism"
+      },
+      {
+        "code": "J449",
+        "longDescription": "Chronic obstructive pulmonary disease, unspecified"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Service",
+        "content": "MEDICINE"
+      },
+      {
+        "title": "Allergies",
+        "content": "No known drug allergies"
+      },
+      {
+        "title": "Attending",
+        "content": ""
+      },
+      {
+        "title": "Chief Complaint",
+        "content": "cough"
+      },
+      {
+        "title": "Major Surgical or Invasive Procedure",
+        "content": ""
+      },
+      {
+        "title": "History of Present Illness",
+        "content": "SYNTHETIC CASE - not a real patient. A 71-year-old man with COPD has had more cough and green sputum for four days, a fever since yesterday and new pain on the left side when he coughs."
+      },
+      {
+        "title": "Past Medical History",
+        "content": "COPD, uses inhalers; two flare-ups last year. Ex-smoker of forty pack-years."
+      },
+      {
+        "title": "Social History",
+        "content": "Synthetic case; social history not recorded."
+      },
+      {
+        "title": "Family History",
+        "content": ""
+      },
+      {
+        "title": "Physical Exam",
+        "content": "Temperature 38.6, oxygen saturation 90% on room air. Wheeze throughout and bronchial breathing at the left base."
+      },
+      {
+        "title": "Pertinent Results",
+        "content": "Chest X-ray: consolidation in the left lower lobe. Sputum culture: Streptococcus pneumoniae."
+      },
+      {
+        "title": "Brief Hospital Course",
+        "content": "Treated with antibiotics, nebulisers and a short course of steroids. Oxygen weaned by day four."
+      },
+      {
+        "title": "Medications on Admission",
+        "content": "See the synthetic history above."
+      },
+      {
+        "title": "Discharge Medications",
+        "content": "Continued as described in the hospital course."
+      },
+      {
+        "title": "Facility",
+        "content": ""
+      },
+      {
+        "title": "Discharge Disposition",
+        "content": "Home"
+      },
+      {
+        "title": "Discharge Diagnosis",
+        "content": "Left lower lobe pneumonia. COPD with exacerbation."
+      },
+      {
+        "title": "Discharge Condition",
+        "content": "Synthetic case: stable at discharge."
+      },
+      {
+        "title": "Discharge Instructions",
+        "content": "Synthetic case: return if symptoms recur."
+      },
+      {
+        "title": "Followup Instructions",
+        "content": ""
+      }
+    ],
+    "diagnoses": [
+      {
+        "id": "d1",
+        "label": "COPD exacerbation",
+        "rank": 1,
+        "score": 0.82,
+        "icd_rank": 2
+      },
+      {
+        "id": "d2",
+        "label": "Community-acquired pneumonia",
+        "rank": 2,
+        "score": 0.785,
+        "icd_rank": 1
+      },
+      {
+        "id": "d3",
+        "label": "Acute bronchitis",
+        "rank": 3,
+        "score": 0.75
+      },
+      {
+        "id": "d4",
+        "label": "Heart failure",
+        "rank": 4,
+        "score": 0.715
+      },
+      {
+        "id": "d5",
+        "label": "Asthma",
+        "rank": 5,
+        "score": 0.68
+      },
+      {
+        "id": "d6",
+        "label": "Bronchiectasis",
+        "rank": 6,
+        "score": 0.645
+      },
+      {
+        "id": "d7",
+        "label": "Lung cancer",
+        "rank": 7,
+        "score": 0.61
+      },
+      {
+        "id": "d8",
+        "label": "Influenza",
+        "rank": 8,
+        "score": 0.575
+      },
+      {
+        "id": "d9",
+        "label": "Pulmonary tuberculosis",
+        "rank": 9,
+        "score": 0.54
+      },
+      {
+        "id": "d10",
+        "label": "Pertussis",
+        "rank": 10,
+        "score": 0.505
+      },
+      {
+        "id": "d11",
+        "label": "Gastroesophageal reflux",
+        "rank": 11,
+        "score": 0.47
+      }
+    ],
+    "existingAnnotations": [
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "2 / 2 / 2 / 2"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "1 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "3 / 3 / 3 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "8 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "4 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "5 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "llama",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / 1 / 2 / 2"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "2 / 2 / 1 / 1"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "3 / 3 / 3 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "5 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "4 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "6 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "qwen",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d1",
+        "value": null,
+        "rankLabel": "1 / 1 / 1 / 1"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d2",
+        "value": null,
+        "rankLabel": "2 / 3 / 2 / 2"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d3",
+        "value": null,
+        "rankLabel": "3 / 2 / 3 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d4",
+        "value": null,
+        "rankLabel": "5 / 5 / 5 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d5",
+        "value": null,
+        "rankLabel": "4 / 4 / 4 / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d6",
+        "value": null,
+        "rankLabel": "6 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d8",
+        "value": null,
+        "rankLabel": "7 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d9",
+        "value": null,
+        "rankLabel": "9 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d10",
+        "value": null,
+        "rankLabel": "8 / _ / _ / _"
+      },
+      {
+        "annotatorId": "medgemma",
+        "diagnosisId": "d11",
+        "value": null,
+        "rankLabel": "10 / _ / _ / _"
+      }
+    ],
+    "dataset": "test350"
+  }
+]

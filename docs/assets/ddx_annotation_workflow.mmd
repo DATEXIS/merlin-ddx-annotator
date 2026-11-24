@@ -1,0 +1,44 @@
+%% MERLIN-DDx clinician DDx annotation (pilot and 350-case study): workflow.
+%% Source for docs/assets/ddx_annotation_workflow.svg (regenerate with mermaid-cli, see docs/reproducibility.md).
+%%{init: {"theme": "default", "flowchart": {"wrappingWidth": 340, "curve": "basis"}}}%%
+flowchart TB
+  subgraph PREP["Preparation"]
+    direction TB
+    P1["<b>1. Cohorts</b><br/>pilot: 70 admissions, 10 per chief complaint,<br/>35 train / 35 test<br/>study: 350 test admissions, 50 per chief complaint,<br/>disease-balanced draw (seed 20260711), pilot excluded"]
+    P2["<b>2. Candidate list per case</b><br/>all WikiDoc diseases of the chief complaint<br/>(19–74), ranked by cosine similarity<br/>to the discharge diagnosis text"]
+    P3["<b>3. Automated references</b><br/>cosine reference = first candidate<br/>ICD reference = candidate whose ICD-10 pattern<br/>matches the earliest coder ICD code"]
+    P1 --> P2 --> P3
+  end
+
+  subgraph ANN["Annotation interface (one record per clinician and case)"]
+    direction TB
+    A1["<b>Shown</b><br/>discharge summary (admission-time sections marked),<br/>labs, discharge diagnosis, coder ICD codes<br/>(collapsible panels), WikiDoc help on hover"]
+    A2["<b>Shown by default, can be hidden</b><br/>MERLIN model ranks V1–V4 + reasoning<br/>other clinicians' marks<br/><i>clinicians were instructed to hide both;<br/>not enforced, no interaction logs</i>"]
+    A3["<b>4. Clinician task</b><br/>confirm the clinically correct diagnosis:<br/>check one or more candidates,<br/>or add a diagnosis missing from the list<br/>(shared per case, stored as oN)"]
+    A1 --> A3
+    A2 -.-> A3
+  end
+
+  subgraph OFF["Offline analysis"]
+    direction TB
+    O1["<b>5. Case construction</b><br/>positives = checked dN / oN<br/>unchecked = not selected<br/>no consensus, raters analysed separately"]
+    O2["<b>6. Clinician vs references</b><br/>agreement with ICD / cosine reference,<br/>tie-break where they disagree,<br/>recall ceiling of the candidate list"]
+    O3["<b>7. Inter-rater agreement (study)</b><br/>candidate-level Cohen's κ, Fleiss' κ,<br/>exact-set agreement, Jaccard, nesting"]
+    O4["<b>8. Model evaluation (secondary)</b><br/>Hit@k / MRR of V1–V4 against<br/>the clinician; bootstrap 2,000, seed 12345"]
+    O1 --> O2
+    O1 --> O3
+    O1 --> O4
+  end
+
+  P3 --> A1
+  A3 --> O1
+
+  classDef caveat fill:#fef9c3,stroke:#a16207,color:#111827;
+  classDef visible fill:#eff6ff,stroke:#2563eb,color:#111827;
+  classDef step fill:#ffffff,stroke:#374151,color:#111827;
+  class A2 caveat;
+  class A1,A3 visible;
+  class P1,P2,P3,O1,O2,O3,O4 step;
+  style PREP fill:#f9fafb,stroke:#9ca3af,color:#111827
+  style ANN fill:#f5f9ff,stroke:#2563eb,color:#1e3a8a
+  style OFF fill:#f9fafb,stroke:#6b7280,color:#111827

@@ -1,0 +1,74 @@
+{
+  "content": "Cohort-level aggregate results of the MERLIN-DDx clinician DDx annotation (70-case pilot and 350-case study). No case, candidate, item or clinician-identifying data.",
+  "source": "final state of the annotation records (verified copy of the annotation server volume, 2026-11-24); case pool combined_1_4 (MIMIC-IV-derived, credentialed)",
+  "code": [
+    "scripts/run_ddx_analysis.py (scripts/analyse_annotations.py, scripts/analyse_scaleup_annotations.py)",
+    "scripts/ddx_agreement.py"
+  ],
+  "coverage": {
+    "study_350": {
+      "frame": 350,
+      "at_least_two_clinicians": 316,
+      "all_three_clinicians": 41
+    },
+    "pilot": {
+      "cohort": 70,
+      "completed_records": 69,
+      "analysed_cases": 61
+    }
+  },
+  "notes": [
+    "Clinician numbering follows the manuscript. It is unrelated to the rater labels of the reasoning audit.",
+    "Unchecked candidates count as not selected (the original analysis' rule); the interface stores no explicit negative.",
+    "Cohen's kappa uses the pairs of the original scale-up script: both clinicians have a record. For Clinicians 1 and 3 this is 122 cases, one of which has no positive mark by Clinician 3; the set statistics use the 121 cases both completed.",
+    "Two marks by Clinician 1 refer to added diagnoses that are no longer in the annotation store; the original analysis ignores them, and so do these counts.",
+    "Pilot: the pilot's original case pool was not recovered. The available pool contains 62 of the 70 pilot cases (candidate lists identical to the interface); reference-agreement and model-evaluation results cover the analysable cases, coverage and selection counts all completed records.",
+    "Model-evaluation tables are secondary outputs of the original analysis and are not reported in the manuscript."
+  ],
+  "files": {
+    "agreement_contingency_matrices.csv": {
+      "sha256": "59e2a1326a8db19d11b6223c07745d30f439c5605c9c5b197c7ecb5bf77c50c4",
+      "bytes": 321
+    },
+    "coverage.csv": {
+      "sha256": "c1244649dc66293b809391bcf14b67298538c1870efc428e70644dcca60c4093",
+      "bytes": 306
+    },
+    "inter_rater_agreement.csv": {
+      "sha256": "24c571124eee09ea06704fb6ebdd41c2844795329eac43822c8cde92f11a88bf",
+      "bytes": 575
+    },
+    "model_evaluation/kappa_vs_models_and_references.csv": {
+      "sha256": "a89c76ff5e94bf121a6cc41451394f546182a816a4870c612bf4fca3fc9aef20",
+      "bytes": 2625
+    },
+    "model_evaluation/model_paired_tests.csv": {
+      "sha256": "9f3e1f4b68b5044fe40cc68d8e0fb5097060320b82d116c7739b68fc01d2507f",
+      "bytes": 4404
+    },
+    "model_evaluation/model_stage_metrics.csv": {
+      "sha256": "c1047b0510dedb6479ea7b026101f7027859f63eb55dfbfd40443e27e702a45e",
+      "bytes": 14704
+    },
+    "model_evaluation/model_vs_icd_reference.csv": {
+      "sha256": "9d8ec19d94dbbe9d4f9e4f5a8a10522f78877de2bc0ef17be3bc45ff51e6a96b",
+      "bytes": 9068
+    },
+    "model_evaluation/reference_rankings_hit_at_k.csv": {
+      "sha256": "debaf91881351bb579c175efe526c024dc9f7be2d45e1e2fcb8ad4e5a62005a2",
+      "bytes": 1977
+    },
+    "recall_ceiling_by_chief_complaint.csv": {
+      "sha256": "de895def2062eb7b538f68341eb40336419b85d13ce3c3a6bf5d653dd811ee70",
+      "bytes": 1582
+    },
+    "reference_agreement.csv": {
+      "sha256": "69c4839b90448e1aec3a25e0249a0045c7454fa9cc49148d266d7bf861b1c706",
+      "bytes": 1155
+    },
+    "selections.csv": {
+      "sha256": "244cf548dc5c13505fb10b064108e10844d164f62e801734d40310aa2277512b",
+      "bytes": 368
+    }
+  }
+}

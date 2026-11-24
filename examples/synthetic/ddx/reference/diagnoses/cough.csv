@@ -1,0 +1,12 @@
+Disease,Synonyms,icd10_regex,fever,acute_onset,exertional,productive_sputum,focal_tenderness,neuro_deficit,weight_loss,hypoxia
+Community-acquired pneumonia,,^J1[2-8],1,1,0,1,0,0,0,1
+Acute bronchitis,,^J20,0,1,0,1,0,0,0,0
+COPD exacerbation,,^J44,0,1,1,1,0,0,0,1
+Asthma,,^J45,0,1,1,0,0,0,0,0
+Heart failure,,^I50,0,0,1,0,0,0,0,1
+Pulmonary tuberculosis,,^A15,1,0,0,1,0,0,1,0
+Lung cancer,,^C34,0,0,0,0,0,0,1,0
+Gastroesophageal reflux,,^K21,0,0,0,0,0,0,0,0
+Pertussis,,^A37,0,1,0,0,0,0,0,0
+Bronchiectasis,,^J47,0,0,0,1,0,0,0,0
+Influenza,,^J1[01],1,1,0,0,0,0,0,0

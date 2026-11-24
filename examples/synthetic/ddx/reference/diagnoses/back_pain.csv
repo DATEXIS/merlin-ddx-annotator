@@ -1,0 +1,12 @@
+Disease,Synonyms,icd10_regex,fever,acute_onset,exertional,productive_sputum,focal_tenderness,neuro_deficit,weight_loss,hypoxia
+Lumbar disc herniation,,^M51,0,1,0,0,0,1,0,0
+Vertebral osteomyelitis,,^M46[2-5],1,0,0,0,1,0,0,0
+Spinal epidural abscess,,^G06,1,0,0,0,1,1,0,0
+Vertebral compression fracture,,^(M485|M80),0,1,0,0,1,0,0,0
+Metastatic spinal disease,,^C795,0,0,0,0,1,0,1,0
+Abdominal aortic aneurysm,,^I71[34],0,1,0,0,0,0,0,0
+Pyelonephritis,,^N10,1,1,0,0,1,0,0,0
+Nephrolithiasis,,^N2[01],0,1,0,0,0,0,0,0
+Lumbar spinal stenosis,,^M480,0,0,0,0,0,1,0,0
+Mechanical low back pain,,^M545,0,0,0,0,0,0,0,0
+Cauda equina syndrome,,^G834,0,1,0,0,0,1,0,0

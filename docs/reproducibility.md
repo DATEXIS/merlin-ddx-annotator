@@ -1,6 +1,11 @@
 # Reproducibility guide
 
-Two workflows: a public one that needs nothing but this repository, and a credentialed one that uses the MERLIN-DDx data on PhysioNet (not yet published; see [data access](data_access.md)). Neither reruns models or creates new study ratings.
+This guide covers both clinician studies:
+
+- **DDx annotation (pilot and 350-case study):** see [below](#ddx-annotation-pilot-and-350-case-study).
+- **Reasoning audit:** the sections up to it. The audit has two workflows: a public one that needs nothing but this repository, and a credentialed one that uses the MERLIN-DDx data on PhysioNet (not yet published; see [data access](data_access.md)).
+
+Neither study's workflow reruns models or creates new study ratings.
 
 ## Coverage: which result can be reproduced from which data
 
@@ -88,9 +93,33 @@ This shows the 42 admissions exactly as the clinicians saw them, under generic r
 - **Rubric:** `config/rubric.json` and `docs/rubric.md` are tested against the interface and the server (`tests/python/test_rubric_consistency.py`).
 - **Study code:** the audit interface and backend are the code that served the clinicians. The frontend sources rebuild the deployed bundle byte for byte, and the backend files equal those in the deployment. The release differs only as listed in [CHANGES_FROM_STUDY.md](../CHANGES_FROM_STUDY.md).
 
+## DDx annotation (pilot and 350-case study)
+
+| Result (where reported) | Reproducible from |
+|---|---|
+| Cohen's κ for the three clinician pairs, with p_o and p_e (§6.5, A.2: Clinicians 1 and 2) | Public matrices: `python scripts/ddx_kappa_from_contingency.py` |
+| Fleiss' κ (all three clinicians) | Individual annotation records only |
+| Coverage, selections, exact-set agreement, Jaccard, nesting (A.2, Limitations) | Individual annotation records only (`scripts/ddx_agreement.py`) |
+| Agreement with the ICD-derived and cosine references, tie-break, recall ceiling, with intervals (§6.5, A.2) | Individual annotation records and the case pool (`scripts/run_ddx_analysis.py`) |
+| Model evaluation tables (results only) | Individual annotation records and the case pool |
+
+- **Who can rerun them:** the individual annotation records are internal ([data access](data_access.md)), so these analyses can be rerun by the study team. Everyone can rerun them on the synthetic data, which exercises the same code end to end ([docs/ddx_annotation/analysis.md](ddx_annotation/analysis.md)).
+- **What the published values come from:** the code in this repository, run on the final state of the records:
+  - `run_ddx_analysis.py pilot` with the pilot cohort;
+  - `run_ddx_analysis.py study`;
+  - `ddx_agreement.py`.
+- **Interval settings:** 2,000 case-bootstrap resamples, seed 12345, cases in the order the original analysis builds them.
+
+**Verified for this release:**
+
+- **Contingency matrices:** they reproduce the scale-up script's κ for every pair exactly.
+- **Agreement with the references:** Clinician 1's agreement (77.1% / 68.0%), the candidate-list gap (11.4%, ceiling 0.886), the tie-break (71 / 39) and the mean selections (1.11 / 1.06 / 1.02) are those the original analysis code produces on the final records.
+- **Synthetic checks:** the synthetic tests check every reported quantity against a hand calculation (`tests/python/test_ddx_analysis_synthetic.py`).
+
 ## Regenerating figures
 
 ```bash
 npm run build && CAPTURE_SCREENSHOTS=1 PYTHON=.venv/bin/python npx playwright test tests/e2e/screenshots.spec.ts
 npx -p @mermaid-js/mermaid-cli mmdc -i docs/assets/evaluation_workflow.mmd -o docs/assets/evaluation_workflow.svg -b white
+npx -p @mermaid-js/mermaid-cli mmdc -i docs/assets/ddx_annotation_workflow.mmd -o docs/assets/ddx_annotation_workflow.svg -b white
 ```

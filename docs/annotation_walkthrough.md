@@ -2,7 +2,12 @@
 
 How a clinician rated one admission in the MERLIN-DDx audit, shown on the synthetic demonstration cases. Every screenshot was captured from this repository's application running on [`examples/synthetic/`](../examples/synthetic/README.md) (`tests/e2e/screenshots.spec.ts`); the cases, rationales, annotator names and answers are synthetic.
 
-**What is historical and what is not.** The audit screen is the study's component (`src/components/RebuttalAudit.tsx`) and backend, unchanged, so the screen, questions, answer options and enabling rules are exactly what clinicians used. Two things differ: the data are synthetic, and the screen is opened directly rather than from the general annotator application the clinicians used. The *train / test / test (350)* buttons in the header belong to that general application and a separate annotation study; in this release they only show a notice. See [CHANGES_FROM_STUDY.md](../CHANGES_FROM_STUDY.md).
+**What is historical and what is not.** The audit screen is the study's component (`src/components/RebuttalAudit.tsx`) and backend, unchanged, so the screen, questions, answer options and enabling rules are exactly what clinicians used. Two things differ from the study:
+
+- **Data:** the data are synthetic.
+- **How the screen opens:** since v1.1.0 the screen is opened as in the study. Choose *reasoning audit* in the view selector of the general annotator application, which opens on the DDx annotation views ([docs/ddx_annotation/](ddx_annotation/README.md)). On a data root without DDx cases, the audit-only shell opens the screen directly. There, the *train / test / test (350)* buttons show a notice.
+
+See [CHANGES_FROM_STUDY.md](../CHANGES_FROM_STUDY.md).
 
 ## 1. Clinical context
 

@@ -2,14 +2,11 @@ import { useCallback, useEffect, useState } from 'react'
 import { RebuttalAudit } from './components/RebuttalAudit'
 import type { Annotator } from './types'
 
-// Public shell for the MERLIN-DDx clinician-audit interface.
-//
-// During the study, clinicians opened the general annotator application and switched
-// to its "reasoning audit" view, which renders <RebuttalAudit>. That component, the
-// annotator selector it contains and the backend it talks to are unchanged here; only
-// this thin shell replaces the general application, whose other views (train, test,
-// test (350)) served a different annotation study and are not part of this release.
-// The selected annotator is remembered under the same browser-storage key as before.
+// Audit-only shell, used when the data root holds no DDx annotation cohort (for example
+// the credentialed audit inputs). With DDx cohorts present, src/main.tsx renders the
+// study's own application (src/App.tsx), whose "reasoning audit" view shows the same
+// <RebuttalAudit> screen. The screen and its backend are unchanged; the selected
+// annotator is remembered under the same browser-storage key as in the study.
 const SELECTED_ANNOTATOR_KEY = 'ddx-selected-annotator'
 
 function readSelected(): string {
@@ -48,7 +45,7 @@ export function AuditApp() {
       onViewChange={() => setShowViewNotice(true)} />
     {showViewNotice && <div role="status"
       className="fixed bottom-4 right-4 z-50 max-w-sm rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 shadow-lg">
-      The train, test and test (350) views belonged to a separate annotation study and are not part of this release.
+      The DDx annotation views (train, test, test (350)) need the DDx cohort files, which this data root does not contain.
       <button type="button" onClick={() => setShowViewNotice(false)} className="ml-2 font-medium text-blue-700">Dismiss</button>
     </div>}
   </>
