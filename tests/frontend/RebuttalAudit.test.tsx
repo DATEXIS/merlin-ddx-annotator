@@ -57,3 +57,25 @@ it('omits target comparison for identical targets but always asks for rationale 
   await user.click(within(v2).getByRole('radio', { name: 'Equivalent' }))
   await waitFor(() => expect(localStorage.getItem('ddx-rebuttal-audit:clinician')).toContain('"target_preference_A_B_equal":null'))
 })
+
+it('renders all four stages with the new stage-specific rubric and evidence', async () => {
+  const pairs = ['V1', 'V2', 'V3', 'V4'].map(stage => ({
+    pair_id: stage, hadm_id: '123', stage, target_format: 'stage_output',
+    target_A: 'Synthetic output A', target_B: 'Synthetic output B',
+    reason_A: 'Synthetic rationale A', reason_B: 'Synthetic rationale B',
+    clinical_context: stage === 'V3' ? 'Synthetic laboratory context.' : '',
+  }))
+  vi.stubGlobal('fetch', vi.fn((url: string) => Promise.resolve(response(
+    url === '/api/rebuttal-audit' ? [{ ...audit[0], pairs }] : [],
+  ))))
+  render(<RebuttalAudit annotators={[{ id: 'clinician', name: 'Clinician', type: 'human' }]}
+    annotatorId="clinician" onAnnotatorChange={() => {}} onViewChange={() => {}} />)
+  const v1 = await screen.findByRole('region', { name: 'V1 pair' })
+  const v3 = screen.getByRole('region', { name: 'V3 pair' })
+  expect(within(v1).getAllByText(/correctly and completely classify/)).toHaveLength(2)
+  expect(within(v3).getByText('Synthetic laboratory context.')).toBeInTheDocument()
+  expect(within(v3).getAllByText(/updated diagnosis ranking/)).toHaveLength(2)
+  expect(screen.getByRole('region', { name: 'V2 pair' })).toBeInTheDocument()
+  expect(screen.getByRole('region', { name: 'V4 pair' })).toBeInTheDocument()
+  expect(within(v1).queryByText('Synthetic laboratory context.')).not.toBeInTheDocument()
+})
