@@ -157,6 +157,44 @@ def export_label_comparison(study, root, out, cases, *, allow_incomplete=False):
     return meta
 
 
+
+def export_single_reasoning(study, root, out, cases, *, allow_incomplete=False):
+    key = read_json(study / "private_analysis" / "single_reasoning_key.json")
+    pairs = {p["pair_id"]: p for case in cases for p in case["pairs"]}
+    by_key = {r["pair_id"]: r for r in key}
+    if len(by_key) != len(key) or set(pairs) != set(by_key):
+        raise ValueError("Standalone key does not match cases")
+    raters, observed = read_observed(root, cases)
+    rows = []
+    incomplete = 0
+    for pair_id, meta in by_key.items():
+        p = pairs[pair_id]
+        if (p.get("target_format") != "single_reasoning" or p["hadm_id"] != meta["case_id"]
+                or p["stage"] != meta["stage"] or any(
+                    meta[field + "_sha256"] != hashlib.sha256(p[column].encode()).hexdigest()
+                    for field, column in (("target", "target_A"), ("reason", "reason_A")))):
+            raise ValueError("Standalone provenance mismatch")
+        counts = {metric: Counter() for metric in ("q1", "q2", "composite")}
+        for rater in raters:
+            answer = observed.get((rater, pair_id), {})
+            q = [answer.get("A_Q1"), answer.get("A_Q2")]
+            q = [v if v in ALLOWED_ANSWERS else "Missing" for v in q]
+            counts["q1"][q[0]] += 1
+            counts["q2"][q[1]] += 1
+            counts["composite"]["Missing" if "Missing" in q else "Yes" if q == ["Yes", "Yes"] else "No"] += 1
+            incomplete += "Missing" in q
+        rows.append({**meta, "n_expected_raters": len(raters),
+                     **{metric + "_votes": dict(v) for metric, v in counts.items()}})
+    if incomplete and not allow_incomplete:
+        raise ValueError(f"{incomplete} incomplete standalone judgments; use --allow-incomplete explicitly")
+    out.mkdir(parents=True, mode=0o700)
+    write_jsonl(out / "single_reasoning_ratings.jsonl", rows)
+    result = {"study_type": "single_reasoning", "traces": len(rows), "raters": len(raters),
+              "incomplete_rater_traces": incomplete}
+    (out / "export_summary.json").write_text(json.dumps(result, indent=2) + "\n")
+    return result
+
+
 def export(study, out, *, allow_incomplete=False, include_corrections=False):
     study, out = Path(study), Path(out)
     if out.exists():
@@ -165,6 +203,10 @@ def export(study, out, *, allow_incomplete=False, include_corrections=False):
     if out.resolve().is_relative_to(root.resolve()):
         raise ValueError("Export must be outside the served data root")
     cases = load_cases(root)
+    if (study / "private_analysis" / "single_reasoning_key.json").is_file():
+        if include_corrections:
+            raise ValueError("Correction export is only for reference-label studies")
+        return export_single_reasoning(study, root, out, cases, allow_incomplete=allow_incomplete)
     if (study / "private_analysis" / "label_comparison_key.json").is_file():
         if include_corrections:
             raise ValueError("Correction export is only for reference-label studies")
