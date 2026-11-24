@@ -23,6 +23,9 @@ def prepare(study, out):
     if out.exists() or out.is_relative_to(root) or root.is_relative_to(out):
         raise ValueError("Use a fresh separate workspace directory")
     manifest = read_json(study / "private_analysis" / "manifest.json")
+    if "input_hashes" in manifest:
+        from build_study import freeze
+        freeze(study)
     raters = read_json(root / "app" / "annotators.json")
     if not raters or any(r["type"] != "human" for r in raters):
         raise ValueError("Independent mode supports human-only new studies")
@@ -58,6 +61,9 @@ def collect(study, workspaces):
     study, workspaces = Path(study), Path(workspaces)
     root = study / "annotation_inputs"
     manifest = read_json(study / "private_analysis" / "manifest.json")
+    if "input_hashes" in manifest:
+        from build_study import freeze
+        freeze(study)
     raters = read_json(root / "app" / "annotators.json")
     ddx = manifest["study_type"] == "ddx"
     cases = read_json(root / "app" / "patients_study.json") if ddx else load_cases(root)
