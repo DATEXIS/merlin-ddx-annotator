@@ -1,0 +1,9 @@
+11625 I214    1 Non-ST elevation (NSTEMI) myocardial infarction              Non-ST elevation (NSTEMI) myocardial infarction
+11904 I5023   1 Acute on chronic systolic (congestive) heart failure         Acute on chronic systolic (congestive) heart failure
+11926 I509    1 Heart failure, unspecified                                   Heart failure, unspecified
+11950 I602    1 Ntrm subarach hemorrhage from anterior communicating artery  Nontraumatic subarachnoid hemorrhage from anterior communicating artery
+11963 I609    1 Nontraumatic subarachnoid hemorrhage, unspecified            Nontraumatic subarachnoid hemorrhage, unspecified
+12090 I63542  1 Cereb infrc due to unsp occls or stenos of left cereblr art  Cerebral infarction due to unspecified occlusion or stenosis of left cerebellar artery
+14205 K3532   1 Ac appendicitis w perf, loc peritonitis, & gangr, w/o abscs  Acute appendicitis with perforation, localized peritonitis, and gangrene, without abscess
+14208 K3580   1 Unspecified acute appendicitis                               Unspecified acute appendicitis
+31023 R42     1 Dizziness and giddiness                                      Dizziness and giddiness

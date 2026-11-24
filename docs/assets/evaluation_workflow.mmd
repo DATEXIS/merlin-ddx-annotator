@@ -1,0 +1,45 @@
+%% MERLIN-DDx blinded clinician audit: evaluation workflow.
+%% Source for docs/assets/evaluation_workflow.svg (regenerate with mermaid-cli, see docs/reproducibility.md).
+%%{init: {"theme": "default", "flowchart": {"wrappingWidth": 330, "curve": "basis"}}}%%
+flowchart TB
+  subgraph PREP["Preparation (before rating)"]
+    direction TB
+    S1["<b>1. Audit cohort</b><br/>42 admissions: 7 chief complaints × 6<br/>loop outcome: V2 31 accepted / 11 rejected,<br/>V4 22 / 20<br/><i>selection script not recovered</i>"]
+    S3["<b>3. Two rationales per admission and stage</b><br/>V2 diagnosis stage · V4 ICD coding stage<br/>loop: generator–verifier loop (Qwen3-32B)<br/>zero-shot: no verifier loop<br/>→ 84 pairs, 168 rationales"]
+    S4["<b>4. Blinding</b><br/>each pair shown as Response A / Response B<br/><i>assignment procedure not documented</i>"]
+    KEY[("Allocation key<br/>arm, verifier score, loop outcome<br/>kept off the rating server")]
+    S1 --> S3 --> S4
+    S4 -. "A/B ↔ arm" .-> KEY
+  end
+
+  subgraph RATE["Visible to clinicians during rating"]
+    direction TB
+    S2["<b>2. Clinical information</b><br/>admission note of the case"]
+    PAIR["<b>Blinded pairs</b><br/>V2 pair above V4 pair<br/>target + rationale for A and B<br/>(V4: ICD code + ICD-10-CM description)"]
+    S5["<b>5. Independent assessment, 2 clinicians</b><br/>per response: Q1 facts supported? Q2 facts support target?<br/>Yes / No / Unclear<br/>per pair: target preference (only if targets differ),<br/>rationale preference, optional comment"]
+    S2 --> S5
+    PAIR --> S5
+  end
+
+  subgraph OFF["Offline analysis only (after all ratings were complete)"]
+    direction TB
+    CHECK{"Completion check<br/>84 pairs × 2 raters,<br/>no missing answers"}
+    S6["<b>6. Unblinding</b><br/>join the allocation key:<br/>A/B → loop / zero-shot"]
+    S7["<b>7. Aggregation</b><br/>valid = Q1 Yes and Q2 Yes<br/>rates pool both clinicians<br/>(84 judgments per stage and arm)"]
+    S8["<b>8. Statistics</b><br/>loop − zero-shot differences, admission-cluster bootstrap<br/>preference shares · raw agreement + Cohen's κ<br/>loop accepted vs rejected · verifier score vs Q2"]
+    CHECK --> S6 --> S7 --> S8
+  end
+
+  S4 --> PAIR
+  S5 --> CHECK
+  KEY --> S6
+
+  classDef hidden fill:#f3f4f6,stroke:#6b7280,stroke-dasharray:4 3,color:#111827;
+  classDef visible fill:#eff6ff,stroke:#2563eb,color:#111827;
+  classDef step fill:#ffffff,stroke:#374151,color:#111827;
+  class KEY hidden;
+  class S2,PAIR,S5 visible;
+  class S1,S3,S4,CHECK,S6,S7,S8 step;
+  style PREP fill:#f9fafb,stroke:#9ca3af,color:#111827
+  style RATE fill:#f5f9ff,stroke:#2563eb,color:#1e3a8a
+  style OFF fill:#f9fafb,stroke:#6b7280,color:#111827

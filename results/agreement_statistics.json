@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "study_id": "merlin-ddx-clinician-audit-batch1",
+  "implementation": "Recomputed with the original definitions (merlin_ddx/rebuttal_analysis.py: _agreement, reliability).",
+  "rater_labels": "rater_A and rater_B are assigned independently for every matrix with an unpublished seed; they do not identify the same clinician across matrices. Kappa is symmetric in the raters.",
+  "disclosure_rule": "Full matrix only when the published kappa and the credentialed per-item aggregates already determine it up to label swap, or when it attributes no disagreement to one rater; otherwise concordant counts and unordered disagreement totals only.",
+  "measures": [
+    {
+      "id": "V2.Q1_evidence_grounded",
+      "stage": "V2",
+      "criterion": "Q1_evidence_grounded",
+      "population": "all rationales of the stage, both arms pooled (one item = one rationale)",
+      "unit": "rationale",
+      "n_items": 84,
+      "categories": [
+        "Yes",
+        "No",
+        "Unclear"
+      ],
+      "weighting": "none (nominal categories, unweighted Cohen's kappa)",
+      "missing_data": "pairwise complete: items with a missing rating from either rater are excluded",
+      "n_items_excluded_missing": 0,
+      "n_items_not_applicable": 0,
+      "raw_agreement": 0.9404761904761905,
+      "expected_agreement": 0.9404761904761905,
+      "kappa": 0.0,
+      "kappa_defined": true,
+      "n_raters": 2,
+      "disclosure_level": "full",
+      "confidence_interval": null,
+      "confidence_interval_note": "Not reported in the original analysis; no interval method was documented.",
+      "contingency": {
+        "rows": "rater_A",
+        "columns": "rater_B",
+        "counts": {
+          "Yes": {
+            "Yes": 79,
+            "No": 0,
+            "Unclear": 0
+          },
+          "No": {
+            "Yes": 5,
+            "No": 0,
+            "Unclear": 0
+          },
+          "Unclear": {
+            "Yes": 0,
+            "No": 0,
+            "Unclear": 0
+          }
+        },
+        "marginals": {
+          "rater_A": {
+            "Yes": 79,
+            "No": 5,
+            "Unclear": 0
+          },
+          "rater_B": {
+            "Yes": 84,
+            "No": 0,
+            "Unclear": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "V2.Q2_supports_target",
+      "stage": "V2",
+      "criterion": "Q2_supports_target",
+      "population": "all rationales of the stage, both arms pooled (one item = one rationale)",
+      "unit": "rationale",
+      "n_items": 84,
+      "categories": [
+        "Yes",
+        "No",
+        "Unclear"
+      ],
+      "weighting": "none (nominal categories, unweighted Cohen's kappa)",
+      "missing_data": "pairwise complete: items with a missing rating from either rater are excluded",
+      "n_items_excluded_missing": 0,
+      "n_items_not_applicable": 0,
+      "raw_agreement": 0.9285714285714286,
+      "expected_agreement": 0.9090136054421769,
+      "kappa": 0.2149532710280374,
+      "kappa_defined": true,
+      "n_raters": 2,
+      "disclosure_level": "full",
+      "confidence_interval": null,
+      "confidence_interval_note": "Not reported in the original analysis; no interval method was documented.",
+      "contingency": {
+        "rows": "rater_A",
+        "columns": "rater_B",
+        "counts": {
+          "Yes": {
+            "Yes": 77,
+            "No": 2,
+            "Unclear": 0
+          },
+          "No": {
+            "Yes": 4,
+            "No": 1,
+            "Unclear": 0
+          },
+          "Unclear": {
+            "Yes": 0,
+            "No": 0,
+            "Unclear": 0
+          }
+        },
+        "marginals": {
+          "rater_A": {
+            "Yes": 79,
+            "No": 5,
+            "Unclear": 0
+          },
+          "rater_B": {
+            "Yes": 81,
+            "No": 3,
+            "Unclear": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "V2.valid_composite",
+      "stage": "V2",
+      "criterion": "valid_composite",
+      "population": "all rationales of the stage, both arms pooled (one item = one rationale)",
+      "unit": "rationale",
+      "n_items": 84,
+      "categories": [
+        "valid",
+        "not_valid"
+      ],
+      "weighting": "none (nominal categories, unweighted Cohen's kappa)",
+      "missing_data": "pairwise complete: items with a missing rating from either rater are excluded",
+      "n_items_excluded_missing": 0,
+      "n_items_not_applicable": 0,
+      "raw_agreement": 0.8690476190476191,
+      "expected_agreement": 0.8537414965986394,
+      "kappa": 0.10465116279069814,
+      "kappa_defined": true,
+      "n_raters": 2,
+      "disclosure_level": "full",
+      "confidence_interval": null,
+      "confidence_interval_note": "Not reported in the original analysis; no interval method was documented.",
+      "contingency": {
+        "rows": "rater_A",
+        "columns": "rater_B",
+        "counts": {
+          "valid": {
+            "valid": 72,
+            "not_valid": 2
+          },
+          "not_valid": {
+            "valid": 9,
+            "not_valid": 1
+          }
+        },
+        "marginals": {
+          "rater_A": {
+            "valid": 74,
+            "not_valid": 10
+          },
+          "rater_B": {
+            "valid": 81,
+            "not_valid": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "V2.target_preference",
+      "stage": "V2",
+      "criterion": "target_preference",
+      "population": "pairs with differing displayed targets (target comparison asked)",
+      "unit": "pair",
+      "n_items": 13,
+      "categories": [
+        "loop",
+        "zero_shot",
+        "equal"
+      ],
+      "weighting": "none (nominal categories, unweighted Cohen's kappa)",
+      "missing_data": "pairwise complete: items with a missing rating from either rater are excluded",
+      "n_items_excluded_missing": 0,
+      "n_items_not_applicable": 29,
+      "raw_agreement": 0.38461538461538464,
+      "expected_agreement": 0.3136094674556213,
+      "kappa": 0.10344827586206902,
+      "kappa_defined": true,
+      "n_raters": 2,
+      "disclosure_level": "reduced",
+      "confidence_interval": null,
+      "confidence_interval_note": "Not reported in the original analysis; no interval method was documented.",
+      "contingency": {
+        "concordant_counts": {
+          "loop": 2,
+          "zero_shot": 2,
+          "equal": 1
+        },
+        "discordant_unordered_counts": {
+          "loop|zero_shot": 3,
+          "loop|equal": 2,
+          "zero_shot|equal": 3
+        },
+        "withheld": "directional off-diagonal cells and per-rater marginals"
+      }
+    },
+    {
+      "id": "V2.rationale_preference",
+      "stage": "V2",
+      "criterion": "rationale_preference",
+      "population": "all pairs of the stage (one item = one loop/zero-shot pair)",
+      "unit": "pair",
+      "n_items": 42,
+      "categories": [
+        "loop",
+        "zero_shot",
+        "equivalent"
+      ],
+      "weighting": "none (nominal categories, unweighted Cohen's kappa)",
+      "missing_data": "pairwise complete: items with a missing rating from either rater are excluded",
+      "n_items_excluded_missing": 0,
+      "n_items_not_applicable": 0,
+      "raw_agreement": 0.5,
+      "expected_agreement": 0.3356009070294785,
+      "kappa": 0.24744027303754265,
+      "kappa_defined": true,
+      "n_raters": 2,
+      "disclosure_level": "full",
+      "confidence_interval": null,
+      "confidence_interval_note": "Not reported in the original analysis; no interval method was documented.",
+      "contingency": {
+        "rows": "rater_A",
+        "columns": "rater_B",
+        "counts": {
+          "loop": {
+            "loop": 8,
+            "zero_shot": 1,
+            "equivalent": 2
+          },
+          "zero_shot": {
+            "loop": 4,
+            "zero_shot": 10,
+            "equivalent": 5
+          },
+          "equivalent": {
+            "loop": 5,
+            "zero_shot": 4,
+            "equivalent": 3
+          }
+        },
+        "marginals": {
+          "rater_A": {
+            "loop": 11,
+            "zero_shot": 19,
+            "equivalent": 12
+          },
+          "rater_B": {
+            "loop": 17,
+            "zero_shot": 15,
+            "equivalent": 10
+          }
+        }
+      }
+    },
+    {
+      "id": "V4.Q1_evidence_grounded",
+      "stage": "V4",
+      "criterion": "Q1_evidence_grounded",
+      "population": "all rationales of the stage, both arms pooled (one item = one rationale)",
+      "unit": "rationale",
+      "n_items": 84,
+      "categories": [
+        "Yes",
+        "No",
+        "Unclear"
+      ],
+      "weighting": "none (nominal categories, unweighted Cohen's kappa)",
+      "missing_data": "pairwise complete: items with a missing rating from either rater are excluded",
+      "n_items_excluded_missing": 0,
+      "n_items_not_applicable": 0,
+      "raw_agreement": 0.9285714285714286,
+      "expected_agreement": 0.9285714285714286,
+      "kappa": 0.0,
+      "kappa_defined": true,
+      "n_raters": 2,
+      "disclosure_level": "full",
+      "confidence_interval": null,
+      "confidence_interval_note": "Not reported in the original analysis; no interval method was documented.",
+      "contingency": {
+        "rows": "rater_A",
+        "columns": "rater_B",
+        "counts": {
+          "Yes": {
+            "Yes": 78,
+            "No": 0,
+            "Unclear": 0
+          },
+          "No": {
+            "Yes": 6,
+            "No": 0,
+            "Unclear": 0
+          },
+          "Unclear": {
+            "Yes": 0,
+            "No": 0,
+            "Unclear": 0
+          }
+        },
+        "marginals": {
+          "rater_A": {
+            "Yes": 78,
+            "No": 6,
+            "Unclear": 0
+          },
+          "rater_B": {
+            "Yes": 84,
+            "No": 0,
+            "Unclear": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "V4.Q2_supports_target",
+      "stage": "V4",
+      "criterion": "Q2_supports_target",
+      "population": "all rationales of the stage, both arms pooled (one item = one rationale)",
+      "unit": "rationale",
+      "n_items": 84,
+      "categories": [
+        "Yes",
+        "No",
+        "Unclear"
+      ],
+      "weighting": "none (nominal categories, unweighted Cohen's kappa)",
+      "missing_data": "pairwise complete: items with a missing rating from either rater are excluded",
+      "n_items_excluded_missing": 0,
+      "n_items_not_applicable": 0,
+      "raw_agreement": 0.7261904761904762,
+      "expected_agreement": 0.5405328798185941,
+      "kappa": 0.40407156076495987,
+      "kappa_defined": true,
+      "n_raters": 2,
+      "disclosure_level": "reduced",
+      "confidence_interval": null,
+      "confidence_interval_note": "Not reported in the original analysis; no interval method was documented.",
+      "contingency": {
+        "concordant_counts": {
+          "Yes": 45,
+          "No": 16,
+          "Unclear": 0
+        },
+        "discordant_unordered_counts": {
+          "Yes|No": 19,
+          "Yes|Unclear": 3,
+          "No|Unclear": 1
+        },
+        "withheld": "directional off-diagonal cells and per-rater marginals"
+      }
+    },
+    {
+      "id": "V4.valid_composite",
+      "stage": "V4",
+      "criterion": "valid_composite",
+      "population": "all rationales of the stage, both arms pooled (one item = one rationale)",
+      "unit": "rationale",
+      "n_items": 84,
+      "categories": [
+        "valid",
+        "not_valid"
+      ],
+      "weighting": "none (nominal categories, unweighted Cohen's kappa)",
+      "missing_data": "pairwise complete: items with a missing rating from either rater are excluded",
+      "n_items_excluded_missing": 0,
+      "n_items_not_applicable": 0,
+      "raw_agreement": 0.7261904761904762,
+      "expected_agreement": 0.5515873015873016,
+      "kappa": 0.3893805309734512,
+      "kappa_defined": true,
+      "n_raters": 2,
+      "disclosure_level": "full",
+      "confidence_interval": null,
+      "confidence_interval_note": "Not reported in the original analysis; no interval method was documented.",
+      "contingency": {
+        "rows": "rater_A",
+        "columns": "rater_B",
+        "counts": {
+          "valid": {
+            "valid": 44,
+            "not_valid": 11
+          },
+          "not_valid": {
+            "valid": 12,
+            "not_valid": 17
+          }
+        },
+        "marginals": {
+          "rater_A": {
+            "valid": 55,
+            "not_valid": 29
+          },
+          "rater_B": {
+            "valid": 56,
+            "not_valid": 28
+          }
+        }
+      }
+    },
+    {
+      "id": "V4.target_preference",
+      "stage": "V4",
+      "criterion": "target_preference",
+      "population": "pairs with differing displayed targets (target comparison asked)",
+      "unit": "pair",
+      "n_items": 28,
+      "categories": [
+        "loop",
+        "zero_shot",
+        "equal"
+      ],
+      "weighting": "none (nominal categories, unweighted Cohen's kappa)",
+      "missing_data": "pairwise complete: items with a missing rating from either rater are excluded",
+      "n_items_excluded_missing": 0,
+      "n_items_not_applicable": 14,
+      "raw_agreement": 0.4642857142857143,
+      "expected_agreement": 0.25510204081632654,
+      "kappa": 0.2808219178082192,
+      "kappa_defined": true,
+      "n_raters": 2,
+      "disclosure_level": "full",
+      "confidence_interval": null,
+      "confidence_interval_note": "Not reported in the original analysis; no interval method was documented.",
+      "contingency": {
+        "rows": "rater_A",
+        "columns": "rater_B",
+        "counts": {
+          "loop": {
+            "loop": 5,
+            "zero_shot": 1,
+            "equal": 0
+          },
+          "zero_shot": {
+            "loop": 1,
+            "zero_shot": 6,
+            "equal": 0
+          },
+          "equal": {
+            "loop": 6,
+            "zero_shot": 7,
+            "equal": 2
+          }
+        },
+        "marginals": {
+          "rater_A": {
+            "loop": 6,
+            "zero_shot": 7,
+            "equal": 15
+          },
+          "rater_B": {
+            "loop": 12,
+            "zero_shot": 14,
+            "equal": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "V4.rationale_preference",
+      "stage": "V4",
+      "criterion": "rationale_preference",
+      "population": "all pairs of the stage (one item = one loop/zero-shot pair)",
+      "unit": "pair",
+      "n_items": 42,
+      "categories": [
+        "loop",
+        "zero_shot",
+        "equivalent"
+      ],
+      "weighting": "none (nominal categories, unweighted Cohen's kappa)",
+      "missing_data": "pairwise complete: items with a missing rating from either rater are excluded",
+      "n_items_excluded_missing": 0,
+      "n_items_not_applicable": 0,
+      "raw_agreement": 0.5238095238095238,
+      "expected_agreement": 0.2919501133786848,
+      "kappa": 0.32746196957566054,
+      "kappa_defined": true,
+      "n_raters": 2,
+      "disclosure_level": "reduced",
+      "confidence_interval": null,
+      "confidence_interval_note": "Not reported in the original analysis; no interval method was documented.",
+      "contingency": {
+        "concordant_counts": {
+          "loop": 8,
+          "zero_shot": 8,
+          "equivalent": 6
+        },
+        "discordant_unordered_counts": {
+          "loop|zero_shot": 4,
+          "loop|equivalent": 7,
+          "zero_shot|equivalent": 9
+        },
+        "withheld": "directional off-diagonal cells and per-rater marginals"
+      }
+    }
+  ],
+  "reproducibility_levels": [
+    {
+      "data": "Public cohort-level results alone",
+      "reproducible": "Point estimates of every rate, loop minus zero-shot difference, preference share and margin, sign test and loop outcome count, recomputed from the published counts. Their 95% intervals are published but cannot be re-derived without item-level data."
+    },
+    {
+      "data": "Public contingency matrices",
+      "reproducible": "Raw agreement and Cohen's kappa for the measures published at the `full` level, from the joint counts. For `reduced` measures only raw agreement can be rebuilt; their kappa can be checked arithmetically against the published p_e, which itself cannot be re-derived. No interval was reported for any agreement statistic."
+    },
+    {
+      "data": "Credentialed per-item aggregates (PhysioNet), alone or with the public files",
+      "reproducible": "Every point estimate above and its admission-cluster bootstrap interval, exactly (with the case mapping), and raw agreement for every measure. Per-item aggregates do not say which clinician gave which rating, so they add nothing to Cohen's kappa: kappa comes only from the public matrices (full measures)."
+    },
+    {
+      "data": "Individual clinician ratings (internal archive only; not released)",
+      "reproducible": "Independent reproduction of kappa for `reduced` measures; per-clinician accepted-minus-rejected differences with intervals and per-clinician verifier-score correlations (the paper reports both only as ranges, which are published); per-clinician differences; the sensitivity analysis excluding a clinician's paired judgment when either arm was Unclear."
+    }
+  ],
+  "reproduction": {
+    "compared_with_original_run": 30,
+    "identical": 30
+  },
+  "manuscript": [
+    {
+      "id": "agreement",
+      "quote": "Agreement on the coding-stage composite was 0.73 (κ = 0.39); diagnosis-stage κ is deflated by the ceiling.",
+      "status": "PASS"
+    }
+  ]
+}

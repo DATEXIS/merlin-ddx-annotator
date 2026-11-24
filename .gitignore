@@ -1,0 +1,29 @@
+# --- Restricted data: never commit ---------------------------------------------
+# MIMIC-IV and MERLIN-DDx credentialed data are distributed only through PhysioNet
+# under its data use agreement. Keep any local copy outside this repository, or in
+# one of these ignored locations.
+/data/
+/physionet/
+*.parquet
+*.pq
+*.feather
+
+# Demo working copies and analysis runs (scripts/run_demo.py, run_original_analysis.py)
+.demo/
+
+# Secrets
+.env
+.env.*
+
+# Build output, dependencies and caches
+node_modules/
+dist/
+.venv/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.DS_Store

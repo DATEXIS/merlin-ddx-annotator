@@ -1,0 +1,17 @@
+level,stage,condition,criterion,scale,n_items,n_judgments,n_missing,n_not_applicable,distribution,favourable_category,favourable_n,favourable_pct,ci95_low_pct,ci95_high_pct
+rationale,V2,loop,Q1_evidence_grounded,Yes|No|Unclear,42,84,0,0,"{""Yes"":80,""No"":4,""Unclear"":0}",Yes,80,95.2381,90.4762,98.8095
+rationale,V2,loop,Q2_supports_target,Yes|No|Unclear,42,84,0,0,"{""Yes"":81,""No"":3,""Unclear"":0}",Yes,81,96.4286,91.6667,100.0000
+rationale,V2,loop,valid_composite,valid|not_valid,42,84,0,0,"{""valid"":77,""not_valid"":7}",valid,77,91.6667,85.7143,96.4286
+rationale,V2,zero_shot,Q1_evidence_grounded,Yes|No|Unclear,42,84,0,0,"{""Yes"":83,""No"":1,""Unclear"":0}",Yes,83,98.8095,96.4286,100.0000
+rationale,V2,zero_shot,Q2_supports_target,Yes|No|Unclear,42,84,0,0,"{""Yes"":79,""No"":5,""Unclear"":0}",Yes,79,94.0476,88.0655,98.8095
+rationale,V2,zero_shot,valid_composite,valid|not_valid,42,84,0,0,"{""valid"":78,""not_valid"":6}",valid,78,92.8571,85.7143,98.8095
+pair,V2,loop_vs_zero_shot,rationale_preference,loop|zero_shot|equivalent,42,84,0,0,"{""loop"":28,""zero_shot"":34,""equivalent"":22}",,,,,
+pair,V2,loop_vs_zero_shot,target_preference,loop|zero_shot|equal,13,26,0,58,"{""loop"":9,""zero_shot"":10,""equal"":7}",,,,,
+rationale,V4,loop,Q1_evidence_grounded,Yes|No|Unclear,42,84,0,0,"{""Yes"":80,""No"":4,""Unclear"":0}",Yes,80,95.2381,90.4762,98.8095
+rationale,V4,loop,Q2_supports_target,Yes|No|Unclear,42,84,0,0,"{""Yes"":56,""No"":27,""Unclear"":1}",Yes,56,66.6667,54.7619,78.5714
+rationale,V4,loop,valid_composite,valid|not_valid,42,84,0,0,"{""valid"":55,""not_valid"":29}",valid,55,65.4762,53.5714,77.3810
+rationale,V4,zero_shot,Q1_evidence_grounded,Yes|No|Unclear,42,84,0,0,"{""Yes"":82,""No"":2,""Unclear"":0}",Yes,82,97.6190,94.0476,100.0000
+rationale,V4,zero_shot,Q2_supports_target,Yes|No|Unclear,42,84,0,0,"{""Yes"":56,""No"":25,""Unclear"":3}",Yes,56,66.6667,53.5714,78.5714
+rationale,V4,zero_shot,valid_composite,valid|not_valid,42,84,0,0,"{""valid"":56,""not_valid"":28}",valid,56,66.6667,53.5714,78.5714
+pair,V4,loop_vs_zero_shot,rationale_preference,loop|zero_shot|equivalent,42,84,0,0,"{""loop"":27,""zero_shot"":29,""equivalent"":28}",,,,,
+pair,V4,loop_vs_zero_shot,target_preference,loop|zero_shot|equal,28,56,0,28,"{""loop"":18,""zero_shot"":21,""equal"":17}",,,,,

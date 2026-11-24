@@ -1,0 +1,27 @@
+{
+  "annotatorId": "synthetic_rater_2",
+  "hadm_id": "SYN004",
+  "updatedAt": "2026-01-01T00:00:00Z",
+  "pairs": {
+    "7": {
+      "pair_id": "7",
+      "hadm_id": "SYN004",
+      "A_Q1": "No",
+      "A_Q2": "No",
+      "B_Q1": "Yes",
+      "B_Q2": "Yes",
+      "target_preference_A_B_equal": "B",
+      "rationale_preference_A_B_equal": "B"
+    },
+    "8": {
+      "pair_id": "8",
+      "hadm_id": "SYN004",
+      "A_Q1": "Yes",
+      "A_Q2": "Yes",
+      "B_Q1": "Unclear",
+      "B_Q2": "Yes",
+      "target_preference_A_B_equal": "Equal",
+      "rationale_preference_A_B_equal": "A"
+    }
+  }
+}

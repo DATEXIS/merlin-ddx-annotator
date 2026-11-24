@@ -1,0 +1,46 @@
+hadm_id,chief_complaint,admission_note
+SYN001,chest_pain,"SYNTHETIC CASE - not a real patient.
+
+Chief complaint: chest pain.
+
+History: 62-year-old man with two hours of substernal pressure radiating to the left arm, with sweating and nausea, starting at rest. History of hypertension and 30 pack-years of smoking. No prior cardiac events.
+
+Examination: BP 152/88 mmHg, HR 96/min, SpO2 97% on room air. Diaphoretic. Heart sounds normal, no rub. Lungs clear.
+
+Investigations: ECG sinus rhythm with 1.5 mm horizontal ST depression in V4-V6; no ST elevation. High-sensitivity troponin I 420 ng/L on arrival, 1100 ng/L at 3 hours (reference < 40). Chest radiograph: no acute findings."
+SYN002,dyspnea,"SYNTHETIC CASE - not a real patient.
+
+Chief complaint: shortness of breath.
+
+History: 71-year-old woman with known heart failure with reduced ejection fraction (EF 30% one year ago) presenting with four days of progressive exertional dyspnea, orthopnea (now sleeping on three pillows) and swelling of both legs. Weight up 3 kg in one week. Missed diuretic doses while travelling. No fever, no cough with sputum.
+
+Examination: BP 138/82 mmHg, HR 102/min irregular, RR 24/min, SpO2 91% on room air, T 36.8 C. Jugular venous pressure raised, bibasal crackles, pitting edema to the knees.
+
+Investigations: NT-proBNP 6800 pg/mL. WBC 7.9 x10^9/L, CRP 6 mg/L. ECG atrial fibrillation, rate 100. Chest radiograph: upper-lobe venous diversion, interstitial edema and small bilateral pleural effusions; no consolidation."
+SYN003,abdominal_pain,"SYNTHETIC CASE - not a real patient.
+
+Chief complaint: abdominal pain.
+
+History: 34-year-old woman with 18 hours of pain that began around the umbilicus and moved to the right lower quadrant, with loss of appetite and nausea. No urinary symptoms. Last menstrual period two weeks ago.
+
+Examination: T 38.1 C, HR 98/min. Tenderness and guarding at McBurney's point with rebound tenderness; Rovsing sign positive. No generalized peritonism.
+
+Investigations: WBC 14.2 x10^9/L, CRP 48 mg/L. Urine beta-hCG negative. Urinalysis normal. CT abdomen: dilated appendix (11 mm) with periappendiceal fat stranding; no free air, no abscess, no appendicolith."
+SYN004,headache,"SYNTHETIC CASE - not a real patient.
+
+Chief complaint: headache.
+
+History: 45-year-old man with sudden, severe headache that reached maximal intensity within a minute while lifting weights three hours ago, described as the worst of his life, followed by vomiting. No previous similar headaches. No trauma.
+
+Examination: BP 168/94 mmHg, GCS 15, neck stiffness present, pupils equal and reactive, no focal neurological deficit.
+
+Investigations: Non-contrast CT head: hyperdensity in the basal cisterns and interhemispheric fissure consistent with subarachnoid hemorrhage. CT angiography: 6 mm saccular aneurysm of the anterior communicating artery."
+SYN005,vertigo,"SYNTHETIC CASE - not a real patient.
+
+Chief complaint: dizziness.
+
+History: 58-year-old woman with 10 hours of continuous spinning vertigo, nausea and inability to walk unaided. Hypertension and type 2 diabetes. No hearing loss, no tinnitus, no ear pain.
+
+Examination: direction-changing horizontal nystagmus, normal head impulse test to both sides, skew deviation on alternate cover testing, marked truncal ataxia. Limb strength and sensation normal.
+
+Investigations: MRI brain with diffusion-weighted imaging: acute infarct in the left inferior cerebellar hemisphere (territory of the left posterior inferior cerebellar artery). MR angiography: no flow-limiting stenosis identified; no dissection."

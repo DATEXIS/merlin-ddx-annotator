@@ -1,0 +1,22 @@
+stage,comparison,measure,estimate,ci95_low,ci95_high,n_pairs,n_judgments,unit,reported_in_paper,definition
+V2,loop_minus_zero_shot,Q1_evidence_grounded_favourable_rate_difference,-3.5714,-8.3333,0.0000,42,84,percentage points,no,Pooled loop rate minus pooled zero-shot rate; admission-cluster bootstrap
+V2,loop_minus_zero_shot,Q2_supports_target_favourable_rate_difference,2.3810,-3.5714,9.5238,42,84,percentage points,no,Pooled loop rate minus pooled zero-shot rate; admission-cluster bootstrap
+V2,loop_minus_zero_shot,valid_composite_favourable_rate_difference,-1.1905,-8.3333,7.1429,42,84,percentage points,yes,Pooled loop rate minus pooled zero-shot rate; admission-cluster bootstrap
+V2,loop_minus_zero_shot,rationale_preference_margin,-7.1429,-28.5714,14.2857,42,84,percentage points,no,Share preferring loop minus share preferring zero-shot; admission-cluster bootstrap
+V2,loop_vs_zero_shot,rationale_preference_sign_test_p,0.525773,,,42,62,p-value (two-sided exact),no,Exact binomial test on non-tied judgments; descriptive
+V2,loop_minus_zero_shot,target_preference_margin,-3.8462,-40.0000,32.3775,13,26,percentage points,no,Share preferring loop minus share preferring zero-shot; admission-cluster bootstrap
+V2,design,loop_accepted_pairs,31,,,42,,pairs,yes,Loop outcome of the in-loop rationale (sampling stratum)
+V2,design,loop_rejected_pairs,11,,,42,,pairs,yes,Loop outcome of the in-loop rationale (sampling stratum)
+V4,loop_minus_zero_shot,Q1_evidence_grounded_favourable_rate_difference,-2.3810,-7.1429,2.3810,42,84,percentage points,no,Pooled loop rate minus pooled zero-shot rate; admission-cluster bootstrap
+V4,loop_minus_zero_shot,Q2_supports_target_favourable_rate_difference,0.0000,-15.4762,15.4762,42,84,percentage points,no,Pooled loop rate minus pooled zero-shot rate; admission-cluster bootstrap
+V4,loop_minus_zero_shot,valid_composite_favourable_rate_difference,-1.1905,-16.6667,14.2857,42,84,percentage points,yes,Pooled loop rate minus pooled zero-shot rate; admission-cluster bootstrap
+V4,loop_minus_zero_shot,rationale_preference_margin,-2.3810,-22.6190,17.8571,42,84,percentage points,no,Share preferring loop minus share preferring zero-shot; admission-cluster bootstrap
+V4,loop_vs_zero_shot,rationale_preference_sign_test_p,0.893853,,,42,56,p-value (two-sided exact),no,Exact binomial test on non-tied judgments; descriptive
+V4,loop_minus_zero_shot,target_preference_margin,-5.3571,-32.0000,21.1538,28,56,percentage points,no,Share preferring loop minus share preferring zero-shot; admission-cluster bootstrap
+V4,design,loop_accepted_pairs,22,,,42,,pairs,yes,Loop outcome of the in-loop rationale (sampling stratum)
+V4,design,loop_rejected_pairs,20,,,42,,pairs,yes,Loop outcome of the in-loop rationale (sampling stratum)
+V2+V4,per_clinician_range,accepted_minus_rejected_valid_rate_min,-10.9091,,,,,percentage points,yes,"In-loop rationales only: validity of loop-accepted minus loop-rejected, per clinician and stage; published as the range over clinicians and stages"
+V2+V4,per_clinician_range,accepted_minus_rejected_valid_rate_max,5.8651,,,,,percentage points,yes,"In-loop rationales only: validity of loop-accepted minus loop-rejected, per clinician and stage; published as the range over clinicians and stages"
+V2+V4,per_clinician_range,spearman_verifier_score_vs_Q2_yes_min,-0.1236,,,,,Spearman rho,yes,"Loop verifier score vs binary Q2 = Yes, per clinician and stage; published as the range"
+V2+V4,per_clinician_range,spearman_verifier_score_vs_Q2_yes_max,0.0729,,,,,Spearman rho,yes,"Loop verifier score vs binary Q2 = Yes, per clinician and stage; published as the range"
+V2+V4,per_clinician_range,accepted_minus_rejected_all_ci95_include_zero,true,,,,,boolean,yes,"All per-clinician, per-stage 95% intervals include zero"

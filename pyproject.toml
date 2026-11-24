@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "merlin-ddx-annotator"
+version = "1.0.0"
+description = "Clinical annotation interface, evaluation protocol, rubric, and reproducibility tools for the MERLIN-DDx clinician evaluation study."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn>=0.29",
+]
+
+[project.optional-dependencies]
+# The original statistical analysis (merlin_ddx/rebuttal_*.py) and reproduction scripts.
+analysis = [
+  "numpy>=1.26",
+  "pandas>=2.1",
+  "scipy>=1.11",
+  "matplotlib>=3.8",
+  "pyarrow>=14",
+]
+dev = [
+  "pytest>=8",
+  "httpx>=0.27",
+]
+
+[tool.setuptools.packages.find]
+include = ["merlin_ddx*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]

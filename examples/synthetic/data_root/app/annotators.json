@@ -1,0 +1,14 @@
+[
+  {
+    "id": "synthetic_rater_1",
+    "name": "Synthetic rater 1",
+    "type": "human",
+    "active": true
+  },
+  {
+    "id": "synthetic_rater_2",
+    "name": "Synthetic rater 2",
+    "type": "human",
+    "active": true
+  }
+]

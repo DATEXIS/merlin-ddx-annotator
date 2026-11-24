@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "study_id": "merlin-ddx-clinician-audit-batch1",
+  "source": "Recovered verbatim from the clinician interface and server validation used during rating.",
+  "unit_of_rating": {
+    "rationale": "One generated rationale (target diagnosis or ICD code plus its justification text).",
+    "pair": "Two rationales for the same admission and stage, shown side by side as Response A and Response B."
+  },
+  "display": {
+    "layout": "Admission note on the left; V2 pair panel above V4 pair panel on the right.",
+    "per_response": "Target (V4: ICD code followed by its ICD-10-CM description), then the rationale text, then Q1 and Q2.",
+    "stages": {
+      "V2": "diagnosis (differential-diagnosis) stage",
+      "V4": "coding (ICD prediction) stage"
+    },
+    "v4_description_note": "When a full code has no catalog description, the closest valid parent category is shown with the note '... no exact full-code description listed.'"
+  },
+  "criteria": [
+    {
+      "id": "Q1_evidence_grounded",
+      "original_fields": [
+        "A_Q1",
+        "B_Q1"
+      ],
+      "legacy_field_names": [
+        "A_Q1_evidence_grounded",
+        "B_Q1_evidence_grounded"
+      ],
+      "level": "rationale",
+      "asked_for": "every rationale",
+      "wording": {
+        "V2": "Are the clinical facts stated in this rationale supported by the patient information?",
+        "V4": "Are the clinical facts stated in this rationale supported by the patient information?"
+      },
+      "response_type": "nominal",
+      "response_options": [
+        {
+          "label": "Yes",
+          "stored_value": "Yes",
+          "analysis_code": 1,
+          "meaning": "Favourable answer; the only value that counts toward a Yes-rate or the composite."
+        },
+        {
+          "label": "No",
+          "stored_value": "No",
+          "analysis_code": 0,
+          "meaning": "Unfavourable answer."
+        },
+        {
+          "label": "Unclear",
+          "stored_value": "Unclear",
+          "analysis_code": 0,
+          "meaning": "Rater could not decide; retained as its own category for agreement and distributions, counted as not Yes (not valid) in the primary analysis."
+        }
+      ],
+      "direction": "Yes = favourable",
+      "required": true
+    },
+    {
+      "id": "Q2_supports_target",
+      "original_fields": [
+        "A_Q2",
+        "B_Q2"
+      ],
+      "legacy_field_names": [
+        "A_Q2_supports_target",
+        "B_Q2_supports_target"
+      ],
+      "level": "rationale",
+      "asked_for": "every rationale",
+      "wording": {
+        "V2": "Do the stated facts clinically support this diagnosis as a plausible diagnosis for this patient?",
+        "V4": "Do the stated facts clinically support this specific ICD diagnosis?"
+      },
+      "response_type": "nominal",
+      "response_options": [
+        {
+          "label": "Yes",
+          "stored_value": "Yes",
+          "analysis_code": 1,
+          "meaning": "Favourable answer; the only value that counts toward a Yes-rate or the composite."
+        },
+        {
+          "label": "No",
+          "stored_value": "No",
+          "analysis_code": 0,
+          "meaning": "Unfavourable answer."
+        },
+        {
+          "label": "Unclear",
+          "stored_value": "Unclear",
+          "analysis_code": 0,
+          "meaning": "Rater could not decide; retained as its own category for agreement and distributions, counted as not Yes (not valid) in the primary analysis."
+        }
+      ],
+      "direction": "Yes = favourable",
+      "required": true
+    },
+    {
+      "id": "target_preference",
+      "original_fields": [
+        "target_preference_A_B_equal"
+      ],
+      "level": "pair",
+      "asked_for": "only pairs whose two displayed targets differ (exact string comparison)",
+      "wording": {
+        "V2": "Which diagnosis is more clinically appropriate for this patient at this point in the case?",
+        "V4": "Which ICD diagnosis is more clinically appropriate for this patient, including whether the level of specificity is justified by the available evidence?"
+      },
+      "helper_text": {
+        "V4": "Prefer a more specific code when the evidence supports it; penalize unsupported over-specificity."
+      },
+      "response_type": "nominal",
+      "response_options": [
+        {
+          "label": "A",
+          "stored_value": "A",
+          "release_value": "loop or zero_shot (decoded via the allocation key)"
+        },
+        {
+          "label": "B",
+          "stored_value": "B",
+          "release_value": "loop or zero_shot (decoded via the allocation key)"
+        },
+        {
+          "label": "Equally appropriate",
+          "stored_value": "Equal",
+          "release_value": "equal"
+        }
+      ],
+      "not_applicable": "Identical targets: no question shown; stored as null; released as not_applicable.",
+      "direction": "No ordering; analysis contrasts loop-preferred with zero-shot-preferred shares.",
+      "required": "when asked",
+      "enabled_after": "all four Q1/Q2 judgments of the pair"
+    },
+    {
+      "id": "rationale_preference",
+      "original_fields": [
+        "rationale_preference_A_B_equal"
+      ],
+      "level": "pair",
+      "asked_for": "every pair",
+      "wording": {
+        "V2": "Which rationale is clinically better?",
+        "V4": "Which rationale is clinically better?"
+      },
+      "helper_text": {
+        "V2": "Consider grounding in the patient record, clinical relevance, whether the reasoning supports its target, and clarity of the justification.",
+        "V4": "Consider grounding in the patient record, clinical relevance, whether the reasoning supports its target, and clarity of the justification."
+      },
+      "response_type": "nominal",
+      "response_options": [
+        {
+          "label": "A",
+          "stored_value": "A",
+          "release_value": "loop or zero_shot (decoded via the allocation key)"
+        },
+        {
+          "label": "B",
+          "stored_value": "B",
+          "release_value": "loop or zero_shot (decoded via the allocation key)"
+        },
+        {
+          "label": "Equivalent",
+          "stored_value": "Equivalent",
+          "release_value": "equivalent"
+        }
+      ],
+      "direction": "No ordering; analysis contrasts loop-preferred with zero-shot-preferred shares.",
+      "required": true,
+      "enabled_after": "all four Q1/Q2 judgments of the pair"
+    },
+    {
+      "id": "rater_comment",
+      "original_fields": [
+        "rater_comment"
+      ],
+      "level": "pair",
+      "asked_for": "every pair",
+      "wording": {
+        "V2": "Optional comment",
+        "V4": "Optional comment"
+      },
+      "response_type": "free text",
+      "required": false,
+      "release": "Not released (unreviewed free text); retained in the internal research archive only."
+    }
+  ],
+  "derived_measures": [
+    {
+      "id": "valid_composite",
+      "level": "rationale",
+      "formula": "valid if Q1 == 'Yes' and Q2 == 'Yes'; otherwise not_valid (No and Unclear both count as not valid)",
+      "release_values": [
+        "valid",
+        "not_valid"
+      ],
+      "analysis_code": {
+        "valid": 1,
+        "not_valid": 0
+      },
+      "missing": "missing if Q1 or Q2 is missing",
+      "origin": "Primary outcome of the original analysis (merlin_ddx/rebuttal_analysis.py)."
+    }
+  ],
+  "missing_uncertain_not_applicable": {
+    "missing": "No answer saved; the original analysis refuses to run with any missing required response.",
+    "uncertain": "Unclear is a valid response category, never imputed.",
+    "not_applicable": "Target preference for pairs with identical targets.",
+    "legacy_overall_preference": "An earlier interface field (preference_A_B_equivalent) is accepted for loading only and never substituted for rationale_preference."
+  },
+  "aggregation_rules": [
+    "Ratings are never averaged across categories; per-item distributions keep every original category.",
+    "Q1/Q2 Yes-rates and composite validity rates pool both raters' judgments (denominator = raters x rationales).",
+    "Loop minus zero-shot differences use the same admissions in both arms (paired within admission).",
+    "Preference shares: loop-preferred, zero-shot-preferred and equal/equivalent counts over all judgments.",
+    "In the credentialed per-item aggregates, mean_rating is reported only for valid_composite (share of raters judging the rationale valid)."
+  ]
+}

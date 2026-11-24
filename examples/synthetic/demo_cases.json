@@ -1,0 +1,378 @@
+{
+  "_about": "SYNTHETIC DEMONSTRATION DATA. Every admission, note, rationale, allocation and rating below was written by hand for this repository. None is derived from, paraphrased from, or modelled on a MIMIC-IV record or on a rationale evaluated in the MERLIN-DDx study, and no rating comes from a clinician. `scripts/build_synthetic_demo.py` turns this file into the application inputs under `data_root/`, the allocation key and the synthetic rating exports.",
+  "raters": [
+    {
+      "id": "synthetic_rater_1",
+      "name": "Synthetic rater 1"
+    },
+    {
+      "id": "synthetic_rater_2",
+      "name": "Synthetic rater 2"
+    }
+  ],
+  "cases": [
+    {
+      "hadm_id": "SYN001",
+      "chief_complaint": "chest_pain",
+      "admission_note": "SYNTHETIC CASE - not a real patient.\n\nChief complaint: chest pain.\n\nHistory: 62-year-old man with two hours of substernal pressure radiating to the left arm, with sweating and nausea, starting at rest. History of hypertension and 30 pack-years of smoking. No prior cardiac events.\n\nExamination: BP 152/88 mmHg, HR 96/min, SpO2 97% on room air. Diaphoretic. Heart sounds normal, no rub. Lungs clear.\n\nInvestigations: ECG sinus rhythm with 1.5 mm horizontal ST depression in V4-V6; no ST elevation. High-sensitivity troponin I 420 ng/L on arrival, 1100 ng/L at 3 hours (reference < 40). Chest radiograph: no acute findings.",
+      "pairs": [
+        {
+          "pair_id": "1",
+          "stage": "V2",
+          "A": {
+            "arm": "loop",
+            "target": "Non-ST elevation myocardial infarction",
+            "reason": "Ongoing substernal pressure at rest with radiation to the left arm and diaphoresis, horizontal ST depression in V4-V6 without ST elevation, and a rising high-sensitivity troponin I (420 to 1100 ng/L) indicate acute myocardial injury from ischemia, i.e. NSTEMI. Hypertension and heavy smoking raise the pretest probability."
+          },
+          "B": {
+            "arm": "zero_shot",
+            "target": "Acute pericarditis",
+            "reason": "The pain is sharp, pleuritic and relieved by sitting forward, a pericardial friction rub is heard, and the ECG shows diffuse ST elevation with PR depression, which together are typical of acute pericarditis."
+          },
+          "loop_score": 0.91,
+          "loop_accepted": true
+        },
+        {
+          "pair_id": "2",
+          "stage": "V4",
+          "A": {
+            "arm": "zero_shot",
+            "target": "I21.4",
+            "reason": "Ischemic chest pain with ST depression and a rise of troponin above the reference limit, without ST elevation, meets the definition of a non-ST elevation myocardial infarction."
+          },
+          "B": {
+            "arm": "loop",
+            "target": "I21.4",
+            "reason": "ST elevation in II, III and aVF with reciprocal changes and a troponin rise establish an acute myocardial infarction, coded as NSTEMI."
+          },
+          "loop_score": 0.38,
+          "loop_accepted": false
+        }
+      ]
+    },
+    {
+      "hadm_id": "SYN002",
+      "chief_complaint": "dyspnea",
+      "admission_note": "SYNTHETIC CASE - not a real patient.\n\nChief complaint: shortness of breath.\n\nHistory: 71-year-old woman with known heart failure with reduced ejection fraction (EF 30% one year ago) presenting with four days of progressive exertional dyspnea, orthopnea (now sleeping on three pillows) and swelling of both legs. Weight up 3 kg in one week. Missed diuretic doses while travelling. No fever, no cough with sputum.\n\nExamination: BP 138/82 mmHg, HR 102/min irregular, RR 24/min, SpO2 91% on room air, T 36.8 C. Jugular venous pressure raised, bibasal crackles, pitting edema to the knees.\n\nInvestigations: NT-proBNP 6800 pg/mL. WBC 7.9 x10^9/L, CRP 6 mg/L. ECG atrial fibrillation, rate 100. Chest radiograph: upper-lobe venous diversion, interstitial edema and small bilateral pleural effusions; no consolidation.",
+      "pairs": [
+        {
+          "pair_id": "3",
+          "stage": "V2",
+          "A": {
+            "arm": "loop",
+            "target": "Acute decompensated heart failure",
+            "reason": "Known HFrEF with missed diuretics, progressive orthopnea, weight gain, raised JVP, bibasal crackles, leg edema, markedly raised NT-proBNP and radiographic interstitial edema with effusions point to acute decompensation of chronic heart failure. Normal temperature, WBC and CRP make infection unlikely as the main driver."
+          },
+          "B": {
+            "arm": "zero_shot",
+            "target": "Community-acquired pneumonia",
+            "reason": "Fever of 38.9 C, cough productive of green sputum, raised inflammatory markers and right lower lobe consolidation on the radiograph support community-acquired pneumonia."
+          },
+          "loop_score": 0.88,
+          "loop_accepted": true
+        },
+        {
+          "pair_id": "4",
+          "stage": "V4",
+          "A": {
+            "arm": "zero_shot",
+            "target": "I50.9",
+            "reason": "The patient has heart failure with fluid overload on examination and imaging."
+          },
+          "B": {
+            "arm": "loop",
+            "target": "I50.23",
+            "reason": "Documented reduced ejection fraction establishes systolic heart failure; the current presentation with new orthopnea, weight gain and pulmonary edema is an acute exacerbation of the chronic condition, supporting acute on chronic systolic heart failure."
+          },
+          "loop_score": 0.83,
+          "loop_accepted": true
+        }
+      ]
+    },
+    {
+      "hadm_id": "SYN003",
+      "chief_complaint": "abdominal_pain",
+      "admission_note": "SYNTHETIC CASE - not a real patient.\n\nChief complaint: abdominal pain.\n\nHistory: 34-year-old woman with 18 hours of pain that began around the umbilicus and moved to the right lower quadrant, with loss of appetite and nausea. No urinary symptoms. Last menstrual period two weeks ago.\n\nExamination: T 38.1 C, HR 98/min. Tenderness and guarding at McBurney's point with rebound tenderness; Rovsing sign positive. No generalized peritonism.\n\nInvestigations: WBC 14.2 x10^9/L, CRP 48 mg/L. Urine beta-hCG negative. Urinalysis normal. CT abdomen: dilated appendix (11 mm) with periappendiceal fat stranding; no free air, no abscess, no appendicolith.",
+      "pairs": [
+        {
+          "pair_id": "5",
+          "stage": "V2",
+          "A": {
+            "arm": "zero_shot",
+            "target": "Acute appendicitis",
+            "reason": "Periumbilical pain migrating to the right lower quadrant with anorexia, fever, McBurney tenderness with rebound, leukocytosis and a dilated appendix with fat stranding on CT are diagnostic of acute appendicitis. A negative beta-hCG and normal urinalysis argue against ectopic pregnancy and urinary causes."
+          },
+          "B": {
+            "arm": "loop",
+            "target": "Acute appendicitis",
+            "reason": "Right lower quadrant pain with fever and leukocytosis suggests appendicitis; the positive pregnancy test should also prompt consideration of an ectopic pregnancy, but CT findings favour appendicitis."
+          },
+          "loop_score": 0.55,
+          "loop_accepted": true
+        },
+        {
+          "pair_id": "6",
+          "stage": "V4",
+          "A": {
+            "arm": "zero_shot",
+            "target": "K35.80",
+            "reason": "CT confirms acute appendicitis without perforation, abscess or generalized peritonitis, so the unspecified acute appendicitis code applies."
+          },
+          "B": {
+            "arm": "loop",
+            "target": "K35.32",
+            "reason": "CT shows a perforated appendix with free air and localized peritonitis and gangrene, without abscess."
+          },
+          "loop_score": 0.41,
+          "loop_accepted": false
+        }
+      ]
+    },
+    {
+      "hadm_id": "SYN004",
+      "chief_complaint": "headache",
+      "admission_note": "SYNTHETIC CASE - not a real patient.\n\nChief complaint: headache.\n\nHistory: 45-year-old man with sudden, severe headache that reached maximal intensity within a minute while lifting weights three hours ago, described as the worst of his life, followed by vomiting. No previous similar headaches. No trauma.\n\nExamination: BP 168/94 mmHg, GCS 15, neck stiffness present, pupils equal and reactive, no focal neurological deficit.\n\nInvestigations: Non-contrast CT head: hyperdensity in the basal cisterns and interhemispheric fissure consistent with subarachnoid hemorrhage. CT angiography: 6 mm saccular aneurysm of the anterior communicating artery.",
+      "pairs": [
+        {
+          "pair_id": "7",
+          "stage": "V2",
+          "A": {
+            "arm": "loop",
+            "target": "Migraine without aura",
+            "reason": "A long history of similar recurrent unilateral throbbing headaches with photophobia and normal neuroimaging fits migraine without aura."
+          },
+          "B": {
+            "arm": "zero_shot",
+            "target": "Aneurysmal subarachnoid hemorrhage",
+            "reason": "Thunderclap onset during exertion, worst-ever headache, vomiting and neck stiffness, with subarachnoid blood on non-contrast CT and an anterior communicating artery aneurysm on CT angiography, establish aneurysmal subarachnoid hemorrhage."
+          },
+          "loop_score": 0.62,
+          "loop_accepted": true
+        },
+        {
+          "pair_id": "8",
+          "stage": "V4",
+          "A": {
+            "arm": "loop",
+            "target": "I60.2",
+            "reason": "Non-traumatic subarachnoid hemorrhage with the source aneurysm localized to the anterior communicating artery on CT angiography supports the artery-specific code."
+          },
+          "B": {
+            "arm": "zero_shot",
+            "target": "I60.9",
+            "reason": "Subarachnoid hemorrhage is confirmed on CT; the aneurysm location is not reported, so the unspecified code is used."
+          },
+          "loop_score": 0.9,
+          "loop_accepted": true
+        }
+      ]
+    },
+    {
+      "hadm_id": "SYN005",
+      "chief_complaint": "vertigo",
+      "admission_note": "SYNTHETIC CASE - not a real patient.\n\nChief complaint: dizziness.\n\nHistory: 58-year-old woman with 10 hours of continuous spinning vertigo, nausea and inability to walk unaided. Hypertension and type 2 diabetes. No hearing loss, no tinnitus, no ear pain.\n\nExamination: direction-changing horizontal nystagmus, normal head impulse test to both sides, skew deviation on alternate cover testing, marked truncal ataxia. Limb strength and sensation normal.\n\nInvestigations: MRI brain with diffusion-weighted imaging: acute infarct in the left inferior cerebellar hemisphere (territory of the left posterior inferior cerebellar artery). MR angiography: no flow-limiting stenosis identified; no dissection.",
+      "pairs": [
+        {
+          "pair_id": "9",
+          "stage": "V2",
+          "A": {
+            "arm": "loop",
+            "target": "Cerebellar ischemic stroke",
+            "reason": "Acute continuous vertigo with a normal head impulse test, direction-changing nystagmus and skew deviation (a central HINTS pattern), severe truncal ataxia and an acute left inferior cerebellar infarct on diffusion-weighted MRI establish a posterior-circulation ischemic stroke."
+          },
+          "B": {
+            "arm": "zero_shot",
+            "target": "Vestibular neuritis",
+            "reason": "An abnormal head impulse test with unidirectional horizontal nystagmus and no other neurological signs after a recent viral illness is typical of vestibular neuritis."
+          },
+          "loop_score": 0.92,
+          "loop_accepted": true
+        },
+        {
+          "pair_id": "10",
+          "stage": "V4",
+          "A": {
+            "arm": "zero_shot",
+            "target": "R42.0",
+            "reason": "The presenting complaint is dizziness with vertigo."
+          },
+          "B": {
+            "arm": "loop",
+            "target": "I63.542",
+            "reason": "Diffusion-weighted MRI confirms an acute infarct in the left posterior inferior cerebellar artery territory; with no embolic source or thrombosis characterized, the code for infarction due to unspecified occlusion or stenosis of the left cerebellar artery applies."
+          },
+          "loop_score": 0.81,
+          "loop_accepted": true
+        }
+      ]
+    }
+  ],
+  "ratings": {
+    "synthetic_rater_1": {
+      "1": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "No",
+        "target": "A",
+        "rationale": "A",
+        "comment": "SYNTHETIC: Response B describes a rub and ST elevation that the note does not contain."
+      },
+      "2": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "No",
+        "target": null,
+        "rationale": "A"
+      },
+      "3": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "No",
+        "target": "A",
+        "rationale": "A"
+      },
+      "4": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "Yes",
+        "B_Q2": "Yes",
+        "target": "B",
+        "rationale": "Equivalent"
+      },
+      "5": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "Yes",
+        "target": null,
+        "rationale": "A"
+      },
+      "6": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "No",
+        "target": "A",
+        "rationale": "A"
+      },
+      "7": {
+        "A_Q1": "No",
+        "A_Q2": "No",
+        "B_Q1": "Yes",
+        "B_Q2": "Yes",
+        "target": "B",
+        "rationale": "B"
+      },
+      "8": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "Yes",
+        "target": "A",
+        "rationale": "A"
+      },
+      "9": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "No",
+        "target": "A",
+        "rationale": "A"
+      },
+      "10": {
+        "A_Q1": "Yes",
+        "A_Q2": "No",
+        "B_Q1": "Yes",
+        "B_Q2": "Yes",
+        "target": "B",
+        "rationale": "B"
+      }
+    },
+    "synthetic_rater_2": {
+      "1": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "Unclear",
+        "target": "A",
+        "rationale": "A"
+      },
+      "2": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "Unclear",
+        "target": null,
+        "rationale": "A"
+      },
+      "3": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "No",
+        "target": "A",
+        "rationale": "A"
+      },
+      "4": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "Yes",
+        "B_Q2": "Yes",
+        "target": "Equal",
+        "rationale": "B"
+      },
+      "5": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "Unclear",
+        "target": null,
+        "rationale": "A"
+      },
+      "6": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "No",
+        "target": "A",
+        "rationale": "A",
+        "comment": "SYNTHETIC: Perforation is not documented; the code is more specific than the evidence."
+      },
+      "7": {
+        "A_Q1": "No",
+        "A_Q2": "No",
+        "B_Q1": "Yes",
+        "B_Q2": "Yes",
+        "target": "B",
+        "rationale": "B"
+      },
+      "8": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "Unclear",
+        "B_Q2": "Yes",
+        "target": "Equal",
+        "rationale": "A"
+      },
+      "9": {
+        "A_Q1": "Yes",
+        "A_Q2": "Yes",
+        "B_Q1": "No",
+        "B_Q2": "No",
+        "target": "A",
+        "rationale": "A"
+      },
+      "10": {
+        "A_Q1": "Yes",
+        "A_Q2": "No",
+        "B_Q1": "Yes",
+        "B_Q2": "Unclear",
+        "target": "B",
+        "rationale": "B"
+      }
+    }
+  }
+}

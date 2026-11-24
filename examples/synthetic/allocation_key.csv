@@ -1,0 +1,11 @@
+pair_id,hadm_id,stage,_A_arm,_B_arm,_loop_score,_loop_accepted,_words_A,_words_B
+1,SYN001,V2,loop,zs,0.91,True,47,33
+2,SYN001,V4,zs,loop,0.38,False,27,22
+3,SYN002,V2,loop,zs,0.88,True,44,23
+4,SYN002,V4,zs,loop,0.83,True,12,34
+5,SYN003,V2,zs,loop,0.55,True,43,27
+6,SYN003,V4,zs,loop,0.41,False,17,15
+7,SYN004,V2,loop,zs,0.62,True,18,29
+8,SYN004,V4,loop,zs,0.90,True,20,18
+9,SYN005,V2,loop,zs,0.92,True,36,24
+10,SYN005,V4,zs,loop,0.81,True,7,37

@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software or the clinician-evaluation materials, please cite it as below, together with the MERLIN-DDx paper."
+title: "MERLIN-DDx Annotator: clinical annotation interface, evaluation protocol, rubric, and reproducibility tools for the MERLIN-DDx clinician evaluation"
+type: software
+version: 1.0.0
+date-released: "2026-11-24"
+license: MIT
+repository-code: "https://github.com/DATEXIS/merlin-ddx-annotator"
+authors:
+  - given-names: Dennis
+    family-names: Fast

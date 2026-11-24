@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Remove default <details> marker in WebKit */
+details > summary::-webkit-details-marker {
+  display: none;
+}

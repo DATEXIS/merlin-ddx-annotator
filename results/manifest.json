@@ -1,0 +1,818 @@
+{
+  "package": "public",
+  "schema_version": 1,
+  "study_id": "merlin-ddx-clinician-audit-batch1",
+  "release_version": "1.0.0-rc1",
+  "release_status": "incomplete",
+  "open_items": [
+    {
+      "id": "pair_builder",
+      "kind": "missing_evidence",
+      "detail": "The code that sampled the 42 admissions and built the blinded/keyed pair files (2026-09-16 15:04 UTC) was not found. The pre-rating protocol names a seeded sampling script for its own, different frame (60 dev admissions per stage); that script was not found either (local projects, knowledge base, default branches of the DATEXIS pipeline repositories), and the executed batch does not follow its frame."
+    },
+    {
+      "id": "zero_shot_generation",
+      "kind": "missing_evidence",
+      "detail": "The pre-rating protocol defines the zero-shot condition as the same generator (Qwen3-32B) and prompts without the loop, taken from a base evaluation run (4 candidates, first valid JSON). The outputs of that run were not found; none of the 84 zero-shot texts occurs in the stored loop-construction outputs of any model. The served texts, word counts and a recorded zero-shot verifier score exist."
+    },
+    {
+      "id": "protocol_deviation",
+      "kind": "missing_evidence",
+      "detail": "A pre-rating protocol (internal, self-dated 2026-09-16, no independent timestamp) specified a different study - 60 dev admissions per stage sampled 30 per loop outcome, three 1-5 items (evidence support, conclusion support, clinical soundness), a third rater on a 40-trace overlap, and a paired analysis of the mean item score. The executed audit used 42 held-out test admissions, binary Q1/Q2 plus two preferences, two raters on everything and a binary composite with an admission-cluster bootstrap. The deviations are not documented in a dated amendment."
+    },
+    {
+      "id": "mimic_version",
+      "kind": "missing_evidence",
+      "detail": "MIMIC-IV release version is not recorded in the audit artifacts (repository mentions both 2.2 and 3.1)."
+    },
+    {
+      "id": "checkpoint_volume_not_inspected",
+      "kind": "missing_evidence",
+      "detail": "A large experiment-checkpoint volume on the cluster is not mounted by any running workload and was not inspected (read-only discovery); it may hold zero-shot generation outputs."
+    },
+    {
+      "id": "claim:generator",
+      "kind": "unverified_claim",
+      "detail": "Appendix B: zero_shot_rationales_traced_to_generator_outputs: expected 84, observed 0"
+    },
+    {
+      "id": "claim:dev_split",
+      "kind": "manuscript_discrepancy",
+      "detail": "Appendix B: source_split_values: expected ['dev'], observed ['test']"
+    },
+    {
+      "id": "claim:criteria_and_preregistration",
+      "kind": "manual_review",
+      "detail": "The three named criteria are the 1-5 items of the pre-rating protocol, which were not used. Clinicians answered two per-rationale questions (Q1 evidence grounding, Q2 support for the target; Yes/No/Unclear) plus two pairwise preferences; there was no clinical-soundness rating. The rating interface and questions predate the first rating, but sample, instrument and analysis deviate from the pre-rating protocol, the executed analysis was implemented after all ratings, and a single-clinician unblinded preliminary analysis was written before the other clinician's last two saves."
+    }
+  ],
+  "files": {
+    "config/rubric.json": {
+      "sha256": "53098bff2525da8255e4e32b1d435c4dbbbceb90a88b77209ef8ed41f9b5972d",
+      "bytes": 8459
+    },
+    "docs/protocol.md": {
+      "sha256": "e74560dd7a1c70bad54a93db688fdb4e811e6c4c827d9294f45f946eaddc08a4",
+      "bytes": 12456
+    },
+    "docs/rubric.md": {
+      "sha256": "714967c81ce6f090a80aaf97de0246bcba9be14e8b3f0dcc67020734e15c8280",
+      "bytes": 5594
+    },
+    "results/README.md": {
+      "sha256": "efdfa7d399e4dc46f1fd42e31eb5b556494f70abdd258dc2bd82556a773fbf0f",
+      "bytes": 3938
+    },
+    "results/agreement_contingency_matrices.csv": {
+      "sha256": "9a0e1406096a35ca39cc2c86d90564ef7ce5048c1cb4987a5c0c832a89641b1c",
+      "bytes": 8608
+    },
+    "results/agreement_statistics.json": {
+      "sha256": "af517b258da4cb1679065e78089b8b9bce7c37f0ae9bd2ab9fe35d5c141f657a",
+      "bytes": 17490
+    },
+    "results/agreement_statistics.md": {
+      "sha256": "c3e743689373533d3f7410692e20d08a9768a410307ecb172db422c4f316ac86",
+      "bytes": 5677
+    },
+    "results/cohort_aggregate_ratings.csv": {
+      "sha256": "62e8f769af2c93bdbf035aeed9d8347f1a82e889d311d94c810211ded76a1479",
+      "bytes": 2300
+    },
+    "results/comparative_results.csv": {
+      "sha256": "22f625877a9aca06bae2f10c08457f768fc17c889414313b2b73b831e15f4a71",
+      "bytes": 3765
+    }
+  },
+  "counts": {
+    "n_admissions": 42,
+    "n_pairs": 84,
+    "n_rationales": 168,
+    "n_raters": 2,
+    "n_rating_observations": 922,
+    "n_missing_ratings": 0,
+    "n_not_applicable_target_preferences": 86
+  },
+  "per_stage": {
+    "V2": {
+      "pairs": 42,
+      "rationales": 84,
+      "loop_accepted": 31,
+      "loop_rejected": 11,
+      "same_target_pairs": 29,
+      "differing_target_pairs": 13,
+      "loop_shown_as_A": 24,
+      "loop_shown_as_B": 18
+    },
+    "V4": {
+      "pairs": 42,
+      "rationales": 84,
+      "loop_accepted": 22,
+      "loop_rejected": 20,
+      "same_target_pairs": 14,
+      "differing_target_pairs": 28,
+      "loop_shown_as_A": 25,
+      "loop_shown_as_B": 17
+    }
+  },
+  "sources": [
+    {
+      "role": "blinded_pairs",
+      "file_name": "audit_batch1_blinded.csv",
+      "sha256": "4c8b9004cedd61c7d12fae65168467678de91e932c5fd726872e7bcae16aa758"
+    },
+    {
+      "role": "allocation_key",
+      "file_name": "audit_batch1_keyed.csv",
+      "sha256": "079d892b039d60b8e1c57b46ef97711437918be2c5b1e9249050f078c0c55dd3"
+    },
+    {
+      "role": "admission_notes",
+      "file_name": "audit_batch1_notes.csv",
+      "sha256": "878b892dd495898672ff6313430db6be6e4cf88c76c24cf7acddfda1f6e8f16f"
+    },
+    {
+      "role": "raw_source_extract",
+      "file_name": "audit_batch1_raw_combined_1_4.pq",
+      "sha256": "01f2913d0b815be030d89dc6b72b04bc46bffbb0c34e73be610ae53f285105e4"
+    },
+    {
+      "role": "icd10cm_catalog",
+      "file_name": "icd10cm-Code-Descriptions-2026.zip",
+      "sha256": "a852eb91b3344ae38476e63816976ee1eeb94dcced7151118324f060e8499f88"
+    },
+    {
+      "role": "export_snapshot_manifest",
+      "file_name": "snapshot_manifest.json",
+      "sha256": "8109f175b3d560be3f7d2a874f99b4159630fa7a389d100620521e05a2752230"
+    },
+    {
+      "role": "rubric_ui_source",
+      "file_name": "RebuttalAudit.tsx",
+      "sha256": "fbb61022787c9a1cb5211968f58843cb1c6a6c8cb4367fafcf1bae53dbf827f0"
+    },
+    {
+      "role": "rubric_server_source",
+      "file_name": "rebuttal_audit.py",
+      "sha256": "352fa9a495273b4a96fd12d1ffed65b533c3b28c2c10b7bedf63717fa5b19420"
+    },
+    {
+      "role": "original_analysis_module",
+      "file_name": "rebuttal_analysis.py",
+      "sha256": "5eb66c88bf1a75999d6508bc06b2220ea298a701c3eb02beeb384c0a033249f6"
+    },
+    {
+      "role": "original_single_rater_module",
+      "file_name": "rebuttal_preliminary.py",
+      "sha256": "eb1cf6124e00af1e11d1292bcf305c1b2fa4b1abf07ac6b49af87b25b637e8c7"
+    },
+    {
+      "role": "original_analysis_run_metadata",
+      "file_name": "run_metadata.json",
+      "sha256": "611271943dff5f434498fd0fc299747ff3673718fbbe5b46f6b70b101c7eb8ea"
+    },
+    {
+      "role": "manuscript",
+      "file_name": "MERLIN-DDx_camera-ready_marked 1.pdf",
+      "sha256": "22f230a82cb824482eb75868b8d1adfdf63f9a4280816722ef0c625b585eb464"
+    },
+    {
+      "role": "ratings:<clinician>",
+      "file_name": "<directory of JSON records>",
+      "analysis_digest": "3f82808c9d4fe8f5c1e3808e430342b3630322a1a3b44aa1117859536b5fe940"
+    },
+    {
+      "role": "ratings:<clinician>",
+      "file_name": "<directory of JSON records>",
+      "analysis_digest": "f3f328968d28efcf7ecd444bc3f12902c5147215be07e8404781cc1271458d60"
+    }
+  ],
+  "analysis": {
+    "bootstrap_replicates": 10000,
+    "seed": 20260917,
+    "cluster_unit": "admission"
+  },
+  "original_run_reproduction": {
+    "values_compared": 222,
+    "values_identical": 222
+  },
+  "rubric_verbatim_check": {
+    "ui_strings_checked": 12,
+    "ui_strings_missing": [],
+    "server_rules_checked": 5,
+    "server_rules_missing": [],
+    "verbatim": true
+  },
+  "manuscript": {
+    "sha256": "22f230a82cb824482eb75868b8d1adfdf63f9a4280816722ef0c625b585eb464",
+    "text_check": "verified against pinned PDF",
+    "summary": {
+      "PASS": 13,
+      "FAIL": 1,
+      "UNVERIFIED": 1,
+      "MANUAL_REVIEW": 1
+    },
+    "claims": [
+      {
+        "id": "n_admissions",
+        "location": "Appendix B",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "equals",
+            "metric": "n_admissions",
+            "expected": 42,
+            "observed": 42,
+            "status": "PASS"
+          },
+          {
+            "type": "equals",
+            "metric": "n_raters",
+            "expected": 2,
+            "observed": 2,
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "generator",
+        "location": "Appendix B",
+        "status": "UNVERIFIED",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "equals",
+            "metric": "loop_rationales_verbatim_in_qwen3_32b_outputs",
+            "expected": 84,
+            "observed": 84,
+            "status": "PASS"
+          },
+          {
+            "type": "equals",
+            "metric": "zero_shot_rationales_traced_to_generator_outputs",
+            "expected": 84,
+            "observed": 0,
+            "status": "UNVERIFIED"
+          }
+        ]
+      },
+      {
+        "id": "dev_split",
+        "location": "Appendix B",
+        "status": "FAIL",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "equals",
+            "metric": "source_split_values",
+            "expected": [
+              "dev"
+            ],
+            "observed": [
+              "test"
+            ],
+            "status": "FAIL"
+          }
+        ]
+      },
+      {
+        "id": "blinding",
+        "location": "Appendix B",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "all_true",
+            "metric": "blinded_file_has_no_key_fields",
+            "observed": true,
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "within_admission_pairing",
+        "location": "Appendix B",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "all_true",
+            "metric": "every_pair_has_one_loop_and_one_zero_shot_arm",
+            "observed": true,
+            "status": "PASS"
+          },
+          {
+            "type": "all_true",
+            "metric": "every_admission_has_both_stages",
+            "observed": true,
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "sampling_counts",
+        "location": "Appendix B",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "equals",
+            "metric": "loop_accepted.V2",
+            "expected": 31,
+            "observed": 31,
+            "status": "PASS"
+          },
+          {
+            "type": "equals",
+            "metric": "loop_rejected.V2",
+            "expected": 11,
+            "observed": 11,
+            "status": "PASS"
+          },
+          {
+            "type": "equals",
+            "metric": "loop_accepted.V4",
+            "expected": 22,
+            "observed": 22,
+            "status": "PASS"
+          },
+          {
+            "type": "equals",
+            "metric": "loop_rejected.V4",
+            "expected": 20,
+            "observed": 20,
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "criteria_and_preregistration",
+        "location": "Appendix B",
+        "status": "MANUAL_REVIEW",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "manual",
+            "status": "MANUAL_REVIEW",
+            "reason": "The three named criteria are the 1-5 items of the pre-rating protocol, which were not used. Clinicians answered two per-rationale questions (Q1 evidence grounding, Q2 support for the target; Yes/No/Unclear) plus two pairwise preferences; there was no clinical-soundness rating. The rating interface and questions predate the first rating, but sample, instrument and analysis deviate from the pre-rating protocol, the executed analysis was implemented after all ratings, and a single-clinician unblinded preliminary analysis was written before the other clinician's last two saves."
+          }
+        ]
+      },
+      {
+        "id": "primary_contrast",
+        "location": "Appendix B",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "approx",
+            "metric": "delta_valid_pp.V2",
+            "expected": -1.2,
+            "observed": -1.190476,
+            "tolerance": 0.050000001,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "delta_valid_ci_low.V2",
+            "expected": -8.3,
+            "observed": -8.333333,
+            "tolerance": 0.050000001,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "delta_valid_ci_high.V2",
+            "expected": 7.1,
+            "observed": 7.142857,
+            "tolerance": 0.050000001,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "delta_valid_pp.V4",
+            "expected": -1.2,
+            "observed": -1.190476,
+            "tolerance": 0.050000001,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "delta_valid_ci_low.V4",
+            "expected": -16.7,
+            "observed": -16.666667,
+            "tolerance": 0.050000001,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "delta_valid_ci_high.V4",
+            "expected": 14.3,
+            "observed": 14.285714,
+            "tolerance": 0.050000001,
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "accepted_vs_rejected_and_score",
+        "location": "Appendix B",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "range",
+            "metrics": [
+              "acc_minus_rej_valid_pp.<clinician>.V2",
+              "acc_minus_rej_valid_pp.<clinician>.V4",
+              "acc_minus_rej_valid_pp.<clinician>.V2",
+              "acc_minus_rej_valid_pp.<clinician>.V4"
+            ],
+            "expected": [
+              -10.9,
+              5.9
+            ],
+            "observed": [
+              -10.909091,
+              5.865103
+            ],
+            "tolerance": 0.050000001,
+            "status": "PASS"
+          },
+          {
+            "type": "all_true",
+            "metric": "acc_minus_rej_valid_ci_spans_zero",
+            "observed": true,
+            "status": "PASS"
+          },
+          {
+            "type": "range",
+            "metrics": [
+              "spearman_q2.<clinician>.V2",
+              "spearman_q2.<clinician>.V4",
+              "spearman_q2.<clinician>.V2",
+              "spearman_q2.<clinician>.V4"
+            ],
+            "expected": [
+              -0.12,
+              0.07
+            ],
+            "observed": [
+              -0.123571,
+              0.072852
+            ],
+            "tolerance": 0.0050000010000000004,
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "absolute_levels",
+        "location": "Appendix B",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "approx",
+            "metric": "valid_pct.V2.loop",
+            "expected": 92,
+            "observed": 91.666667,
+            "tolerance": 1.0,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "valid_pct.V2.zero_shot",
+            "expected": 92,
+            "observed": 92.857143,
+            "tolerance": 1.0,
+            "status": "PASS"
+          },
+          {
+            "type": "at_least",
+            "metrics": [
+              "Q1_pct.V2.loop",
+              "Q1_pct.V2.zero_shot"
+            ],
+            "threshold": 95,
+            "observed": [
+              95.238095,
+              98.809524
+            ],
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "Q2_pct.V4.loop",
+            "expected": 67,
+            "observed": 66.666667,
+            "tolerance": 0.500000001,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "Q2_pct.V4.zero_shot",
+            "expected": 67,
+            "observed": 66.666667,
+            "tolerance": 0.500000001,
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "agreement",
+        "location": "Appendix B",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "approx",
+            "metric": "agreement.V4.valid_composite.raw_agreement",
+            "expected": 0.73,
+            "observed": 0.72619,
+            "tolerance": 0.0050000010000000004,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "agreement.V4.valid_composite.kappa",
+            "expected": 0.39,
+            "observed": 0.389381,
+            "tolerance": 0.0050000010000000004,
+            "status": "PASS"
+          },
+          {
+            "type": "all_true",
+            "metric": "v2_composite_ceiling",
+            "observed": true,
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "stage_scope",
+        "location": "Appendix B",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "equals",
+            "metric": "stages",
+            "expected": [
+              "V2",
+              "V4"
+            ],
+            "observed": [
+              "V2",
+              "V4"
+            ],
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "section6_levels",
+        "location": "Section 6",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "approx",
+            "metric": "valid_pct.V2.loop",
+            "expected": 92,
+            "observed": 91.666667,
+            "tolerance": 1.0,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "valid_pct.V2.zero_shot",
+            "expected": 92,
+            "observed": 92.857143,
+            "tolerance": 1.0,
+            "status": "PASS"
+          },
+          {
+            "type": "at_least",
+            "metrics": [
+              "Q1_pct.V2.loop",
+              "Q1_pct.V2.zero_shot"
+            ],
+            "threshold": 95,
+            "observed": [
+              95.238095,
+              98.809524
+            ],
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "Q2_pct.V4.loop",
+            "expected": 67,
+            "observed": 66.666667,
+            "tolerance": 0.500000001,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "Q2_pct.V4.zero_shot",
+            "expected": 67,
+            "observed": 66.666667,
+            "tolerance": 0.500000001,
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "limitations_contrast",
+        "location": "Limitations",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "approx",
+            "metric": "delta_valid_pp.V2",
+            "expected": -1.2,
+            "observed": -1.190476,
+            "tolerance": 0.050000001,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "delta_valid_pp.V4",
+            "expected": -1.2,
+            "observed": -1.190476,
+            "tolerance": 0.050000001,
+            "status": "PASS"
+          },
+          {
+            "type": "all_true",
+            "metric": "delta_valid_ci_spans_zero",
+            "observed": true,
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "limitations_icd_support",
+        "location": "Limitations",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "approx",
+            "metric": "Q2_pct.V4.loop",
+            "expected": 67,
+            "observed": 66.666667,
+            "tolerance": 0.500000001,
+            "status": "PASS"
+          },
+          {
+            "type": "approx",
+            "metric": "Q2_pct.V4.zero_shot",
+            "expected": 67,
+            "observed": 66.666667,
+            "tolerance": 0.500000001,
+            "status": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "release_statement",
+        "location": "Appendix B",
+        "status": "PASS",
+        "quote_found_in_manuscript": true,
+        "checks": [
+          {
+            "type": "all_true",
+            "metric": "promised_public_artifacts_built",
+            "observed": true,
+            "status": "PASS"
+          }
+        ]
+      }
+    ]
+  },
+  "disclosure_review": {
+    "item_level_observations_released": false,
+    "per_clinician_results": "published only as the ranges reported in the paper, without rater labels",
+    "free_text_fields_released": [],
+    "rater_comments": "39 non-empty comments retained in the internal archive only.",
+    "contingency_matrices": [
+      {
+        "id": "V2.Q1_evidence_grounded",
+        "n_items": 84,
+        "n_discordant": 5,
+        "kappa_consistent_orientations": 1,
+        "matrix_implied_by_published_kappa": true,
+        "small_population": false,
+        "decision": "full",
+        "reason": "matrix is determined (up to label swap) by the published kappa and the credentialed per-item aggregates"
+      },
+      {
+        "id": "V2.Q2_supports_target",
+        "n_items": 84,
+        "n_discordant": 6,
+        "kappa_consistent_orientations": 1,
+        "matrix_implied_by_published_kappa": true,
+        "small_population": false,
+        "decision": "full",
+        "reason": "matrix is determined (up to label swap) by the published kappa and the credentialed per-item aggregates"
+      },
+      {
+        "id": "V2.valid_composite",
+        "n_items": 84,
+        "n_discordant": 11,
+        "kappa_consistent_orientations": 1,
+        "matrix_implied_by_published_kappa": true,
+        "small_population": false,
+        "decision": "full",
+        "reason": "matrix is determined (up to label swap) by the published kappa and the credentialed per-item aggregates"
+      },
+      {
+        "id": "V2.target_preference",
+        "n_items": 13,
+        "n_discordant": 8,
+        "kappa_consistent_orientations": 2,
+        "matrix_implied_by_published_kappa": false,
+        "small_population": true,
+        "decision": "reduced",
+        "reason": "full matrix would attribute disagreements to one rater beyond what kappa implies"
+      },
+      {
+        "id": "V2.rationale_preference",
+        "n_items": 42,
+        "n_discordant": 21,
+        "kappa_consistent_orientations": 29,
+        "matrix_implied_by_published_kappa": false,
+        "small_population": false,
+        "decision": "full",
+        "reason": "no disagreement is attributable to a single rater"
+      },
+      {
+        "id": "V4.Q1_evidence_grounded",
+        "n_items": 84,
+        "n_discordant": 6,
+        "kappa_consistent_orientations": 1,
+        "matrix_implied_by_published_kappa": true,
+        "small_population": false,
+        "decision": "full",
+        "reason": "matrix is determined (up to label swap) by the published kappa and the credentialed per-item aggregates"
+      },
+      {
+        "id": "V4.Q2_supports_target",
+        "n_items": 84,
+        "n_discordant": 23,
+        "kappa_consistent_orientations": 6,
+        "matrix_implied_by_published_kappa": false,
+        "small_population": false,
+        "decision": "reduced",
+        "reason": "full matrix would attribute disagreements to one rater beyond what kappa implies"
+      },
+      {
+        "id": "V4.valid_composite",
+        "n_items": 84,
+        "n_discordant": 23,
+        "kappa_consistent_orientations": 1,
+        "matrix_implied_by_published_kappa": true,
+        "small_population": false,
+        "decision": "full",
+        "reason": "matrix is determined (up to label swap) by the published kappa and the credentialed per-item aggregates"
+      },
+      {
+        "id": "V4.target_preference",
+        "n_items": 28,
+        "n_discordant": 15,
+        "kappa_consistent_orientations": 1,
+        "matrix_implied_by_published_kappa": true,
+        "small_population": false,
+        "decision": "full",
+        "reason": "matrix is determined (up to label swap) by the published kappa and the credentialed per-item aggregates"
+      },
+      {
+        "id": "V4.rationale_preference",
+        "n_items": 42,
+        "n_discordant": 20,
+        "kappa_consistent_orientations": 3,
+        "matrix_implied_by_published_kappa": false,
+        "small_population": false,
+        "decision": "reduced",
+        "reason": "full matrix would attribute disagreements to one rater beyond what kappa implies"
+      }
+    ],
+    "publication_decision": "All kappa values are published at full precision. The investigators reviewed a reconstruction analysis showing that, for some measures (V2 Q1, V4 Q1, V4 target preference and, through Q1, some items of both composites), the published kappa together with the credentialed per-item aggregates assigns that measure's disagreements to one of the two anonymous clinicians. They accepted this residual risk for publication. Nothing released links an anonymous rater label to a named clinician or links labels across measures or stages.",
+    "kappa_implied_attribution": "For measures whose matrix is determined by kappa, the published kappa together with the credentialed per-item aggregates groups that measure's disagreements by (anonymous) clinician; labels are not linked across measures.",
+    "manual_review_required": true
+  },
+  "code_version": {
+    "git_commit": "fa5f6d5e791bca01d8b77699769732d2b2706d38",
+    "release_code_uncommitted": true,
+    "file_sha256": {
+      "scripts/export_clinician_audit_release.py": "8c8681fd796d7d0a50d5ab203004dc01ec3681b6cb05a60cac91a5eda6ea474d",
+      "merlin_ddx/clinician_audit_release.py": "37447675a4b8a8fe86487e5adac6a46f9465366c04cef046d02544f8a2548dce",
+      "config": "aa0932cc0aa129c92dacf16047e271addc671f1f642d7f1a84ea6ee30e55b6df"
+    },
+    "original_analysis_module_sha256": "5eb66c88bf1a75999d6508bc06b2220ea298a701c3eb02beeb384c0a033249f6"
+  }
+}
