@@ -886,7 +886,7 @@ export default function App() {
         <div className="mt-3 flex items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <div className="inline-flex rounded-md border border-gray-300 bg-white p-0.5" aria-label="Dataset split">
-              {VISIBLE_DATASET_VIEWS.filter(view => view.id !== 'study' || patients.some(p => p.dataset === 'study')).map(view => (
+              {VISIBLE_DATASET_VIEWS.filter(view => patients.length > 0 && patients.every(p => p.dataset === 'study') ? view.id === 'study' : view.id !== 'study' || patients.some(p => p.dataset === 'study')).map(view => (
                 <button
                   key={view.id}
                   type="button"
