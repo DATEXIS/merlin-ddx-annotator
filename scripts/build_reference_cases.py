@@ -14,7 +14,7 @@ from build_annotation_cases import STAGES, PAIR_COLUMNS, digest, text, write_csv
 LABEL_COLUMNS = (*PAIR_COLUMNS, "label_source")
 
 
-def raw_labels(path, model, stages, schema, retrospective):
+def raw_labels(path, model, stages, schema, retrospective, *, include_v4_labs=False):
     import pandas as pd
     if not model:
         raise ValueError("Raw Parquet requires --source-model to select one storage row per admission")
@@ -27,7 +27,7 @@ def raw_labels(path, model, stages, schema, retrospective):
         fields.add("disease")
     if "V4" in stages:
         fields.add("ICD_CODES")
-    if "V3" in stages:
+    if "V3" in stages or (include_v4_labs and "V4" in stages):
         fields.add("labs")
     if retrospective and set(stages) - {"V1"}:
         fields.add("discharge_note")
@@ -68,7 +68,7 @@ def raw_labels(path, model, stages, schema, retrospective):
             if not target.strip():
                 continue
             context = []
-            if stage == "V3":
+            if stage == "V3" or (include_v4_labs and stage == "V4"):
                 labs = text(row.get("labs"))
                 if not labs.strip():
                     continue
@@ -84,9 +84,9 @@ def raw_labels(path, model, stages, schema, retrospective):
                    "label_source": source, "label_id": f"{row['hadm_id']}:{stage}", "label_origin": "reference"}
 
 
-def read_labels(path, model, stages, schema, retrospective):
+def read_labels(path, model, stages, schema, retrospective, *, include_v4_labs=False):
     if path.suffix.lower() in (".pq", ".parquet"):
-        yield from raw_labels(path, model, stages, schema, retrospective)
+        yield from raw_labels(path, model, stages, schema, retrospective, include_v4_labs=include_v4_labs)
     elif path.suffix.lower() == ".jsonl":
         with path.open(encoding="utf-8") as handle:
             for line in handle:
