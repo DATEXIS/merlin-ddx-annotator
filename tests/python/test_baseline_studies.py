@@ -58,7 +58,10 @@ def test_standalone_isolated_roundtrip(tmp_path):
     data = rows(out / "single_reasoning_ratings.jsonl")
     assert data[0]["composite_votes"] == {"Yes": 1, "No": 1}
     assert analyze_single_reasoning(data, replicates=5)["single_reasoning_results"][0]["metrics"]["composite"]["rate"] == .5
-    agreements = analyze(study)["pairwise_agreement"]
+    agreement_report = analyze(study)
+    assert len(agreement_report["multi_rater_agreement"]) == 2
+    assert all(a["fleiss_kappa"]["n_items"] == 1 for a in agreement_report["multi_rater_agreement"])
+    agreements = agreement_report["pairwise_agreement"]
     assert len(agreements) == 2
     assert all(a["n"] == 1 for a in agreements)
     assert freeze(study) == manifest
@@ -103,7 +106,12 @@ def test_ddx_import_isolation_and_custom_id_remapping(tmp_path):
     data = rows(out / "ddx_ratings.jsonl")
     assert data[0]["other_selected_label_count"] == 2
     assert analyze_ddx(data)["ddx_results"][0]["mean_selections_per_completed_case"] == 2
-    agreement = analyze(study)["pairwise_agreement"][0]
+    report = analyze(study)
+    multi = report["multi_rater_agreement"][0]
+    assert multi["field"] == "fixed_candidate_selection"
+    assert multi["fleiss_kappa"]["kappa"] == 1
+    assert multi["krippendorff_alpha_nominal"]["alpha"] == 1
+    agreement = report["pairwise_agreement"][0]
     assert agreement["exact_set_agreement"] == 0
     assert agreement["mean_jaccard"] == pytest.approx(1/3)
     assert agreement["fixed_candidate_agreement"]["kappa"] == 1

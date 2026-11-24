@@ -136,8 +136,7 @@ agreement, contingency counts, and complete shared item denominators, grouped
 by stage and rubric field. Undefined kappas are null. For DDx, fixed candidate
 decisions form the kappa universe, while exact-set agreement and Jaccard include
 normalized custom selections. Do not compare these kappas directly with the
-historical study's distinct definitions. Three-rater Fleiss kappa and adjusted
-inference are not included in this general analysis. All summaries remain
+historical study's distinct definitions. The `multi_rater_agreement` section adds Fleiss' kappa and nominal Krippendorff's alpha for each stage/rubric field (or the fixed DDx candidate universe). Fleiss' kappa uses only items rated by every configured active rater (at least two); nominal alpha uses all items with at least two judgments and accounts for varying rater counts through the coincidence weighting and finite-population expected disagreement. `Unclear` remains an observed nominal category, not a missing value. Empty/missing answers are omitted; structurally inapplicable preferences are excluded from the expected item denominator. Each report includes eligible/excluded item counts, the rating-count histogram, observed/expected agreement or disagreement, and pooled category counts. Undefined coefficients (including zero expected disagreement) are null, not 0 or 1. DDx candidate decisions from uncompleted admissions remain missing. The complete-case and pairable-item populations may differ, so report their denominators alongside the coefficients. These are descriptive point estimates; cluster-adjusted inference and missingness correction are not included. All summaries remain
 local until disclosure review; even aggregate contingency cells can reveal
 individual ratings when combined with other releases.
 
