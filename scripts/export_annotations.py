@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import argparse
-from collections import Counter, defaultdict
+from collections import Counter
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -24,25 +25,7 @@ def write_jsonl(path, rows):
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
-def export(study, out, *, allow_incomplete=False):
-    study, out = Path(study), Path(out)
-    if out.exists():
-        raise ValueError("Export directory must not already exist")
-    root = study / "annotation_inputs"
-    if out.resolve().is_relative_to(root.resolve()):
-        raise ValueError("Export must be outside the served data root")
-    cases = load_cases(root)
-    by_pair = {p["pair_id"]: p for case in cases for p in case["pairs"]}
-    key = read_json(study / "private_analysis" / "allocation_key.json")
-    allocation = {row["pair_id"]: row for row in key}
-    if len(by_pair) != sum(len(c["pairs"]) for c in cases) or len(allocation) != len(key) or set(allocation) != set(by_pair):
-        raise ValueError("Pair identifiers do not match allocation key")
-    for pair_id, pair in by_pair.items():
-        row = allocation[pair_id]
-        if row["stage"] != pair["stage"] or row["hadm_id"] != pair["hadm_id"]:
-            raise ValueError("Allocation key does not match served pairs")
-        if set(row["arms"]) != {"A", "B"} or {a["condition"] for a in row["arms"].values()} != {"left", "right"}:
-            raise ValueError("Invalid allocation")
+def read_observed(root, cases):
     raters = [r["id"] for r in read_json(root / "app" / "annotators.json")
               if r["type"] == "human" and r.get("active", True)]
     if not raters or len(raters) != len(set(raters)):
@@ -60,6 +43,85 @@ def export(study, out, *, allow_incomplete=False):
                 if (rater, pair_id) in observed:
                     raise ValueError("Duplicate rater/pair record")
                 observed[rater, pair_id] = answer
+
+    return raters, observed
+
+
+
+def export_reference(study, root, out, cases, *, allow_incomplete=False, include_corrections=False):
+    """Export reference review separately; never conflate label validity with rationale validity."""
+    key = read_json(study / "private_analysis" / "reference_key.json")
+    by_pair = {p["pair_id"]: p for case in cases for p in case["pairs"]}
+    by_key = {r["pair_id"]: r for r in key}
+    if (len(by_pair) != sum(len(c["pairs"]) for c in cases)
+            or len(by_key) != len(key) or set(by_pair) != set(by_key)):
+        raise ValueError("Reference identifiers do not match")
+    for pair_id, pair in by_pair.items():
+        row = by_key[pair_id]
+        if (pair.get("target_format") != "reference_label"
+                or row.get("label_origin") != "reference"
+                or row["case_id"] != pair["hadm_id"] or row["stage"] != pair["stage"]
+                or row["label_source"] != pair["label_source"]
+                or row["label_sha256"] != hashlib.sha256(pair["target_A"].encode("utf-8")).hexdigest()):
+            raise ValueError("Reference key does not match reviewed label")
+    raters, observed = read_observed(root, cases)
+    labels, corrections = [], []
+    incomplete = 0
+    for pair_id, row in by_key.items():
+        votes = Counter()
+        suggestions = Counter()
+        for rater in raters:
+            answer = observed.get((rater, pair_id), {})
+            value = answer.get("label_validity")
+            value = value if value in ALLOWED_ANSWERS else "Missing"
+            votes[value] += 1
+            incomplete += value == "Missing"
+            suggestion = answer.get("suggested_label", "").strip()
+            if suggestion:
+                suggestions[suggestion] += 1
+        labels.append({**row, "label_validity_votes": dict(votes),
+                       "n_expected_raters": len(raters), "n_suggestions": sum(suggestions.values())})
+        if include_corrections and suggestions:
+            corrections.append({"pair_id": pair_id, "case_id": row["case_id"], "stage": row["stage"],
+                                "suggestions": [{"suggested_label": label, "count": count}
+                                                for label, count in sorted(suggestions.items())]})
+    if incomplete and not allow_incomplete:
+        raise ValueError(f"{incomplete} incomplete reference judgments; use --allow-incomplete explicitly")
+    out.mkdir(parents=True, mode=0o700)
+    write_jsonl(out / "label_ratings.jsonl", labels)
+    if include_corrections:
+        write_jsonl(out / "private_suggested_corrections.jsonl", corrections)
+    meta = {"study_type": "reference_label", "labels": len(labels),
+            "raters": len(raters), "incomplete_rater_labels": incomplete}
+    (out / "export_summary.json").write_text(json.dumps(meta, indent=2) + "\n")
+    return meta
+
+
+def export(study, out, *, allow_incomplete=False, include_corrections=False):
+    study, out = Path(study), Path(out)
+    if out.exists():
+        raise ValueError("Export directory must not already exist")
+    root = study / "annotation_inputs"
+    if out.resolve().is_relative_to(root.resolve()):
+        raise ValueError("Export must be outside the served data root")
+    cases = load_cases(root)
+    if (study / "private_analysis" / "reference_key.json").is_file():
+        return export_reference(study, root, out, cases, allow_incomplete=allow_incomplete,
+                                include_corrections=include_corrections)
+    if include_corrections:
+        raise ValueError("Correction export is only for reference-label studies")
+    by_pair = {p["pair_id"]: p for case in cases for p in case["pairs"]}
+    key = read_json(study / "private_analysis" / "allocation_key.json")
+    allocation = {row["pair_id"]: row for row in key}
+    if len(by_pair) != sum(len(c["pairs"]) for c in cases) or len(allocation) != len(key) or set(allocation) != set(by_pair):
+        raise ValueError("Pair identifiers do not match allocation key")
+    for pair_id, pair in by_pair.items():
+        row = allocation[pair_id]
+        if row["stage"] != pair["stage"] or row["hadm_id"] != pair["hadm_id"]:
+            raise ValueError("Allocation key does not match served pairs")
+        if set(row["arms"]) != {"A", "B"} or {a["condition"] for a in row["arms"].values()} != {"left", "right"}:
+            raise ValueError("Invalid allocation")
+    raters, observed = read_observed(root, cases)
 
     trace_rows, pair_rows = [], []
     incomplete = 0
@@ -120,8 +182,11 @@ def main():
     parser.add_argument("--study", required=True, type=Path)
     parser.add_argument("--out", required=True, type=Path)
     parser.add_argument("--allow-incomplete", action="store_true")
+    parser.add_argument("--include-corrections", action="store_true",
+                        help="Export sensitive suggested reference labels separately, local use only")
     args = parser.parse_args()
-    summary = export(args.study, args.out, allow_incomplete=args.allow_incomplete)
+    summary = export(args.study, args.out, allow_incomplete=args.allow_incomplete,
+                     include_corrections=args.include_corrections)
     print(json.dumps(summary))
 
 
