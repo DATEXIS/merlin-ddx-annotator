@@ -100,3 +100,26 @@ it('reviews a reference without demanding a generated rationale or comparison', 
   await user.type(within(review).getByLabelText(/Suggested correction/), 'Synthetic correction')
   expect(screen.getByText('1 / 1 admissions complete')).toBeInTheDocument()
 })
+
+it('uses the same label-only rubric for both blinded sources', async () => {
+  const pair = {
+    pair_id: 'compare-1', hadm_id: '123', stage: 'V2', target_format: 'label_comparison',
+    target_A: 'Synthetic diagnosis A', target_B: 'Synthetic diagnosis B', reason_A: '', reason_B: '',
+  }
+  vi.stubGlobal('fetch', vi.fn((url: string) => Promise.resolve(response(
+    url === '/api/rebuttal-audit' ? [{ ...audit[0], pairs: [pair] }] : [],
+  ))))
+  render(<RebuttalAudit annotators={[{ id: 'clinician', name: 'Clinician', type: 'human' }]}
+    annotatorId="clinician" onAnnotatorChange={() => {}} onViewChange={() => {}} />)
+  const review = await screen.findByRole('region', { name: 'V2 label comparison' })
+  expect(within(review).getAllByText('Is this diagnosis clinically appropriate given the admission evidence?')).toHaveLength(2)
+  expect(within(review).queryByText(/Source:/)).not.toBeInTheDocument()
+  expect(within(review).queryByText(/rationale/i)).not.toBeInTheDocument()
+  expect(within(review).getByRole('radio', { name: 'Equally appropriate' })).toBeDisabled()
+  const user = userEvent.setup()
+  await waitFor(() => expect(within(review).getAllByRole('radio', { name: 'Yes' })[0]).toBeEnabled())
+  await user.click(within(review).getAllByRole('radio', { name: 'Yes' })[0])
+  await user.click(within(review).getAllByRole('radio', { name: 'No' })[1])
+  await user.click(within(review).getByRole('radio', { name: 'A' }))
+  expect(screen.getByText('1 / 1 admissions complete')).toBeInTheDocument()
+})
