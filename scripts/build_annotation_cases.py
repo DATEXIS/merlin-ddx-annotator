@@ -144,7 +144,7 @@ def build(left_path, right_path, left_model, right_model, stages, split, out, *,
     if left_path.resolve() == right_path.resolve() and left_model == right_model:
         raise ValueError("Provide two distinct trace sources or models")
     hashes = [digest(left_path), digest(right_path)]
-    settings = {"source_sha256": hashes, "models": [left_model, right_model],
+    settings = {"study_type": "paired_reasoning", "source_sha256": hashes, "models": [left_model, right_model],
                 "stages": list(stages), "split": split, "seed": seed, "n": n,
                 "complaints": list(complaints), "raters": raters}
     study_id = hashlib.sha256(json.dumps(settings, sort_keys=True).encode()).hexdigest()[:20]
