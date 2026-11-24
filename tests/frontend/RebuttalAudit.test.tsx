@@ -123,3 +123,24 @@ it('uses the same label-only rubric for both blinded sources', async () => {
   await user.click(within(review).getByRole('radio', { name: 'A' }))
   expect(screen.getByText('1 / 1 admissions complete')).toBeInTheDocument()
 })
+
+it('supports a single generated trace with only Q1 and Q2 required', async () => {
+  const pair = {
+    pair_id: 'single-1', hadm_id: '123', stage: 'V3', target_format: 'single_reasoning',
+    target_A: 'Synthetic diagnosis', reason_A: 'Synthetic reasoning', target_B: '', reason_B: '',
+    clinical_context: 'Synthetic labs.',
+  }
+  vi.stubGlobal('fetch', vi.fn((url: string) => Promise.resolve(response(
+    url === '/api/rebuttal-audit' ? [{ ...audit[0], pairs: [pair] }] : [],
+  ))))
+  render(<RebuttalAudit annotators={[{ id: 'clinician', name: 'Clinician', type: 'human' }]}
+    annotatorId="clinician" onAnnotatorChange={() => {}} onViewChange={() => {}} />)
+  const review = await screen.findByRole('region', { name: 'V3 pair' })
+  expect(within(review).getByText('Synthetic reasoning')).toBeInTheDocument()
+  expect(within(review).queryByText('Response B')).not.toBeInTheDocument()
+  expect(within(review).queryByRole('radio', { name: 'Equivalent' })).not.toBeInTheDocument()
+  const user = userEvent.setup()
+  await waitFor(() => expect(within(review).getAllByRole('radio', { name: 'Yes' })[0]).toBeEnabled())
+  for (const choice of within(review).getAllByRole('radio', { name: 'Yes' })) await user.click(choice)
+  expect(screen.getByText('1 / 1 admissions complete')).toBeInTheDocument()
+})
