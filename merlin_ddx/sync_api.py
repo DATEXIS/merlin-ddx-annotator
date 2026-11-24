@@ -6,7 +6,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Literal
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from starlette.staticfiles import StaticFiles
 
@@ -79,6 +80,31 @@ def create_app(
 ) -> FastAPI:
     paths = data_paths(data_root)
     app = FastAPI(title="MERLIN DDx annotation sync")
+    workspace = paths.root / "workspace.json"
+    independent_rater = None
+    if workspace.is_file():
+        independent_rater = validate_id("annotator_id", load_json(workspace)["rater"])
+        configured = load_json(paths.annotators_json)
+        if [r["id"] for r in configured] != [independent_rater] or sync_git:
+            raise ValueError("Independent workspace requires exactly one rater and disabled Git sync")
+
+        @app.middleware("http")
+        async def restrict_workspace(request: Request, call_next):
+            path = request.url.path
+            if path.startswith("/api/"):
+                parts = path.strip("/").split("/")
+                allowed = path in {"/api/patients", "/api/annotators", "/api/annotations", "/api/rebuttal-audit"}
+                if len(parts) >= 3 and parts[1] == "annotations":
+                    allowed = parts[2] == independent_rater and len(parts) in (3, 4)
+                if len(parts) >= 4 and parts[1:3] == ["rebuttal-audit", "annotations"]:
+                    allowed = parts[3] == independent_rater and len(parts) in (4, 5)
+                if len(parts) in (3, 4) and parts[1] == "custom-diagnoses":
+                    allowed = load_json(workspace)["study_type"] == "ddx"
+                if not allowed:
+                    return JSONResponse({"detail": "Unavailable in independent workspace"}, status_code=403)
+            response = await call_next(request)
+            response.headers["Cache-Control"] = "no-store"
+            return response
 
     @app.get("/healthz")
     def healthz() -> dict[str, str]:
@@ -202,7 +228,7 @@ def create_app(
 
     @app.get("/api/annotations")
     def get_all_annotations() -> list[dict[str, Any]]:
-        return [record.to_json() for record in list_annotation_records(paths)]
+        return [record.to_json() for record in list_annotation_records(paths, independent_rater)]
 
     @app.get("/api/annotations/{annotator_id}")
     def get_annotations(annotator_id: str) -> list[dict[str, Any]]:
@@ -258,6 +284,8 @@ def create_app(
         request: CustomDiagnosisCreateRequest,
     ) -> dict[str, Any]:
         try:
+            if independent_rater and request.createdBy != independent_rater:
+                raise HTTPException(status_code=403, detail="Rater identity mismatch")
             entry = add_custom_diagnosis(paths, patient_id, request.label, request.createdBy)
         except AnnotationStoreError as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc

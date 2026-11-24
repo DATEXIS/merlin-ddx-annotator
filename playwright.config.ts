@@ -14,7 +14,7 @@ export default defineConfig({
     trace: 'retain-on-failure',
   },
   webServer: {
-    command: `${python} scripts/run_demo.py --reset --port ${port} --data-root .demo/e2e_data_root`,
+    command: `${python} scripts/run_demo.py --synthetic --reset --port ${port} --data-root .demo/e2e_data_root`,
     url: `http://127.0.0.1:${port}/healthz`,
     reuseExistingServer: false,
   },

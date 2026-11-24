@@ -76,7 +76,7 @@ class CustomDiagnosis:
 
 
 def validate_id(kind: str, value: str) -> str:
-    if not value or not SAFE_ID.match(value):
+    if not value or value in (".", "..") or not SAFE_ID.fullmatch(value):
         raise AnnotationStoreError(f"Invalid {kind}: {value!r}")
     return value
 

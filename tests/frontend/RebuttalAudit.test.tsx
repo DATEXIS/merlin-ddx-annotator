@@ -57,3 +57,90 @@ it('omits target comparison for identical targets but always asks for rationale 
   await user.click(within(v2).getByRole('radio', { name: 'Equivalent' }))
   await waitFor(() => expect(localStorage.getItem('ddx-rebuttal-audit:clinician')).toContain('"target_preference_A_B_equal":null'))
 })
+
+it('renders all four stages with the new stage-specific rubric and evidence', async () => {
+  const pairs = ['V1', 'V2', 'V3', 'V4'].map(stage => ({
+    pair_id: stage, hadm_id: '123', stage, target_format: 'stage_output',
+    target_A: 'Synthetic output A', target_B: 'Synthetic output B',
+    reason_A: 'Synthetic rationale A', reason_B: 'Synthetic rationale B',
+    clinical_context: stage === 'V3' ? 'Synthetic laboratory context.' : '',
+  }))
+  vi.stubGlobal('fetch', vi.fn((url: string) => Promise.resolve(response(
+    url === '/api/rebuttal-audit' ? [{ ...audit[0], pairs }] : [],
+  ))))
+  render(<RebuttalAudit annotators={[{ id: 'clinician', name: 'Clinician', type: 'human' }]}
+    annotatorId="clinician" onAnnotatorChange={() => {}} onViewChange={() => {}} />)
+  const v1 = await screen.findByRole('region', { name: 'V1 pair' })
+  const v3 = screen.getByRole('region', { name: 'V3 pair' })
+  expect(within(v1).getAllByText(/correctly and completely classify/)).toHaveLength(2)
+  expect(within(v3).getByText('Synthetic laboratory context.')).toBeInTheDocument()
+  expect(within(v3).getAllByText(/updated diagnosis ranking/)).toHaveLength(2)
+  expect(screen.getByRole('region', { name: 'V2 pair' })).toBeInTheDocument()
+  expect(screen.getByRole('region', { name: 'V4 pair' })).toBeInTheDocument()
+  expect(within(v1).queryByText('Synthetic laboratory context.')).not.toBeInTheDocument()
+})
+
+it('reviews a reference without demanding a generated rationale or comparison', async () => {
+  const pair = {
+    pair_id: 'reference-1', hadm_id: '123', stage: 'V1', target_format: 'reference_label',
+    target_A: 'Synthetic manifestation labels', target_B: '', reason_A: '', reason_B: '',
+    label_source: 'Synthetic disease prototype',
+  }
+  vi.stubGlobal('fetch', vi.fn((url: string) => Promise.resolve(response(
+    url === '/api/rebuttal-audit' ? [{ ...audit[0], pairs: [pair] }] : [],
+  ))))
+  render(<RebuttalAudit annotators={[{ id: 'clinician', name: 'Clinician', type: 'human' }]}
+    annotatorId="clinician" onAnnotatorChange={() => {}} onViewChange={() => {}} />)
+  const review = await screen.findByRole('region', { name: 'V1 reference label' })
+  expect(within(review).getByText('Synthetic manifestation labels')).toBeInTheDocument()
+  expect(within(review).queryByText('Response B')).not.toBeInTheDocument()
+  const user = userEvent.setup()
+  await waitFor(() => expect(within(review).getByRole('radio', { name: 'No' })).toBeEnabled())
+  await user.click(within(review).getByRole('radio', { name: 'No' }))
+  await user.type(within(review).getByLabelText(/Suggested correction/), 'Synthetic correction')
+  expect(screen.getByText('1 / 1 admissions complete')).toBeInTheDocument()
+})
+
+it('uses the same label-only rubric for both blinded sources', async () => {
+  const pair = {
+    pair_id: 'compare-1', hadm_id: '123', stage: 'V2', target_format: 'label_comparison',
+    target_A: 'Synthetic diagnosis A', target_B: 'Synthetic diagnosis B', reason_A: '', reason_B: '',
+  }
+  vi.stubGlobal('fetch', vi.fn((url: string) => Promise.resolve(response(
+    url === '/api/rebuttal-audit' ? [{ ...audit[0], pairs: [pair] }] : [],
+  ))))
+  render(<RebuttalAudit annotators={[{ id: 'clinician', name: 'Clinician', type: 'human' }]}
+    annotatorId="clinician" onAnnotatorChange={() => {}} onViewChange={() => {}} />)
+  const review = await screen.findByRole('region', { name: 'V2 label comparison' })
+  expect(within(review).getAllByText('Is this diagnosis clinically appropriate given the admission evidence?')).toHaveLength(2)
+  expect(within(review).queryByText(/Source:/)).not.toBeInTheDocument()
+  expect(within(review).queryByText(/rationale/i)).not.toBeInTheDocument()
+  expect(within(review).getByRole('radio', { name: 'Equally appropriate' })).toBeDisabled()
+  const user = userEvent.setup()
+  await waitFor(() => expect(within(review).getAllByRole('radio', { name: 'Yes' })[0]).toBeEnabled())
+  await user.click(within(review).getAllByRole('radio', { name: 'Yes' })[0])
+  await user.click(within(review).getAllByRole('radio', { name: 'No' })[1])
+  await user.click(within(review).getByRole('radio', { name: 'A' }))
+  expect(screen.getByText('1 / 1 admissions complete')).toBeInTheDocument()
+})
+
+it('supports a single generated trace with only Q1 and Q2 required', async () => {
+  const pair = {
+    pair_id: 'single-1', hadm_id: '123', stage: 'V3', target_format: 'single_reasoning',
+    target_A: 'Synthetic diagnosis', reason_A: 'Synthetic reasoning', target_B: '', reason_B: '',
+    clinical_context: 'Synthetic labs.',
+  }
+  vi.stubGlobal('fetch', vi.fn((url: string) => Promise.resolve(response(
+    url === '/api/rebuttal-audit' ? [{ ...audit[0], pairs: [pair] }] : [],
+  ))))
+  render(<RebuttalAudit annotators={[{ id: 'clinician', name: 'Clinician', type: 'human' }]}
+    annotatorId="clinician" onAnnotatorChange={() => {}} onViewChange={() => {}} />)
+  const review = await screen.findByRole('region', { name: 'V3 pair' })
+  expect(within(review).getByText('Synthetic reasoning')).toBeInTheDocument()
+  expect(within(review).queryByText('Response B')).not.toBeInTheDocument()
+  expect(within(review).queryByRole('radio', { name: 'Equivalent' })).not.toBeInTheDocument()
+  const user = userEvent.setup()
+  await waitFor(() => expect(within(review).getAllByRole('radio', { name: 'Yes' })[0]).toBeEnabled())
+  for (const choice of within(review).getAllByRole('radio', { name: 'Yes' })) await user.click(choice)
+  expect(screen.getByText('1 / 1 admissions complete')).toBeInTheDocument()
+})

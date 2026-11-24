@@ -1,5 +1,7 @@
 # Differences from the study implementation
 
+> This document records the historical reproduction release through v1.1.0. The v1.2.0 baseline extends the frontend and backend for new studies; claims of unchanged files or byte-identical builds below refer to v1.1.0. The historical rubric and original analysis are retained. See [new-study baseline](docs/new_studies.md).
+
 The code that served the clinicians and analysed their annotations is preserved in the research group's private archive (tag `clinician-audit-batch1-study`, the state of 17 September 2026).
 
 ## How the released code was identified

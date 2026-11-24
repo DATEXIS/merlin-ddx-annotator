@@ -51,7 +51,7 @@ All DDx results, including the pilot: [results/ddx_annotation/](results/ddx_anno
 
 ## The clinician evaluation
 
-The reasoning audit (unchanged since v1.0.0):
+The original reasoning audit (historical rubric retained; exact study-era implementation archived at v1.1.0):
 
 ![The clinician-audit interface on a synthetic case: admission note on the left, the blinded V2 pair with the rubric questions on the right.](docs/assets/screenshots/01_clinical_context.png)
 
@@ -69,6 +69,22 @@ The reasoning audit (unchanged since v1.0.0):
 - **Primary outcome:** a rationale is *valid* when Q1 = Yes and Q2 = Yes; the contrast is loop minus zero-shot validity within admission, with admission-cluster bootstrap intervals.
 
 The [protocol](docs/protocol.md) marks, element by element, what was fixed before rating and what was documented afterwards, and lists the open discrepancies with the paper.
+
+## Create your own annotation study
+
+The [new-study baseline guide](docs/new_studies.md) describes the JSON study configuration, frozen manifests, standalone reasoning, general DDx case preparation, independent local workspaces, trace-linked export and inter-rater agreement. The historical studies remain reproducible separately.
+
+### Paired reasoning annotation
+
+The new local workflow supports V1–V4 paired evaluation from raw MERLIN generation tables or explicit JSONL trace sources, with stage-specific questions, deterministic A/B allocation, trace-linked aggregate rating export, and analysis without the original study-size constraint. See [the study-building guide](docs/build_annotation_cases.md) for commands, data formats, and limitations. The new questions are proposed rubrics and are separate from the historical clinician studies.
+
+### Review reference (ground-truth) labels
+
+Use the [reference-label review workflow](docs/build_reference_cases.md) to evaluate mapped diagnoses, recorded ICD codes, disease-level manifestation prototypes, or explicit patient-level reference annotations independently of generated rationales. Clinicians can flag unsupported labels and suggest corrections without changing the source data. Reference ratings and generated-trace ratings have separate provenance and exports.
+
+### Compare generated and reference labels blindly
+
+Use the [blinded label-comparison workflow](docs/build_label_comparison_cases.md) to evaluate both sources with identical stage-specific questions and evidence, with no generated rationales or provenance visible. Exports preserve joint human judgments for model/reference error analysis after offline unblinding.
 
 ## Quick start (synthetic cases)
 
@@ -155,7 +171,7 @@ See [docs/data_access.md](docs/data_access.md).
 
 | Path | Content |
 |---|---|
-| `src/` | The study's React application, unchanged: `App.tsx` (DDx views and view switching), `components/DiagnosesPanel.tsx` (DDx annotation), `components/RebuttalAudit.tsx` (audit screen). `main.tsx` adds a fallback to the audit-only shell `AuditApp.tsx` for data roots without DDx cases |
+| `src/` | The React application: `App.tsx` (DDx views and view switching), `components/DiagnosesPanel.tsx` (DDx annotation), `components/RebuttalAudit.tsx` (historical audit and new V1–V4 workflows). `main.tsx` selects the audit-only shell `AuditApp.tsx` for data roots without DDx cases |
 | `merlin_ddx/` | Study backend (`sync_api.py`, `annotation_store.py`, `rebuttal_audit.py`) and the original audit analysis (`rebuttal_analysis.py` and companions) |
 | `scripts/` | DDx analysis (`analyse_annotations.py`, `analyse_scaleup_annotations.py`, `sample_blind_annotation.py`, sanitized study code; `run_ddx_analysis.py`, `ddx_agreement.py`), audit analysis entry points, demo and reproduction tools |
 | `docs/` | `ddx_annotation/`, `reasoning_audit/`, `verification/`; audit protocol, rubric, walkthrough; reproducibility, data access, figures |
