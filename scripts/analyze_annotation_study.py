@@ -194,6 +194,68 @@ def analyze_label_comparison(rows, *, seed=42, replicates=2000):
             "bootstrap_replicates": replicates, "label_comparison_results": results}
 
 
+
+def analyze_single_reasoning(rows, *, seed=42, replicates=2000):
+    """Standalone Q1/Q2 and composite rates with admission-cluster intervals."""
+    if not rows or replicates < 1:
+        raise ValueError("Nonempty ratings and positive replicate count required")
+    groups = defaultdict(list)
+    seen = set()
+    for row in rows:
+        if row["pair_id"] in seen or row["label_origin"] != "generated":
+            raise ValueError("Invalid or duplicate standalone trace")
+        seen.add(row["pair_id"])
+        groups[row["stage"], row["model"]].append(row)
+    result = []
+    for (stage, model), items in sorted(groups.items()):
+        summary = {"stage": stage, "model": model, "traces": len(items), "metrics": {}}
+        for metric in ("q1", "q2", "composite"):
+            clusters = defaultdict(lambda: [0, 0])
+            for row in items:
+                votes, n = row[metric + "_votes"], row["n_expected_raters"]
+                if n < 1 or votes.get("Missing", 0) or sum(votes.values()) != n:
+                    raise ValueError("Analysis requires complete standalone ratings")
+                c = clusters[row["case_id"]]
+                c[0] += votes.get("Yes", 0)
+                c[1] += n
+            values = [clusters[k] for k in sorted(clusters)]
+            yes, total = (sum(v[i] for v in values) for i in (0, 1))
+            rng = random.Random(seed)
+            draws = []
+            for _ in range(replicates):
+                sample = rng.choices(values, k=len(values))
+                draws.append(sum(v[0] for v in sample)/sum(v[1] for v in sample))
+            summary["metrics"][metric] = {"yes": yes, "n": total, "rate": yes/total,
+                "ci95": [quantile(draws, .025), quantile(draws, .975)] if len(values) > 1 else None}
+        from scipy.stats import spearmanr
+        points = [(r["verifier_score"], r["composite_votes"].get("Yes", 0)/r["n_expected_raters"])
+                  for r in items if r.get("verifier_score") is not None]
+        x, y = zip(*points) if points else ((), ())
+        summary["verifier_association"] = {"n_traces": len(points),
+            "spearman_rho": float(spearmanr(x, y).statistic)
+            if len(points) >= 3 and len(set(x)) > 1 and len(set(y)) > 1 else None}
+        result.append(summary)
+    return {"study_type": "single_reasoning", "bootstrap_seed": seed,
+            "bootstrap_replicates": replicates, "single_reasoning_results": result}
+
+
+def analyze_ddx(rows):
+    """Report coverage and selection cardinality; not diagnostic accuracy."""
+    groups = defaultdict(list)
+    for row in rows:
+        groups[row["chief_complaint"]].append(row)
+    result = []
+    for complaint, items in sorted(groups.items()):
+        completed = sum(r["n_completed_raters"] for r in items)
+        expected = sum(r["n_expected_raters"] for r in items)
+        selections = sum(sum(r["fixed_candidate_votes"].values()) + r["other_selected_label_count"] for r in items)
+        result.append({"chief_complaint": complaint, "cases": len(items),
+                       "expected_rater_cases": expected, "completed_rater_cases": completed,
+                       "completion_rate": rate(completed, expected),
+                       "mean_selections_per_completed_case": rate(selections, completed)})
+    return {"study_type": "ddx", "ddx_results": result}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--export", required=True, type=Path)
@@ -203,7 +265,12 @@ def main():
     args = parser.parse_args()
     if args.out.exists():
         parser.error("Output already exists")
-    if (args.export / "label_comparison_ratings.jsonl").is_file():
+    if (args.export / "single_reasoning_ratings.jsonl").is_file():
+        result = analyze_single_reasoning(read_jsonl(args.export / "single_reasoning_ratings.jsonl"),
+                                          seed=args.seed, replicates=args.replicates)
+    elif (args.export / "ddx_ratings.jsonl").is_file():
+        result = analyze_ddx(read_jsonl(args.export / "ddx_ratings.jsonl"))
+    elif (args.export / "label_comparison_ratings.jsonl").is_file():
         result = analyze_label_comparison(read_jsonl(args.export / "label_comparison_ratings.jsonl"),
                                           seed=args.seed, replicates=args.replicates)
     elif (args.export / "label_ratings.jsonl").is_file():
