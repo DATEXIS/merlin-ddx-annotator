@@ -1,6 +1,6 @@
 # Reproducibility guide
 
-Two workflows: a public one that needs nothing but this repository, and a credentialed one that uses the MERLIN-DDx data on PhysioNet. Neither reruns models or creates new study ratings.
+Two workflows: a public one that needs nothing but this repository, and a credentialed one that uses the MERLIN-DDx data on PhysioNet (not yet published; see [data access](data_access.md)). Neither reruns models or creates new study ratings.
 
 ## Coverage: which result can be reproduced from which data
 
@@ -60,7 +60,7 @@ The original analysis (`merlin_ddx/rebuttal_analysis.py`) refuses any dataset th
 
 ## Credentialed workflow (PhysioNet)
 
-1. Obtain credentialed access to the MERLIN-DDx datasets on PhysioNet and sign the data use agreement ([data access](data_access.md)).
+1. Once the credentialed release is published, obtain credentialed access to it on PhysioNet and sign the data use agreement ([data access](data_access.md)).
 2. Keep the files outside this repository, or in the git-ignored `physionet/` folder.
 
 **Reproduce the cohort-level results** and compare them with `results/`:

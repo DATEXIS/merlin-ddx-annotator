@@ -67,7 +67,7 @@ Details, commands and the full statistic-by-data table: [docs/reproducibility.md
 
 ## Data access
 
-This repository contains **no patient data**: all cases, rationales and ratings here are synthetic. The evaluated rationale texts derive from MIMIC-IV notes; they and the per-item aggregate ratings are part of the credentialed MERLIN-DDx datasets on PhysioNet, available to credentialed users who sign the PhysioNet data use agreement. The MIT licence of this software grants no rights to PhysioNet data. See [docs/data_access.md](docs/data_access.md).
+This repository contains **no patient data**: all cases, rationales and ratings here are synthetic. The evaluated rationale texts derive from MIMIC-IV notes; they and the per-item aggregate ratings are intended for a credentialed MERLIN-DDx release on PhysioNet, for credentialed users who sign the PhysioNet data use agreement. That release is not yet published; it will be linked in [docs/data_access.md](docs/data_access.md) when available. The MIT licence of this software grants no rights to PhysioNet data. See [docs/data_access.md](docs/data_access.md).
 
 ## Repository layout
 
