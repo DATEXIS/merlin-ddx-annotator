@@ -93,6 +93,42 @@ def analyze(rows, *, seed=42, replicates=2000):
             "stage_results": result}
 
 
+
+def analyze_reference(rows, *, seed=42, replicates=2000):
+    """Report reference agreement by stage and provenance, separately from model validity."""
+    if replicates < 1 or not rows:
+        raise ValueError("Nonempty reference ratings and positive replicate count required")
+    groups = defaultdict(lambda: defaultdict(lambda: [0, 0, 0, 0]))
+    seen = set()
+    for row in rows:
+        if row["label_origin"] != "reference" or row["pair_id"] in seen:
+            raise ValueError("Invalid or duplicate reference item")
+        seen.add(row["pair_id"])
+        votes = row["label_validity_votes"]
+        n = row["n_expected_raters"]
+        if n < 1 or votes.get("Missing", 0) or sum(votes.values()) != n:
+            raise ValueError("Analysis requires complete reference ratings")
+        group = groups[row["stage"], row["label_source"]][row["case_id"]]
+        for i, value in enumerate(("Yes", "No", "Unclear")):
+            group[i] += votes.get(value, 0)
+        group[3] += n
+    results = []
+    for (stage, source), clusters in sorted(groups.items()):
+        values = [clusters[k] for k in sorted(clusters)]
+        totals = [sum(v[i] for v in values) for i in range(4)]
+        rng = random.Random(seed)
+        draws = []
+        for _ in range(replicates):
+            sampled = rng.choices(values, k=len(values))
+            draws.append(rate(sum(v[0] for v in sampled), sum(v[3] for v in sampled)))
+        results.append({"stage": stage, "label_source": source, "admissions": len(values),
+                        "votes": dict(zip(("Yes", "No", "Unclear"), totals[:3])),
+                        "n": totals[3], "reference_supported_rate": rate(totals[0], totals[3]),
+                        "ci95": [quantile(draws, .025), quantile(draws, .975)] if len(values) > 1 else None})
+    return {"study_type": "reference_label", "bootstrap_seed": seed,
+            "bootstrap_replicates": replicates, "reference_results": results}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--export", required=True, type=Path)
@@ -102,13 +138,17 @@ def main():
     args = parser.parse_args()
     if args.out.exists():
         parser.error("Output already exists")
-    result = analyze(read_jsonl(args.export / "trace_ratings.jsonl"),
-                     seed=args.seed, replicates=args.replicates)
+    if (args.export / "label_ratings.jsonl").is_file():
+        result = analyze_reference(read_jsonl(args.export / "label_ratings.jsonl"),
+                                   seed=args.seed, replicates=args.replicates)
+    else:
+        result = analyze(read_jsonl(args.export / "trace_ratings.jsonl"),
+                         seed=args.seed, replicates=args.replicates)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("x", encoding="utf-8") as handle:
         json.dump(result, handle, indent=2, allow_nan=False)
         handle.write("\n")
-    print(f"Analyzed {len(result['stage_results'])} stages.")
+    print("Analysis complete.")
 
 
 if __name__ == "__main__":
