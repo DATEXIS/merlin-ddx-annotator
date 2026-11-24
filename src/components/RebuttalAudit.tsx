@@ -21,7 +21,9 @@ type AuditStore = Record<string, Record<string, PairAnswers>>
 type AuditPair = {
   pair_id: string
   hadm_id: string
-  stage: 'V2' | 'V4'
+  stage: 'V1' | 'V2' | 'V3' | 'V4'
+  target_format?: 'stage_output'
+  clinical_context?: string
   target_A: string
   reason_A: string
   target_B: string
@@ -73,18 +75,26 @@ function PairPanel({ pair, answers, onChange, canAnnotate }: {
   canAnnotate: boolean
 }) {
   const allJudged = FIELDS.every(field => Boolean(answers[field]))
-  const isV4 = pair.stage === 'V4'
+  const fullStage = pair.target_format === 'stage_output'
+  const isV4 = pair.stage === 'V4' && !fullStage
+  const stageQuestion = {
+    V1: 'Does the extraction correctly and completely classify the relevant manifestations, including explicit absences and unmentioned findings?',
+    V2: 'Is the differential diagnosis ranking clinically supported by the available admission evidence?',
+    V3: 'Is the updated diagnosis ranking supported by the available admission and laboratory evidence?',
+    V4: 'Are the predicted ICD diagnoses and their specificity clinically supported by the available evidence?',
+  }[pair.stage]
   return <section aria-label={`${pair.stage} pair`} className="rounded-lg border border-gray-200 bg-white shadow-sm">
     <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between gap-3">
       <h2 className="text-base font-semibold text-gray-900">{pair.stage} clinical reasoning</h2>
       <span className="text-xs text-gray-400">Pair {pair.pair_id}</span>
     </div>
+    {pair.clinical_context && <div className="border-b border-gray-200 px-4 py-3 text-sm whitespace-pre-wrap break-words">{pair.clinical_context}</div>}
     <div className="p-4 grid gap-4 xl:grid-cols-2">
       {(['A', 'B'] as const).map(arm => <div key={arm} className="rounded-lg border border-gray-200 overflow-hidden">
         <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
           <span className="text-xs font-semibold text-blue-700">Response {arm}</span>
           <h3 className="mt-1 font-semibold text-gray-900 break-words">
-            {pair[`target_${arm}`]}
+            {fullStage ? <span className="block whitespace-pre-wrap text-sm font-normal">{pair[`target_${arm}`]}</span> : pair[`target_${arm}`]}
             {isV4 && <span className="font-normal"> — {pair[`description_${arm}`]}</span>}
           </h3>
           {isV4 && pair[`description_category_${arm}`] && <p className="mt-1 text-xs text-amber-800">
@@ -97,7 +107,8 @@ function PairPanel({ pair, answers, onChange, canAnnotate }: {
             const field = `${arm}_Q${question}` as Field
             const label = question === 1
               ? 'Are the clinical facts stated in this rationale supported by the patient information?'
-              : isV4
+              : fullStage ? stageQuestion
+                : isV4
                 ? 'Do the stated facts clinically support this specific ICD diagnosis?'
                 : 'Do the stated facts clinically support this diagnosis as a plausible diagnosis for this patient?'
             return <fieldset key={field}>
@@ -116,7 +127,7 @@ function PairPanel({ pair, answers, onChange, canAnnotate }: {
     </div>
     <div className="border-t border-gray-200 px-4 py-4">
       {pair.target_A !== pair.target_B && <fieldset disabled={!canAnnotate || !allJudged}>
-        <legend className="text-sm font-semibold text-gray-900">{isV4
+        <legend className="text-sm font-semibold text-gray-900">{fullStage ? 'Which stage output is more clinically appropriate given the available evidence?' : isV4
           ? 'Which ICD diagnosis is more clinically appropriate for this patient, including whether the level of specificity is justified by the available evidence?'
           : 'Which diagnosis is more clinically appropriate for this patient at this point in the case?'}</legend>
         {isV4 && <p className="mt-1 text-xs text-gray-600">Prefer a more specific code when the evidence supports it; penalize unsupported over-specificity.</p>}
@@ -261,8 +272,6 @@ export function RebuttalAudit({ annotators, annotatorId, onAnnotatorChange, onVi
   }
   const auditCase = cases[index]
   const pairAnswers = auditCase ? store[auditCase.hadm_id] ?? {} : {}
-  const v2 = auditCase?.pairs.find(pair => pair.stage === 'V2')
-  const v4 = auditCase?.pairs.find(pair => pair.stage === 'V4')
   const completed = cases.filter(item => item.pairs.every(pair => complete(pair, store[item.hadm_id]?.[pair.pair_id]))).length
 
   return <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -307,10 +316,8 @@ export function RebuttalAudit({ annotators, annotatorId, onAnnotatorChange, onVi
         </section>
         <section aria-label="Clinical reasoning audit" className="min-w-0 space-y-4 overflow-y-auto p-4 lg:h-[calc(100vh-112px)]">
           {!annotatorId && <p className="rounded border border-amber-200 bg-amber-50 p-3 text-sm">Select an annotator to record answers.</p>}
-          {v2 && <PairPanel pair={v2} answers={pairAnswers[v2.pair_id] ?? {}} canAnnotate={!!annotatorId && answersLoaded}
-            onChange={(field, value) => change(auditCase.hadm_id, v2, field, value)} />}
-          {v4 && <PairPanel pair={v4} answers={pairAnswers[v4.pair_id] ?? {}} canAnnotate={!!annotatorId && answersLoaded}
-            onChange={(field, value) => change(auditCase.hadm_id, v4, field, value)} />}
+          {auditCase.pairs.map(pair => <PairPanel key={pair.pair_id} pair={pair} answers={pairAnswers[pair.pair_id] ?? {}} canAnnotate={!!annotatorId && answersLoaded}
+            onChange={(field, value) => change(auditCase.hadm_id, pair, field, value)} />)}
         </section>
       </div>
     </>}
