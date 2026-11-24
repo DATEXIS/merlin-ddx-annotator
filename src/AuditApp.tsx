@@ -26,7 +26,7 @@ export function AuditApp() {
         if (!response.ok) throw new Error(`Annotator list unavailable (${response.status})`)
         return response.json() as Promise<Annotator[]>
       })
-      .then(setAnnotators)
+      .then(items => { setAnnotators(items); setAnnotatorId(previous => items.some(a => a.id === previous) ? previous : items.length === 1 ? items[0].id : '') })
       .catch(cause => { if (!controller.signal.aborted) setError(String(cause)) })
     return () => controller.abort()
   }, [])
