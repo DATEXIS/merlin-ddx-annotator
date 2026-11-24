@@ -47,13 +47,14 @@ def score(value):
         return None
 
 
-def read_traces(path, model, stages):
+def read_traces(path, model, stages, *, label_only=False):
     """Raw combined.pq or explicit normalized JSONL; never use corrected SFT Output."""
     if path.suffix.lower() in (".pq", ".parquet"):
         import pandas as pd
         frame = pd.read_parquet(path)
         required = {"hadm_id", "gen_model", "split", "Chief Complaint", "admission_note"}
-        required |= {f"{s.lower()}_{field}" for s in stages for field in ("json", "text", "score")}
+        required |= {f"{s.lower()}_{field}" for s in stages
+                     for field in (("json",) if label_only else ("json", "text", "score"))}
         if any(s in ("V3", "V4") for s in stages):
             required.add("labs")
         if not required.issubset(frame.columns):
@@ -63,14 +64,14 @@ def read_traces(path, model, stages):
                 continue
             for stage in stages:
                 prefix = stage.lower()
-                target, rationale = text(row[f"{prefix}_json"]), text(row[f"{prefix}_text"])
-                if not target.strip() or not rationale.strip():
+                target, rationale = text(row[f"{prefix}_json"]), text(row.get(f"{prefix}_text"))
+                if not target.strip() or (not label_only and not rationale.strip()):
                     continue
                 try:
                     parsed = json.loads(target)
                 except (ValueError, TypeError):
                     continue
-                if not isinstance(parsed, (dict, list)) or not parsed:
+                if not isinstance(parsed, (dict, list)) or (not parsed and not (label_only and stage == "V4" and isinstance(parsed, list))):
                     continue
                 # Construction prompts include labs in V3 and V4, unlike the
                 # historical admission-only audit and downstream no-lab evaluation.
@@ -84,7 +85,7 @@ def read_traces(path, model, stages):
                     "clinical_context": ("Laboratory results (construction input):\n" + labs) if labs else "",
                     "target": target, "reason": rationale,
                     "trace_id": f"{model}:{row['hadm_id']}:{stage}", "label_origin": "generated",
-                    "verifier_score": score(row[f"{prefix}_score"]),
+                    "verifier_score": score(row.get(f"{prefix}_score")),
                 }
     elif path.suffix.lower() == ".jsonl":
         with path.open(encoding="utf-8") as handle:
@@ -98,10 +99,10 @@ def read_traces(path, model, stages):
         raise ValueError("Expected raw .pq/.parquet or normalized .jsonl")
 
 
-def index(rows, split, complaints):
+def index(rows, split, complaints, *, label_only=False):
     result = {}
     fields = ("hadm_id", "stage", "model", "trace_id", "split", "chief_complaint",
-              "admission_note", "clinical_context", "target", "reason")
+              "admission_note", "clinical_context", "target") + (() if label_only else ("reason",))
     for row in rows:
         if row.get("label_origin") != "generated":
             raise ValueError("Generated trace input requires label_origin=generated; use the reference builder for labels")
