@@ -18,7 +18,7 @@ from merlin_ddx.sync_api import create_app
 def make_input(path, model):
     rows = []
     for stage in STAGES:
-        rows.append({"hadm_id": "SYNCASE", "model": model, "stage": stage,
+        rows.append({"hadm_id": "SYNCASE", "model": model, "stage": stage, "label_origin": "generated",
                      "split": "test", "chief_complaint": "synthetic complaint",
                      "admission_note": "Synthetic admission note.",
                      "clinical_context": "Synthetic laboratory results." if stage in ("V3", "V4") else "",
