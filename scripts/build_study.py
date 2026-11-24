@@ -31,11 +31,15 @@ def freeze(study):
     path = study / "private_analysis" / "manifest.json"
     manifest = read_json(path)
     fingerprint = hashes(study / "annotation_inputs")
+    keys = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sorted((study / "private_analysis").glob("*key*.json"))}
+    if len(keys) != 1:
+        raise ValueError("Expected exactly one private study allocation key")
     if "input_hashes" in manifest:
-        if manifest["input_hashes"] != fingerprint:
+        if manifest["input_hashes"] != fingerprint or manifest.get("key_hashes") != keys:
             raise ValueError("Prepared inputs changed after freezing")
         return manifest
-    manifest.update(rubric_version=RUBRIC, input_hashes=fingerprint, manifest_version=1)
+    manifest.update(rubric_version=RUBRIC, input_hashes=fingerprint, key_hashes=keys, manifest_version=1)
     write_json_atomic(path, manifest)
     return manifest
 
