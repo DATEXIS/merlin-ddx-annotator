@@ -129,6 +129,71 @@ def analyze_reference(rows, *, seed=42, replicates=2000):
             "bootstrap_replicates": replicates, "reference_results": results}
 
 
+
+def analyze_label_comparison(rows, *, seed=42, replicates=2000):
+    """Preserve paired human judgments; never infer joint outcomes from marginals."""
+    from collections import Counter
+    if not rows or replicates < 1:
+        raise ValueError("Nonempty paired ratings and positive replicate count required")
+    groups = defaultdict(list)
+    seen = set()
+    for row in rows:
+        if row["pair_id"] in seen:
+            raise ValueError("Duplicate label comparison")
+        seen.add(row["pair_id"])
+        groups[row["stage"], row["reference"]["label_source"], row["comparison_unit"]].append(row)
+    results = []
+    categories = ("Yes", "No", "Unclear")
+    for (stage, source, unit), items in sorted(groups.items()):
+        joint, preference = Counter(), Counter()
+        clusters = defaultdict(lambda: [0, 0, 0])
+        for row in items:
+            n = row["n_expected_raters"]
+            if n < 1:
+                raise ValueError("Invalid expected rater count")
+            votes = row["joint_votes"]
+            if (sum(v["count"] for v in votes) != n or
+                    any(v["generated"] not in categories or v["reference"] not in categories
+                        or type(v["count"]) is not int or v["count"] < 1 for v in votes)):
+                raise ValueError("Analysis requires complete paired label judgments")
+            prefs = row["preference_votes"]
+            allowed = {"Not applicable"} if row["identical_labels"] else {"generated", "reference", "Equal"}
+            if not set(prefs) <= allowed or sum(prefs.values()) != n:
+                raise ValueError("Analysis requires complete applicable preferences")
+            preference.update(prefs)
+            c = clusters[row["case_id"]]
+            for vote in votes:
+                g, r, k = vote["generated"], vote["reference"], vote["count"]
+                joint[g, r] += k
+                c[0] += k * (g == "Yes")
+                c[1] += k * (r == "Yes")
+                c[2] += k
+        values = [clusters[k] for k in sorted(clusters)]
+        g_yes, r_yes, total = (sum(c[i] for c in values) for i in range(3))
+        rng = random.Random(seed)
+        draws = []
+        for _ in range(replicates):
+            sample = rng.choices(values, k=len(values))
+            g, r, n = (sum(c[i] for c in sample) for i in range(3))
+            draws.append((g-r)/n)
+        results.append({
+            "stage": stage, "reference_source": source, "comparison_unit": unit,
+            "admissions": len(values), "pairs": len(items), "rater_pairs": total,
+            "generated_yes_rate": g_yes/total, "reference_yes_rate": r_yes/total,
+            "generated_minus_reference": (g_yes-r_yes)/total,
+            "paired_ci95": [quantile(draws, .025), quantile(draws, .975)] if len(values) > 1 else None,
+            "joint_table": {g: {r: joint[g, r] for r in categories} for g in categories},
+            "both_supported": joint["Yes", "Yes"],
+            "generated_only_supported": joint["Yes", "No"],
+            "reference_only_supported": joint["No", "Yes"],
+            "neither_supported": joint["No", "No"],
+            "at_least_one_unclear": sum(k for (g, r), k in joint.items() if "Unclear" in (g, r)),
+            "preference_votes": dict(preference),
+        })
+    return {"study_type": "label_comparison", "bootstrap_seed": seed,
+            "bootstrap_replicates": replicates, "label_comparison_results": results}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--export", required=True, type=Path)
@@ -138,7 +203,10 @@ def main():
     args = parser.parse_args()
     if args.out.exists():
         parser.error("Output already exists")
-    if (args.export / "label_ratings.jsonl").is_file():
+    if (args.export / "label_comparison_ratings.jsonl").is_file():
+        result = analyze_label_comparison(read_jsonl(args.export / "label_comparison_ratings.jsonl"),
+                                          seed=args.seed, replicates=args.replicates)
+    elif (args.export / "label_ratings.jsonl").is_file():
         result = analyze_reference(read_jsonl(args.export / "label_ratings.jsonl"),
                                    seed=args.seed, replicates=args.replicates)
     else:
