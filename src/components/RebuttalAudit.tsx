@@ -5,7 +5,7 @@ import { PatientNav } from './PatientNav'
 type Judgment = 'Yes' | 'No' | 'Unclear'
 type RationalePreference = 'A' | 'B' | 'Equivalent'
 type TargetPreference = 'A' | 'B' | 'Equal'
-type Field = 'A_Q1' | 'A_Q2' | 'B_Q1' | 'B_Q2'
+type Field = 'A_Q1' | 'A_Q2' | 'B_Q1' | 'B_Q2' | 'A_label_validity' | 'B_label_validity'
 type PairAnswers = Partial<Record<Field, Judgment>> & {
   target_preference_A_B_equal?: TargetPreference | null
   rationale_preference_A_B_equal?: RationalePreference
@@ -24,7 +24,7 @@ type AuditPair = {
   pair_id: string
   hadm_id: string
   stage: 'V1' | 'V2' | 'V3' | 'V4'
-  target_format?: 'stage_output' | 'reference_label'
+  target_format?: 'stage_output' | 'reference_label' | 'label_comparison'
   label_source?: string
   clinical_context?: string
   target_A: string
@@ -67,6 +67,7 @@ function normalizeStore(store: AuditStore): AuditStore {
 }
 function complete(pair: AuditPair, answers?: PairAnswers) {
   if (pair.target_format === 'reference_label') return Boolean(answers?.label_validity)
+  if (pair.target_format === 'label_comparison') return Boolean(answers?.A_label_validity && answers?.B_label_validity && (pair.target_A === pair.target_B || answers.target_preference_A_B_equal))
   return FIELDS.every(field => Boolean(answers?.[field]))
     && Boolean(answers?.rationale_preference_A_B_equal)
     && (pair.target_A === pair.target_B || Boolean(answers?.target_preference_A_B_equal))
@@ -78,6 +79,51 @@ function PairPanel({ pair, answers, onChange, canAnnotate }: {
   onChange: (field: Field | 'target_preference_A_B_equal' | 'rationale_preference_A_B_equal' | 'rater_comment' | 'label_validity' | 'suggested_label', value: string) => void
   canAnnotate: boolean
 }) {
+  if (pair.target_format === 'label_comparison') {
+    const question = {
+      V1: 'Does this manifestation label set correctly and completely describe the findings documented at admission?',
+      V2: 'Is this diagnosis clinically appropriate given the admission evidence?',
+      V3: 'Is this diagnosis clinically appropriate given the admission and laboratory evidence?',
+      V4: 'Are these ICD labels clinically supported, appropriately specific and complete for the available evidence?',
+    }[pair.stage]
+    const judged = Boolean(answers.A_label_validity && answers.B_label_validity)
+    return <section aria-label={pair.stage + ' label comparison'} className="rounded-lg border border-gray-200 bg-white shadow-sm p-4 space-y-4">
+      <h2 className="text-base font-semibold">{pair.stage} blinded label comparison</h2>
+      {pair.clinical_context && <div className="text-sm whitespace-pre-wrap break-words border-b pb-3">{pair.clinical_context}</div>}
+      <div className="grid gap-4 xl:grid-cols-2">
+        {(['A', 'B'] as const).map(arm => {
+          const field = arm === 'A' ? 'A_label_validity' : 'B_label_validity'
+          return <div key={arm} className="rounded border p-3 space-y-3">
+            <h3 className="font-semibold text-blue-700">Label {arm}</h3>
+            <div className="rounded bg-gray-50 p-3 text-sm whitespace-pre-wrap break-words">{pair['target_' + arm as 'target_A' | 'target_B']}</div>
+            <fieldset disabled={!canAnnotate}>
+              <legend className="text-sm font-medium">{question}</legend>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {(['Yes', 'No', 'Unclear'] as Judgment[]).map(value => <label key={value} className="rounded border px-2 py-1 text-sm">
+                  <input type="radio" name={pair.pair_id + '-' + field} checked={answers[field] === value}
+                    onChange={() => onChange(field, value)} className="mr-1" />{value}
+                </label>)}
+              </div>
+            </fieldset>
+          </div>
+        })}
+      </div>
+      {pair.target_A !== pair.target_B && <fieldset disabled={!canAnnotate || !judged}>
+        <legend className="text-sm font-semibold">Which label or label set is more clinically appropriate?</legend>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {(['A', 'B', 'Equal'] as TargetPreference[]).map(value => <label key={value} className="rounded border px-2 py-1 text-sm">
+            <input type="radio" name={pair.pair_id + '-label-preference'} checked={answers.target_preference_A_B_equal === value}
+              onChange={() => onChange('target_preference_A_B_equal', value)} className="mr-1" />{value === 'Equal' ? 'Equally appropriate' : value}
+          </label>)}
+        </div>
+      </fieldset>}
+      <label className="block text-sm">Optional comment
+        <textarea value={answers.rater_comment ?? ''} disabled={!canAnnotate}
+          onChange={event => onChange('rater_comment', event.target.value)} rows={2}
+          className="mt-1 block w-full rounded border p-2" />
+      </label>
+    </section>
+  }
   if (pair.target_format === 'reference_label') {
     const question = {
       V1: 'Does this manifestation label set correctly and completely describe the findings documented at admission?',
