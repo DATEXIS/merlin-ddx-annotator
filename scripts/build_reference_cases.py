@@ -81,7 +81,7 @@ def raw_labels(path, model, stages, schema, retrospective):
             yield {"hadm_id": str(row["hadm_id"]), "stage": stage, "split": str(row["split"]),
                    "chief_complaint": complaint, "admission_note": text(row["admission_note"]),
                    "clinical_context": "\n\n".join(context), "target": target,
-                   "label_source": source, "label_id": f"{row['hadm_id']}:{stage}"}
+                   "label_source": source, "label_id": f"{row['hadm_id']}:{stage}", "label_origin": "reference"}
 
 
 def read_labels(path, model, stages, schema, retrospective):
@@ -120,6 +120,8 @@ def build(path, out, stages, split, *, model=None, schema_path=None, retrospecti
             raise ValueError("Reference rows require explicit string fields")
         if row["split"] != split or row["stage"] not in stages:
             continue
+        if row.get("label_origin") != "reference":
+            raise ValueError("Reference input requires label_origin=reference")
         if any(not row[f].strip() for f in fields if f != "clinical_context"):
             raise ValueError("Reference row has an empty required field")
         if row["stage"] == "V3" and not row["clinical_context"].strip():
