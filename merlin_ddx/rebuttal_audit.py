@@ -89,6 +89,9 @@ def load_cases(data_root: Path) -> list[dict]:
         if pair.get("target_format") == "label_comparison":
             if not pair["target_A"] or not pair["target_B"] or pair["reason_A"] or pair["reason_B"]:
                 raise HTTPException(status_code=500, detail="Malformed label comparison")
+        if pair.get("target_format") == "label_comparison":
+            if not pair["target_A"] or not pair["target_B"] or pair["reason_A"] or pair["reason_B"]:
+                raise HTTPException(status_code=500, detail="Malformed label comparison")
         if pair["stage"] == "V4" and pair.get("target_format") not in {"stage_output", "reference_label", "label_comparison"}:
             if catalog is None:
                 catalog = descriptions(data_root)
