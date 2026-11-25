@@ -91,7 +91,7 @@ This shows the 42 admissions exactly as the clinicians saw them, under generic r
 - **κ:** every κ published with a full matrix is reproduced from it, including the paper's coding-stage 0.73 / κ 0.39. The 3 reduced measures are consistent with their published p_o and p_e.
 - **Credentialed aggregates:** every pooled rate, difference, preference margin, interval and raw agreement is reproduced exactly.
 - **Rubric:** `config/rubric.json` and `docs/rubric.md` are tested against the interface and the server (`tests/python/test_rubric_consistency.py`).
-- **Study code:** the audit interface and backend are the code that served the clinicians. The frontend sources rebuild the deployed bundle byte for byte, and the backend files equal those in the deployment. The release differs only as listed in [CHANGES_FROM_STUDY.md](../CHANGES_FROM_STUDY.md).
+- **Study code (v1.1.0):** in release v1.1.0, the audit interface and backend are the code that served the clinicians. The frontend sources rebuild the deployed bundle byte for byte, and the backend files equal those in the deployment. That release differs only as listed in [CHANGES_FROM_STUDY.md](../CHANGES_FROM_STUDY.md). Since v1.2.0 the interface and backend are extended for new studies ([docs/new_studies.md](new_studies.md)); historical inputs take the original code paths, and the historical analysis code and results are unchanged.
 
 ## DDx annotation (pilot and 350-case study)
 

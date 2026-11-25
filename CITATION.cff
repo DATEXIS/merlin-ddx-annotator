@@ -3,6 +3,7 @@ message: "If you use this software or the clinician-evaluation materials, please
 title: "MERLIN-DDx Annotator: clinical annotation interface, protocols, analysis code and reproducibility tools for the MERLIN-DDx clinician studies"
 type: software
 version: 1.2.0
+date-released: "2026-11-25"
 license: MIT
 repository-code: "https://github.com/DATEXIS/merlin-ddx-annotator"
 authors:

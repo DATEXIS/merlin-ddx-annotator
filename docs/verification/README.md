@@ -11,8 +11,8 @@ It was set up on 16–17 September 2026 and then superseded by the 42-admission 
 
 What this release contains of it:
 
-- **Frontend.** The study's application code still includes the view (`src/components/VerificationPanel.tsx`, `src/hooks/useVerificationAnnotations.ts`). The view is hidden from the view selector, as it was in the study. These files ship only because the unchanged application imports them.
-- **Backend.** The backend endpoints (`/api/verification70…`) are part of the unchanged `merlin_ddx/sync_api.py`.
+- **Frontend.** The study's application code still includes the view (`src/components/VerificationPanel.tsx`, `src/hooks/useVerificationAnnotations.ts`). The view is hidden from the view selector, as it was in the study. These files ship only because the application imports them.
+- **Backend.** The backend endpoints (`/api/verification70…`) are part of `merlin_ddx/sync_api.py`.
 - **Data.** No verification cases, inputs or records are included. Without a `verification70.json` file the endpoints answer "missing data file".
 
 The case list and the script that built it are not released, because the design was not used.

@@ -94,7 +94,7 @@ From that date on, the DDx view differs from the released one only by two things
 
 Display defaults and storage are unchanged.
 
-The released application code (`src/App.tsx` and its components) is the version of 17 September 2026. Those archived sources rebuild byte for byte the bundle that was served during the reasoning audit ([CHANGES_FROM_STUDY.md](../../CHANGES_FROM_STUDY.md)). Which build was deployed during the DDx annotation was not recorded.
+The application code released in v1.1.0 (`src/App.tsx` and its components) is the version of 17 September 2026. Since v1.2.0, `src/App.tsx` and the audit screen are extended for new studies; the DDx views of the historical cohorts are unaffected. Those archived sources rebuild byte for byte the bundle that was served during the reasoning audit ([CHANGES_FROM_STUDY.md](../../CHANGES_FROM_STUDY.md)). Which build was deployed during the DDx annotation was not recorded.
 
 ## 5. Recorded data [code, records]
 

@@ -1,6 +1,6 @@
 # DDx annotation walkthrough
 
-The screenshots show the study interface (unchanged, see [CHANGES_FROM_STUDY.md](../../CHANGES_FROM_STUDY.md)) running on the synthetic cases in [examples/synthetic/ddx/](../../examples/synthetic/ddx/README.md). Every case, note, prediction and rating shown is synthetic. To reproduce them, run `uv run python scripts/run_demo.py --with-ratings` and open http://127.0.0.1:8765. To regenerate the images, run `CAPTURE_SCREENSHOTS=1 npx playwright test tests/e2e/screenshots.spec.ts`.
+The screenshots show the study interface (as released in v1.1.0, see [CHANGES_FROM_STUDY.md](../../CHANGES_FROM_STUDY.md); v1.2.0 adds views for new studies only) running on the synthetic cases in [examples/synthetic/ddx/](../../examples/synthetic/ddx/README.md). Every case, note, prediction and rating shown is synthetic. To reproduce them, run `uv run python scripts/run_demo.py --with-ratings` and open http://127.0.0.1:8765. To regenerate the images, run `CAPTURE_SCREENSHOTS=1 npx playwright test tests/e2e/screenshots.spec.ts`.
 
 ## 1. Choose the cohort, the annotator and the case
 
