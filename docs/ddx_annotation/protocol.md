@@ -4,7 +4,7 @@ This page states what is known about how the clinician DDx annotation was carrie
 
 - **[code]**: the interface and analysis code in this repository, verified;
 - **[records]**: the stored annotation records, verified;
-- **[investigators]**: confirmed by the study investigators on 2026-11-24, without a contemporaneous written document;
+- **[investigators]**: confirmed by the study investigators on 2026-11-24, with actual blinding of the 350-case study additionally confirmed by co-author Dennis Fast on 2026-11-27; no contemporaneous written instruction document was recovered;
 - **[manuscript]**: stated in the MERLIN-DDx paper only.
 
 ## 1. Task
@@ -38,7 +38,7 @@ The clinician task did not ask clinicians to choose between the two references. 
 
 ## 4. Information available to the clinicians
 
-Three things are kept apart here: what clinicians were told, what the interface did, and what can be checked afterwards.
+Three things are kept apart here: the investigator-confirmed study conduct, what the interface did, and what can be independently checked afterwards.
 
 ### 4.1 Instructions [investigators]
 
@@ -46,6 +46,8 @@ Clinicians were instructed to hide:
 
 - the MERLIN model predictions;
 - the other clinicians' annotations.
+
+**350-case study:** On 2026-11-27, study co-author Dennis Fast confirmed that clinicians actually conducted the annotation blinded to MERLIN model predictions and the other clinicians' annotations, not merely that they were instructed to do so [investigators]. This is retrospective investigator confirmation, not evidence from interaction logs or technically enforced masking. It does not establish the information regime of the earlier pilot.
 
 The full discharge summary, including the discharge diagnosis and the coder-assigned ICD codes, was available **by design**. The task is retrospective reference annotation: it confirms the diagnosis the admission was mapped to, so it is not an admission-time diagnostic task.
 
@@ -71,8 +73,8 @@ No written instruction document for the pilot or the 350-case study was recovere
 ### 4.3 What the records can and cannot show [records]
 
 - **What is stored.** The annotation store holds each clinician's current selections per case and the time of the last save. It holds no interaction log: switch settings, opened panels and viewing order are not recorded.
-- **Compliance unverifiable.** Whether the instruction to hide model predictions and other clinicians' marks was followed therefore cannot be verified from the data.
-- **Order of saves.** Clinician 1's last save of a case precedes Clinician 2's in 230 of their 236 shared cases, and precedes Clinician 3's in all 121 of theirs. So in most shared cases another clinician's marks already existed when the later clinician annotated, and the default view would have shown them.
+- **Blinding confirmed by investigator, not independently logged.** The conduct of the 350-case study was confirmed on 2026-11-27 (section 4.1). The stored records alone cannot independently establish switch settings, viewing order, or whether information was inadvertently exposed.
+- **Order of saves.** Clinician 1's last save of a case precedes Clinician 2's in 230 of their 236 shared cases, and precedes Clinician 3's in all 121 of theirs. So in most shared cases another clinician's marks already existed when the later clinician annotated, and the default view would have shown them had the clinicians not hidden them. This is evidence about the interface default, not evidence that the marks were actually viewed.
 
 ### 4.4 Pilot: a different account in the analysis code
 
@@ -116,7 +118,7 @@ There was no consensus or adjudication step. Every clinician's records are analy
 
 | Item | Status |
 |---|---|
-| Written annotation instructions (pilot, 350-case study) | Not recovered; the instruction in section 4.1 is investigator-confirmed |
+| Written annotation instructions (pilot, 350-case study) | Not recovered; the instructions and actual blinding of the 350-case study are investigator-confirmed (section 4.1) |
 | Interaction logs (switch settings, panels opened) | Never recorded |
 | Selection procedure of the 70 pilot cases | Not recovered |
 | Case pool used by the original pilot analysis | Not recovered. The available pool contains 62 of the 70 pilot cases, so pilot reference-agreement results cover the analysable cases (see results) |
