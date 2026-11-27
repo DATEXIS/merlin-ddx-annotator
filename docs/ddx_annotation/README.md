@@ -14,6 +14,8 @@ MERLIN-DDx maps each admission to a reference diagnosis from the WikiDoc differe
 
 A "completed record" is a clinician's record for a case with at least one diagnosis marked. Counts come from the records, not from the cohort size or the number of stored files.
 
+The 350-case study was conducted blinded to MERLIN model predictions and other clinicians' annotations, as confirmed by study co-author Dennis Fast on 2026-11-27. Discharge information remained available by design. Blinding was procedural rather than technically enforced; the [protocol](protocol.md) distinguishes investigator confirmation from the absence of interaction logs and the unresolved pilot information regime.
+
 The third activity in the paper, the blinded audit of generated rationales on 42 further admissions, is documented in [docs/reasoning_audit/](../reasoning_audit/README.md). A 70-case verification view also exists in the code, but it never collected a judgment; see [docs/verification/](../verification/README.md).
 
 ![Workflow of the DDx annotation: cohorts, candidate lists and automated references; the annotation interface with the information shown and the instruction to hide model predictions and peer marks; offline analysis of clinician-vs-reference agreement, inter-rater agreement and model evaluation.](../assets/ddx_annotation_workflow.svg)
