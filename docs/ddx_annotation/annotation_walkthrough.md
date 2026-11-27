@@ -32,13 +32,13 @@ The screenshots show the study interface (as released in v1.1.0, see [CHANGES_FR
 
 ![The same case with the switches 'Human annotators' and 'MERLIN predictions' turned off: only the candidate list and the clinician's own column remain.](../assets/screenshots/ddx/03_predictions_and_peers_hidden.png)
 
-Clinicians were instructed to annotate in this configuration ([protocol](protocol.md), section 4):
+Clinicians were instructed to annotate in this configuration ([protocol](protocol.md), section 4). Study co-author Dennis Fast confirmed on 2026-11-27 that the 350-case study was conducted blinded to MERLIN predictions and other clinicians' annotations:
 
 - *Human annotators* off;
 - *MERLIN predictions* off;
 - *AI annotators* off (already off by default).
 
-The switches start **on** at every page load, and the interface does not enforce the setting.
+The Human annotators and MERLIN predictions switches start **on** at every page load, and the interface does not enforce the setting. The confirmation of actual blinding is investigator testimony; individual display states were not logged.
 
 ## 4. Adding a diagnosis that is not in the list
 
