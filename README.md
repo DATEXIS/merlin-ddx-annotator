@@ -35,7 +35,7 @@ A fourth design in the code, a 70-case *verification* view, collected no judgmen
   - Study: 350 test admissions, 50 per chief complaint, disease-balanced draw without pilot cases.
 - **Information shown:**
   - The full discharge summary with labs, the discharge diagnosis and the coder ICD codes. This is intended, because the task is retrospective reference annotation.
-  - Clinicians conducted both the 70-case pilot (train and test splits) and the 350-case study blinded to MERLIN model predictions and the other clinicians' marks, as confirmed by study co-author Dennis Fast on 2026-11-27.
+  - Clinicians conducted both the 70-case pilot (train and test splits) and the 350-case study blinded to MERLIN model predictions and the other clinicians' marks.
   - Blinding was implemented by hiding these displays, not by technical enforcement. The interface shows both by default and keeps no interaction log; actual display states cannot be independently verified from the records. See the [protocol](docs/ddx_annotation/protocol.md) for this distinction and the historical pilot report's conflicting account.
 - **Analysis:** candidate-level selections, with unchecked candidates counted as not selected (the original rule). The analysis compares them with two automated references (ICD-derived, cosine), between clinicians (Cohen's and Fleiss' κ, exact-set agreement, Jaccard, nesting) and, as a secondary analysis, with the model rankings. There is no consensus step.
 
