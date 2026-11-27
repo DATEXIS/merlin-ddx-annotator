@@ -52,6 +52,6 @@ The Human annotators and MERLIN predictions switches start **on** at every page 
 
 ![The Labs, Discharge Diagnosis and Ground Truth ICD Codes panels expanded on synthetic case 900202, after saving.](../assets/screenshots/ddx/05_reference_panels.png)
 
-- **Reference panels.** The discharge diagnosis and the coder ICD codes are available by design: the task is to confirm the reference diagnosis from the full record.
+- **Reference panels.** The application provides collapsible panels for the discharge diagnosis and coder ICD codes. During the 35-case pilot training split these were visible to familiarize clinicians with hospital documentation and coding practices; they were kept hidden in the pilot test split and the 350-case study. The screenshot illustrates interface functionality on synthetic data, not the evaluation information regime. Model predictions were hidden in every cohort.
 - **Saving.** *Save* stores the record on the server. Changes are also autosaved 30 seconds after the last edit.
 - **Stored records.** The server keeps one JSON record per clinician and case under `annotations/<annotator>/<case>.json`. Added diagnoses go under `custom_diagnoses/<case>.json`.
