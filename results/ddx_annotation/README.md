@@ -62,6 +62,6 @@ These are cohort-level results of the clinician DDx annotation. They contain no 
 ## Interpretation limits
 
 - **Purpose.** The clinician labels confirm the reference diagnoses retrospectively, with the discharge summary available by design. They are not admission-time diagnoses.
-- **Instructions and compliance.** Clinicians were instructed to hide model predictions and the other clinicians' marks. The interface showed both by default, did not enforce hiding and kept no interaction log, so compliance cannot be verified.
+- **Blinding (350-case study).** Study co-author Dennis Fast confirmed on 2026-11-27 that clinicians conducted this study blinded to model predictions and other clinicians' marks. This is investigator-confirmed procedural blinding, not technically enforced masking: the interface showed both by default, did not enforce hiding and kept no interaction log, so actual display states cannot be independently verified from the records. The earlier pilot information regime remains separately documented.
 - **Order of annotation.** Clinician 1's records preceded the other clinicians' in nearly all shared cases.
 - **Model evaluation.** The model-evaluation tables measure agreement with these labels. They are secondary and not reported in the manuscript.
