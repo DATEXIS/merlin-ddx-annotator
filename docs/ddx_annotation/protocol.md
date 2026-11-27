@@ -4,7 +4,7 @@ This page states what is known about how the clinician DDx annotation was carrie
 
 - **[code]**: the interface and analysis code in this repository, verified;
 - **[records]**: the stored annotation records, verified;
-- **[investigators]**: confirmed by the study investigators on 2026-11-24, without a contemporaneous written document;
+- **[investigators]**: information supplied by the study investigators about the annotation procedure and study conduct; no contemporaneous written instruction document was recovered;
 - **[manuscript]**: stated in the MERLIN-DDx paper only.
 
 ## 1. Task
@@ -38,7 +38,7 @@ The clinician task did not ask clinicians to choose between the two references. 
 
 ## 4. Information available to the clinicians
 
-Three things are kept apart here: what clinicians were told, what the interface did, and what can be checked afterwards.
+Three things are kept apart here: the investigator-confirmed study conduct, what the interface did, and what can be independently checked afterwards.
 
 ### 4.1 Instructions [investigators]
 
@@ -47,7 +47,16 @@ Clinicians were instructed to hide:
 - the MERLIN model predictions;
 - the other clinicians' annotations.
 
-The full discharge summary, including the discharge diagnosis and the coder-assigned ICD codes, was available **by design**. The task is retrospective reference annotation: it confirms the diagnosis the admission was mapped to, so it is not an admission-time diagnostic task.
+**Information regime by cohort [investigators].** Model predictions and other clinicians' annotations were hidden throughout all DDx annotation cohorts. Visibility of the recorded discharge diagnosis and coder-assigned ICD codes differed deliberately between calibration and evaluation:
+
+| Information | Pilot train (35 cases) | Pilot test (35 cases) | 350-case study |
+|---|---|---|---|
+| Recorded discharge diagnosis | Visible | Hidden | Hidden |
+| Recorded ICD codes | Visible | Hidden | Hidden |
+| MERLIN model predictions | Hidden | Hidden | Hidden |
+| Other clinicians' annotations | Hidden | Hidden | Hidden |
+
+The pilot training split served to familiarize clinicians with the hospital's documentation and coding practices. The discharge diagnosis and recorded ICD codes were then withheld for the pilot test split and subsequent 350-case evaluation. The task remained retrospective reference annotation rather than prospective diagnosis. This account describes the study procedure, not technically enforced masking or independently logged display states. The candidate list was ranked using discharge-diagnosis text (section 3), so hiding the recorded diagnosis does not imply that all outcome-derived information was removed. The precise set of other discharge-summary sections consulted is not recorded.
 
 No written instruction document for the pilot or the 350-case study was recovered.
 
@@ -71,17 +80,12 @@ No written instruction document for the pilot or the 350-case study was recovere
 ### 4.3 What the records can and cannot show [records]
 
 - **What is stored.** The annotation store holds each clinician's current selections per case and the time of the last save. It holds no interaction log: switch settings, opened panels and viewing order are not recorded.
-- **Compliance unverifiable.** Whether the instruction to hide model predictions and other clinicians' marks was followed therefore cannot be verified from the data.
-- **Order of saves.** Clinician 1's last save of a case precedes Clinician 2's in 230 of their 236 shared cases, and precedes Clinician 3's in all 121 of theirs. So in most shared cases another clinician's marks already existed when the later clinician annotated, and the default view would have shown them.
+- **Procedural blinding, not independently logged.** Both DDx annotation cohorts used the blinding procedure described in section 4.1. The stored records alone cannot independently establish switch settings, viewing order, or whether information was inadvertently exposed.
+- **Order of saves.** Clinician 1's last save of a case precedes Clinician 2's in 230 of their 236 shared cases, and precedes Clinician 3's in all 121 of theirs. So in most shared cases another clinician's marks already existed when the later clinician annotated, and the default view would have shown them had the clinicians not hidden them. This is evidence about the interface default, not evidence that the marks were actually viewed.
 
-### 4.4 Pilot: a different account in the analysis code
+### 4.4 Pilot: clarification of the historical report
 
-The study's pilot report generator describes a different regime for the pilot. It is not published here because it hard-codes interpretive text about the pilot results; see [CHANGES_FROM_STUDY.md](../../CHANGES_FROM_STUDY.md).
-
-- **Train split:** annotated with the discharge diagnoses, ICD codes and model predictions visible.
-- **Test split:** annotated "blinded" to them.
-
-This account differs from section 4.1 for the train split and for the discharge information. No other document resolves the difference. The analysis therefore keeps the two pilot splits apart, as the original code does, and the published code no longer labels either split "blinded".
+The original pilot report generator correctly distinguished the visibility of discharge diagnoses and recorded ICD codes between the calibration and test splits, but incorrectly described model predictions as visible in the training split according to the investigators' account of the actual procedure. Model predictions were hidden throughout. The report generator is not published because it hard-codes interpretive text about pilot results; see [CHANGES_FROM_STUDY.md](../../CHANGES_FROM_STUDY.md). The analysis keeps the two pilot splits separate because they differ in access to recorded diagnoses and codes. The published code uses neutral split labels. No interaction logs survive to independently verify the display states.
 
 ### 4.5 Interface version
 
@@ -116,7 +120,7 @@ There was no consensus or adjudication step. Every clinician's records are analy
 
 | Item | Status |
 |---|---|
-| Written annotation instructions (pilot, 350-case study) | Not recovered; the instruction in section 4.1 is investigator-confirmed |
+| Written annotation instructions (pilot, 350-case study) | Not recovered; the instructions and actual blinding of both DDx annotation cohorts are investigator-confirmed (section 4.1) |
 | Interaction logs (switch settings, panels opened) | Never recorded |
 | Selection procedure of the 70 pilot cases | Not recovered |
 | Case pool used by the original pilot analysis | Not recovered. The available pool contains 62 of the 70 pilot cases, so pilot reference-agreement results cover the analysable cases (see results) |

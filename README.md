@@ -34,9 +34,9 @@ A fourth design in the code, a 70-case *verification* view, collected no judgmen
   - Pilot: 70 admissions, 10 per chief complaint, 35 train / 35 test.
   - Study: 350 test admissions, 50 per chief complaint, disease-balanced draw without pilot cases.
 - **Information shown:**
-  - The full discharge summary with labs, the discharge diagnosis and the coder ICD codes. This is intended, because the task is retrospective reference annotation.
-  - Clinicians were instructed to hide the MERLIN model predictions and the other clinicians' marks.
-  - The interface shows both by default and can hide them, but it does not enforce hiding and keeps no interaction log. Instruction, interface behaviour and the lack of logs are documented separately in the [protocol](docs/ddx_annotation/protocol.md).
+  - The clinical record and candidate list were used for retrospective reference annotation. The recorded discharge diagnosis and coder-assigned ICD codes were visible only in the 35-case pilot training split, to familiarize clinicians with the hospital's documentation and coding practices. Both were hidden in the 35-case pilot test split and the subsequent 350-case study.
+  - Clinicians conducted both the 70-case pilot (train and test splits) and the 350-case study blinded to MERLIN model predictions and the other clinicians' marks.
+  - Blinding was implemented by hiding these displays, not by technical enforcement. The interface shows both by default and keeps no interaction log; actual display states cannot be independently verified from the records. See the [protocol](docs/ddx_annotation/protocol.md) for the cohort-specific information regimes and the correction to the historical pilot report.
 - **Analysis:** candidate-level selections, with unchecked candidates counted as not selected (the original rule). The analysis compares them with two automated references (ICD-derived, cosine), between clinicians (Cohen's and Fleiss' κ, exact-set agreement, Jaccard, nesting) and, as a secondary analysis, with the model rankings. There is no consensus step.
 
 | 350-case study (final records) | Value |

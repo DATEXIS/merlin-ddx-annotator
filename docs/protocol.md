@@ -32,6 +32,8 @@ To judge, independently of the pipeline's verifiers, whether rationales produced
 
 ## 4. Blinding and randomization
 
+For this audit, blinding concerns condition, verifier score and loop outcome, as supported by the serving artifacts below.
+
 - Clinicians saw each pair as "Response A" and "Response B"; arm identity, verifier score and loop outcome were held in a separate allocation key that was never deployed to the serving storage [pre-rating; verified on the serving volume].
 - A/B position of the in-loop rationale: V2 24 A / 18 B; V4 25 A / 17 B [observed]. The randomization procedure and seed [not documented].
 - Answers were stored separately per annotator, and the interface displayed only the answers of the annotator selected in it [pre-rating]. Access was not technically restricted per clinician: the annotator selector listed all clinicians behind one shared login [pre-rating].
