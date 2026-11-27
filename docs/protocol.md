@@ -32,7 +32,7 @@ To judge, independently of the pipeline's verifiers, whether rationales produced
 
 ## 4. Blinding and randomization
 
-Study co-author Dennis Fast confirmed on 2026-11-27 that all MERLIN-DDx annotation studies, including this rationale audit, were conducted blinded [investigator confirmation]. For this audit, blinding concerns condition, verifier score and loop outcome, as independently supported by the serving artifacts below.
+For this audit, blinding concerns condition, verifier score and loop outcome, as supported by the serving artifacts below.
 
 - Clinicians saw each pair as "Response A" and "Response B"; arm identity, verifier score and loop outcome were held in a separate allocation key that was never deployed to the serving storage [pre-rating; verified on the serving volume].
 - A/B position of the in-loop rationale: V2 24 A / 18 B; V4 25 A / 17 B [observed]. The randomization procedure and seed [not documented].
