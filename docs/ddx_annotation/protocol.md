@@ -4,7 +4,7 @@ This page states what is known about how the clinician DDx annotation was carrie
 
 - **[code]**: the interface and analysis code in this repository, verified;
 - **[records]**: the stored annotation records, verified;
-- **[investigators]**: confirmed by the study investigators on 2026-11-24, with actual blinding of the 350-case study additionally confirmed by co-author Dennis Fast on 2026-11-27; no contemporaneous written instruction document was recovered;
+- **[investigators]**: confirmed by the study investigators on 2026-11-24, with actual blinding of both the 70-case pilot (both splits) and the 350-case study additionally confirmed by co-author Dennis Fast on 2026-11-27; no contemporaneous written instruction document was recovered;
 - **[manuscript]**: stated in the MERLIN-DDx paper only.
 
 ## 1. Task
@@ -47,7 +47,7 @@ Clinicians were instructed to hide:
 - the MERLIN model predictions;
 - the other clinicians' annotations.
 
-**350-case study:** On 2026-11-27, study co-author Dennis Fast confirmed that clinicians actually conducted the annotation blinded to MERLIN model predictions and the other clinicians' annotations, not merely that they were instructed to do so [investigators]. This is retrospective investigator confirmation, not evidence from interaction logs or technically enforced masking. It does not establish the information regime of the earlier pilot.
+**Both DDx annotation cohorts:** On 2026-11-27, study co-author Dennis Fast confirmed that clinicians actually conducted all annotation studies blinded, including both splits of the 70-case pilot and the 350-case study. For DDx annotation, the reported blinding concerns MERLIN model predictions and other clinicians' annotations, not the clinical reference information needed for the retrospective task [investigators]. This is retrospective investigator confirmation, not evidence from interaction logs or technically enforced masking. The historical pilot report generator's conflicting account is retained in section 4.4.
 
 The full discharge summary, including the discharge diagnosis and the coder-assigned ICD codes, was available **by design**. The task is retrospective reference annotation: it confirms the diagnosis the admission was mapped to, so it is not an admission-time diagnostic task.
 
@@ -73,7 +73,7 @@ No written instruction document for the pilot or the 350-case study was recovere
 ### 4.3 What the records can and cannot show [records]
 
 - **What is stored.** The annotation store holds each clinician's current selections per case and the time of the last save. It holds no interaction log: switch settings, opened panels and viewing order are not recorded.
-- **Blinding confirmed by investigator, not independently logged.** The conduct of the 350-case study was confirmed on 2026-11-27 (section 4.1). The stored records alone cannot independently establish switch settings, viewing order, or whether information was inadvertently exposed.
+- **Blinding confirmed by investigator, not independently logged.** The conduct of both DDx annotation cohorts was confirmed on 2026-11-27 (section 4.1). The stored records alone cannot independently establish switch settings, viewing order, or whether information was inadvertently exposed.
 - **Order of saves.** Clinician 1's last save of a case precedes Clinician 2's in 230 of their 236 shared cases, and precedes Clinician 3's in all 121 of theirs. So in most shared cases another clinician's marks already existed when the later clinician annotated, and the default view would have shown them had the clinicians not hidden them. This is evidence about the interface default, not evidence that the marks were actually viewed.
 
 ### 4.4 Pilot: a different account in the analysis code
@@ -83,7 +83,7 @@ The study's pilot report generator describes a different regime for the pilot. I
 - **Train split:** annotated with the discharge diagnoses, ICD codes and model predictions visible.
 - **Test split:** annotated "blinded" to them.
 
-This account differs from section 4.1 for the train split and for the discharge information. No other document resolves the difference. The analysis therefore keeps the two pilot splits apart, as the original code does, and the published code no longer labels either split "blinded".
+This historical account conflicts with the investigator's confirmation on 2026-11-27 that all annotation studies, including both pilot splits, were conducted blinded to model predictions and other clinicians' annotations (section 4.1). The original account is retained for provenance; no interaction logs survive to adjudicate it independently. The historical discrepancy concerning visibility of discharge information in the pilot also remains documented. The analysis keeps the two pilot splits apart, as the original code does, and the published code uses neutral split labels.
 
 ### 4.5 Interface version
 
@@ -118,7 +118,7 @@ There was no consensus or adjudication step. Every clinician's records are analy
 
 | Item | Status |
 |---|---|
-| Written annotation instructions (pilot, 350-case study) | Not recovered; the instructions and actual blinding of the 350-case study are investigator-confirmed (section 4.1) |
+| Written annotation instructions (pilot, 350-case study) | Not recovered; the instructions and actual blinding of both DDx annotation cohorts are investigator-confirmed (section 4.1) |
 | Interaction logs (switch settings, panels opened) | Never recorded |
 | Selection procedure of the 70 pilot cases | Not recovered |
 | Case pool used by the original pilot analysis | Not recovered. The available pool contains 62 of the 70 pilot cases, so pilot reference-agreement results cover the analysable cases (see results) |
