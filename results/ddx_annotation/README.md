@@ -55,13 +55,13 @@ These are cohort-level results of the clinician DDx annotation. They contain no 
 | Train | 30 | 90.0% [80.0, 100.0] | 86.7% [73.3, 96.7] | 3 / 2 / 0 of 5 | 1.000 |
 | Test | 31 | 83.9% [71.0, 96.8] | 74.2% [58.1, 87.2] | 5 / 2 / 3 of 10 | 1.000 |
 
-**Reporting by split.** The pilot splits are reported separately, as in the original analysis. The historical analysis code describes the two splits as annotated under different information regimes; the investigators report that both pilot splits were conducted blinded to model predictions and other clinicians' annotations. The conflicting historical account is retained for provenance. See [the protocol](../../docs/ddx_annotation/protocol.md), section 4.
+**Reporting by split.** The pilot splits are reported separately because the training split served as calibration: recorded discharge diagnoses and ICD codes were visible to familiarize clinicians with hospital documentation and coding practices. Both were hidden in the pilot test split and the 350-case study. Model predictions and peer annotations were hidden throughout. See [the protocol](../../docs/ddx_annotation/protocol.md), section 4.
 
 **Not in the manuscript.** The pilot results are not reported in the manuscript.
 
 ## Interpretation limits
 
-- **Purpose.** The clinician labels confirm the reference diagnoses retrospectively, with the discharge summary available by design. They are not admission-time diagnoses.
-- **Blinding (both DDx cohorts).** Clinicians conducted both pilot splits and the 350-case study blinded to model predictions and other clinicians' marks. This is investigator-confirmed procedural blinding, not technically enforced masking: the interface showed both by default, did not enforce hiding and kept no interaction log, so actual display states cannot be independently verified from the records. The conflicting historical pilot report is separately documented.
+- **Purpose.** The clinician labels assess the reference diagnoses retrospectively. The recorded discharge diagnosis and ICD codes were withheld outside the pilot calibration split. Candidate lists were ordered using discharge-diagnosis text; this is not a prospective admission-time diagnosis task.
+- **Blinding (both DDx cohorts).** Clinicians conducted both pilot splits and the 350-case study blinded to model predictions and other clinicians' marks. This is investigator-confirmed procedural blinding, not technically enforced masking: the interface showed both by default, did not enforce hiding and kept no interaction log, so actual display states cannot be independently verified from the records. The historical pilot report's incorrect description of model visibility is clarified in the protocol.
 - **Order of annotation.** Clinician 1's records preceded the other clinicians' in nearly all shared cases.
 - **Model evaluation.** The model-evaluation tables measure agreement with these labels. They are secondary and not reported in the manuscript.
